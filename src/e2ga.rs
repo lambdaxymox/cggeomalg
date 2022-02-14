@@ -6,6 +6,7 @@ use crate::scalar::{
 use std::ops::{
     Index,
     IndexMut,
+    Not,
 };
 use std::fmt;
 
@@ -179,4 +180,52 @@ where
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
     }
+
+    pub fn dual(&self) -> Self {
+        Self::new(-self.data[3], -self.data[2], self.data[1], self.data[0])
+    }
+
+    pub fn dual_mut(&mut self) {
+        let mut result = Self::zero();
+        result.data[0] = -self.data[3];
+        result.data[1] = -self.data[2];
+        result.data[2] = self.data[1];
+        result.data[3] = self.data[0];
+        *self = result;
+    }
 }
+
+impl<S> Not for EuclideanMultivector2<S> 
+where
+    S: ScalarSigned
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn not(self) -> Self::Output {
+        let mut result = Self::zero();
+        result.data[0] = -self.data[3];
+        result.data[1] = -self.data[2];
+        result.data[2] = self.data[1];
+        result.data[3] = self.data[0];
+        
+        result
+    }
+}
+
+impl<S> Not for &EuclideanMultivector2<S> 
+where
+    S: ScalarSigned
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn not(self) -> Self::Output {
+        let mut result = EuclideanMultivector2::zero();
+        result.data[0] = -self.data[3];
+        result.data[1] = -self.data[2];
+        result.data[2] = self.data[1];
+        result.data[3] = self.data[0];
+        
+        result
+    }
+}
+
