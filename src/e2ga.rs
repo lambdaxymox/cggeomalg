@@ -148,3 +148,35 @@ where
         )
     }
 }
+
+impl<S> EuclideanMultivector2<S> 
+where
+    S: ScalarSigned
+{
+    pub fn reverse(&self) -> Self {
+        Self::new(self.data[0], self.data[1], self.data[2], -self.data[3])
+    }
+
+    pub fn reverse_mut(&mut self) {
+        self.data[3] = -self.data[3];
+    }
+
+    pub fn conjugate(&self) -> Self {
+        Self::new(self.data[0], -self.data[1], -self.data[2], -self.data[3])
+    }
+
+    pub fn conjugate_mut(&mut self) {
+        self.data[1] = -self.data[1];
+        self.data[2] = -self.data[2];
+        self.data[3] = -self.data[3];
+    }
+
+    pub fn involute(&self) -> Self {
+        Self::new(self.data[0], -self.data[1], -self.data[2], self.data[3])
+    }
+
+    pub fn involute_mut(&mut self) {
+        self.data[1] = -self.data[1];
+        self.data[2] = -self.data[2];
+    }
+}
