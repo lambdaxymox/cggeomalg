@@ -59,6 +59,26 @@ where
     pub fn len(&self) -> usize {
         self.data.len()
     }
+
+    #[inline]
+    pub fn unit_c() -> Self {
+        Self::new(S::one(), S::zero(), S::zero(), S::zero())
+    }
+
+    #[inline]
+    pub fn unit_e1() -> Self {
+        Self::new(S::zero(), S::one(), S::zero(), S::zero())
+    }
+
+    #[inline]
+    pub fn unit_e2() -> Self {
+        Self::new(S::zero(), S::zero(), S::one(), S::zero())
+    }
+
+    #[inline]
+    pub fn unit_e12() -> Self {
+        Self::new(S::zero(), S::zero(), S::zero(), S::one())
+    }
 }
 
 impl<S> Index<usize> for EuclideanMultivector2<S> 
