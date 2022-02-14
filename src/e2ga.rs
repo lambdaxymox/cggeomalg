@@ -7,6 +7,8 @@ use std::ops::{
     Index,
     IndexMut,
 };
+use std::fmt;
+
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub enum BasisElement {
@@ -17,6 +19,20 @@ pub enum BasisElement {
     E12,
 }
 
+impl fmt::Display for BasisElement {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        let disp = match *self {
+            BasisElement::C => "1",
+            BasisElement::E1 => "e1",
+            BasisElement::E2 => "e2",
+            BasisElement::E12 => "e1 /\\ e2",
+        };
+
+        write!(formatter, "{}", disp)
+    }
+}
+
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct EuclideanMultivector2<S> {
     data: [S; 4],
 }
@@ -96,5 +112,19 @@ where
         };
 
         &mut self.data[idx]
+    }
+}
+
+impl<S> fmt::Display for EuclideanMultivector2<S>
+where
+    S: fmt::Display
+{
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        use BasisElement::*;
+        write!(
+            formatter, 
+            "{} {} + {} {} + {} {} + {} {}",
+            self.data[0], C, self.data[1], E1, self.data[2], E2, self.data[3], E12
+        )
     }
 }
