@@ -6,6 +6,7 @@ use crate::scalar::{
 use std::ops::{
     Index,
     IndexMut,
+    Add,
     BitXor,
     BitOr,
     Mul,
@@ -431,6 +432,74 @@ where
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
         let result_e12 = a[0] * b[3] + a[3] * b[0];
+        
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<S> Add<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn add(self, b: EuclideanMultivector2<S>) -> Self::Output {
+        let a = self;
+        let result_1   = a[0] + b[0];
+        let result_e1  = a[1] + b[1];
+        let result_e2  = a[2] + b[2];
+        let result_e12 = a[3] + b[3];
+        
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<S> Add<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn add(self, b: &EuclideanMultivector2<S>) -> Self::Output {
+        let a = self;
+        let result_1   = a[0] + b[0];
+        let result_e1  = a[1] + b[1];
+        let result_e2  = a[2] + b[2];
+        let result_e12 = a[3] + b[3];
+        
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<S> Add<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn add(self, b: EuclideanMultivector2<S>) -> Self::Output {
+        let a = self;
+        let result_1   = a[0] + b[0];
+        let result_e1  = a[1] + b[1];
+        let result_e2  = a[2] + b[2];
+        let result_e12 = a[3] + b[3];
+        
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<'a, 'b, S> Add<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn add(self, b: &'b EuclideanMultivector2<S>) -> Self::Output {
+        let a = self;
+        let result_1   = a[0] + b[0];
+        let result_e1  = a[1] + b[1];
+        let result_e2  = a[2] + b[2];
+        let result_e12 = a[3] + b[3];
         
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
