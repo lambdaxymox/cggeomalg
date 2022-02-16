@@ -676,3 +676,42 @@ where
     }
 }
 
+impl<S> EuclideanMultivector2<S> 
+where
+    S: ScalarFloat
+{
+    pub fn magnitude_squared(&self) -> S {
+        let scalar_part = (self * self.conjugate())[0];
+
+        scalar_part.abs()
+    }
+
+    pub fn magnitude(&self) -> S {
+        self.magnitude_squared().sqrt()
+    }
+
+    pub fn imagnitude_squared(&self) -> S {
+        self.dual().magnitude_squared()
+    }
+
+    pub fn imagnitude(&self) -> S {
+        self.dual().magnitude()
+    }
+
+    pub fn normalize(&self) -> Self {
+        self * (S::one() / self.magnitude())
+    }
+    
+    pub fn normalize_to(&self, magnitude: S) -> Self {
+        self * (magnitude / self.magnitude())
+    }
+
+    pub fn distance_squared(&self, other: &Self) -> S {
+        (self - other).magnitude_squared()
+    }
+
+    pub fn distance(&self, other: &Self) -> S {
+        (self - other).magnitude()
+    }
+}
+
