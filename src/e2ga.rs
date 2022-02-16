@@ -715,3 +715,18 @@ where
     }
 }
 
+impl<S> EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    pub fn inverse(&self) -> Option<Self> {
+        let magnitude_squared = self.magnitude_squared();
+        if magnitude_squared.is_zero() {
+            None
+        } else {
+            let inv_magnitude_squared = S::one() / magnitude_squared;
+            Some(self.reverse() * inv_magnitude_squared)
+        }
+    }
+}
+
