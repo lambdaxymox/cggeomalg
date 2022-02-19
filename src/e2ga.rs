@@ -9,6 +9,7 @@ use std::ops::{
     Add,
     BitXor,
     BitOr,
+    Div,
     Mul,
     Not,
     Sub,
@@ -719,6 +720,13 @@ impl<S> EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
+    fn inverse_unchecked(&self) -> Self {
+        let magnitude_squared = self.magnitude_squared();
+        let inv_magnitude_squared = S::one() / magnitude_squared;
+
+        self.reverse() * inv_magnitude_squared
+    }
+
     pub fn inverse(&self) -> Option<Self> {
         let magnitude_squared = self.magnitude_squared();
         if magnitude_squared.is_zero() {
@@ -727,6 +735,84 @@ where
             let inv_magnitude_squared = S::one() / magnitude_squared;
             Some(self.reverse() * inv_magnitude_squared)
         }
+    }
+}
+
+impl<S> Div<S> for EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn div(self, other: S) -> Self::Output {
+        let one_over_other = S::one() / other;
+        let result_1 =   self.data[0] * one_over_other;
+        let result_e1 =  self.data[1] * one_over_other;
+        let result_e2 =  self.data[2] * one_over_other;
+        let result_e12 = self.data[3] * one_over_other;
+
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<S> Div<S> for &EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn div(self, other: S) -> Self::Output {
+        let one_over_other = S::one() / other;
+        let result_1 =   self.data[0] * one_over_other;
+        let result_e1 =  self.data[1] * one_over_other;
+        let result_e2 =  self.data[2] * one_over_other;
+        let result_e12 = self.data[3] * one_over_other;
+
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<S> Div<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn div(self, other: EuclideanMultivector2<S>) -> Self::Output {
+        self * other.inverse_unchecked()
+    }
+}
+
+impl<S> Div<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn div(self, other: &EuclideanMultivector2<S>) -> Self::Output {
+        self * other.inverse_unchecked()
+    }
+}
+
+impl<S> Div<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn div(self, other: EuclideanMultivector2<S>) -> Self::Output {
+        self * other.inverse_unchecked()
+    }
+}
+
+impl<'a, 'b, S> Div<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+where
+    S: ScalarFloat
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn div(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
+        self * other.inverse_unchecked()
     }
 }
 
