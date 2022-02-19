@@ -3,7 +3,13 @@ use crate::scalar::{
     ScalarSigned,
     ScalarFloat,
 };
+use crate::{
+    impl_coords,
+    impl_coords_deref,
+};
 use std::ops::{
+    Deref,
+    DerefMut,
     Index,
     IndexMut,
     Add,
@@ -42,6 +48,23 @@ impl fmt::Display for BasisElement {
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct EuclideanMultivector2<S> {
     data: [S; 4],
+}
+
+impl<S> EuclideanMultivector2<S>
+where
+    S: Copy
+{
+    /// Get a pointer to the underlying array.
+    #[inline]
+    pub fn as_ptr(&self) -> *const S {
+        &self.data[0]
+    }
+
+    /// Get a mutable pointer to the underlying array.
+    #[inline]
+    pub fn as_mut_ptr(&mut self) -> *mut S {
+        &mut self.data[0]
+    }
 }
 
 impl<S> EuclideanMultivector2<S> 
@@ -814,4 +837,7 @@ where
         self * other.inverse_unchecked()
     }
 }
+
+impl_coords!(E2ga, { scalar, e1, e2, e12 });
+impl_coords_deref!(EuclideanMultivector2, E2ga);
 
