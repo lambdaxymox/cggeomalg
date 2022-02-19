@@ -19,6 +19,16 @@ mod e2ga_test {
         assert_eq!(mv[3], 4);
     }
 
+    #[test]
+    fn test_components2() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
+
+        assert_eq!(mv.scalar, mv[0]);
+        assert_eq!(mv.e1, mv[1]);
+        assert_eq!(mv.e2, mv[2]);
+        assert_eq!(mv.e12, mv[3]);
+    }
+
 
     #[test]
     fn test_multivector_addition() {
