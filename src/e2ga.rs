@@ -131,40 +131,6 @@ where
     }
 }
 
-impl<S> Index<BasisElement> for EuclideanMultivector2<S> 
-where
-    S: Scalar
-{
-    type Output = S;
-
-    fn index(&self, index: BasisElement) -> &Self::Output {
-        let idx = match index {
-            BasisElement::C => 0,
-            BasisElement::E1 => 1,
-            BasisElement::E2 => 2,
-            BasisElement::E12 => 3,
-        };
-
-        &self.data[idx]
-    }
-}
-
-impl<S> IndexMut<BasisElement> for EuclideanMultivector2<S>
-where
-    S: Scalar
-{
-    fn index_mut(&mut self, index: BasisElement) -> &mut Self::Output {
-        let idx = match index {
-            BasisElement::C => 0,
-            BasisElement::E1 => 1,
-            BasisElement::E2 => 2,
-            BasisElement::E12 => 3,
-        };
-
-        &mut self.data[idx]
-    }
-}
-
 impl<S> fmt::Display for EuclideanMultivector2<S>
 where
     S: fmt::Display
