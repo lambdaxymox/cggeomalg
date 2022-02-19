@@ -19,6 +19,14 @@ mod e2ga_test {
         assert_eq!(result, expected);
     }
 
+    #[test]
+    fn test_mutlivector_plus_zero() {
+        let mv1 = EuclideanMultivector2::new(1, 2, 3, 4);
+        let zero = EuclideanMultivector2::zero();
+        let expected = mv1;
+        let result = mv1 + zero;
 
+        assert_eq!(result, expected);
+    }
 }
 
