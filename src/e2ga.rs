@@ -43,6 +43,12 @@ where
     pub fn as_mut_ptr(&mut self) -> *mut S {
         &mut self.data[0]
     }
+
+    /// Get a slice of the underlying elements of the data type.
+    #[inline]
+    pub fn as_slice(&self) -> &[S] {
+        <Self as AsRef<[S; 4]>>::as_ref(self)
+    }
 }
 
 impl<S> EuclideanMultivector2<S> 
@@ -106,6 +112,42 @@ where
 {
     fn index_mut(&mut self, index: usize) -> &mut Self::Output {
         &mut self.data[index]
+    }
+}
+
+impl<S> AsRef<[S; 4]> for EuclideanMultivector2<S> {
+    #[inline]
+    fn as_ref(&self) -> &[S; 4] {
+        unsafe {
+            &*(self as *const EuclideanMultivector2<S> as *const [S; 4])
+        }
+    }
+}
+
+impl<S> AsMut<[S; 4]> for EuclideanMultivector2<S> {
+    #[inline]
+    fn as_mut(&mut self) -> &mut [S; 4] {
+        unsafe {
+            &mut *(self as *mut EuclideanMultivector2<S> as *mut [S; 4])
+        }
+    }
+}
+
+impl<S> AsRef<(S, S, S, S)> for EuclideanMultivector2<S> {
+    #[inline]
+    fn as_ref(&self) -> &(S, S, S, S) {
+        unsafe {
+            &*(self as *const EuclideanMultivector2<S> as *const (S, S, S, S))
+        }
+    }
+}
+
+impl<S> AsMut<(S, S, S, S)> for EuclideanMultivector2<S> {
+    #[inline]
+    fn as_mut(&mut self) -> &mut (S, S, S, S) {
+        unsafe {
+            &mut *(self as *mut EuclideanMultivector2<S> as *mut (S, S, S, S))
+        }
     }
 }
 
