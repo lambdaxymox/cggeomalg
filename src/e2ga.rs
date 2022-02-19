@@ -147,11 +147,10 @@ where
     S: fmt::Display
 {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-        use BasisElement::*;
         write!(
             formatter, 
-            "{} {} + {} {} + {} {} + {} {}",
-            self.data[0], C, self.data[1], E1, self.data[2], E2, self.data[3], E12
+            "{} + {} e1 + {} e2 + {} e1 /\\ e2",
+            self.data[0], self.data[1], self.data[2], self.data[3]
         )
     }
 }
