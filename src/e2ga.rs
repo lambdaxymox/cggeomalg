@@ -23,28 +23,6 @@ use std::ops::{
 use std::fmt;
 
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
-pub enum BasisElement {
-    /// The `1` , or scalar component of a Euclidean multivector.
-    C,
-    E1,
-    E2,
-    E12,
-}
-
-impl fmt::Display for BasisElement {
-    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-        let disp = match *self {
-            BasisElement::C => "1",
-            BasisElement::E1 => "e1",
-            BasisElement::E2 => "e2",
-            BasisElement::E12 => "e1 /\\ e2",
-        };
-
-        write!(formatter, "{}", disp)
-    }
-}
-
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct EuclideanMultivector2<S> {
     data: [S; 4],
