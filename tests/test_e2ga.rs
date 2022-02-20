@@ -232,5 +232,34 @@ mod e2ga_test {
 
         assert_eq!(zero.magnitude(), 0.0);
     }
+
+    #[test]
+    fn test_multivector_inverse() {
+        let mv = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
+        let expected = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
+        let result = mv.inverse().unwrap();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_times_inverse1() {
+        let mv = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
+        let mv_inv = mv.inverse().unwrap();
+        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
+        let result = mv * mv_inv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_times_inverse2() {
+        let mv = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
+        let mv_inv = mv.inverse().unwrap();
+        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
+        let result = mv_inv * mv;
+
+        assert_eq!(result, expected);
+    }
 }
 
