@@ -7,7 +7,7 @@ use crate::{
     impl_coords,
     impl_coords_deref,
 };
-use std::ops::{
+use core::ops::{
     Deref,
     DerefMut,
     Index,
@@ -20,9 +20,10 @@ use std::ops::{
     Not,
     Sub,
 };
-use std::fmt;
+use core::fmt;
 
 
+#[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct EuclideanMultivector2<S> {
     data: [S; 4],
