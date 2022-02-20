@@ -763,10 +763,10 @@ where
     S: ScalarFloat
 {
     fn inverse_unchecked(&self) -> Self {
-        let magnitude_squared = self.magnitude_squared();
-        let inv_magnitude_squared = S::one() / magnitude_squared;
+        let conjugate = self.conjugate();
+        let self_times_conjugate = (self * conjugate)[0];
 
-        self.reverse() * inv_magnitude_squared
+        conjugate / self_times_conjugate
     }
 
     pub fn inverse(&self) -> Option<Self> {
@@ -774,8 +774,10 @@ where
         if magnitude_squared.is_zero() {
             None
         } else {
-            let inv_magnitude_squared = S::one() / magnitude_squared;
-            Some(self.reverse() * inv_magnitude_squared)
+            let conjugate = self.conjugate();
+            let self_times_conjugate = (self * conjugate)[0];
+
+            Some(conjugate / self_times_conjugate)
         }
     }
 }
