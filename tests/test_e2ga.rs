@@ -59,5 +59,15 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_multivector_subtraction() {
+        let mv1: EuclideanMultivector2<isize> = EuclideanMultivector2::new(4, 6, 1, 7);
+        let mv2: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 6, 7, 10);
+        let expected = EuclideanMultivector2::new(3, 0, -6, -3);
+        let result = mv1 - mv2;
+
+        assert_eq!(result, expected);
+    }
 }
 
