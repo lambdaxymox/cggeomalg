@@ -382,5 +382,19 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    /// In an Euclidean geometric algebra, the square of the volume 
+    /// element should be negative one. That is, let `I` denote the volume element. 
+    /// Then
+    /// ```text
+    /// I^2 := I * I == -1
+    /// ```
+    #[test]
+    fn test_volume_element_squared_equals_negative_one() {
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let one = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e12 * e12, -one);
+    }
 }
 
