@@ -335,7 +335,7 @@ mod e2ga_test {
     #[test]
     fn test_multivector_reverse1() {
         let mv = EuclideanMultivector2::new(1.0, 2.0, 3.0, 4.0);
-        let expected = EuclideanMultivector2::new(1.0, 2.0, 3.0, -4.0);;
+        let expected = EuclideanMultivector2::new(1.0, 2.0, 3.0, -4.0);
         let result = mv.reverse();
 
         assert_eq!(result, expected);
