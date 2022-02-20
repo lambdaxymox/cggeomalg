@@ -384,6 +384,45 @@ mod e2ga_test {
     }
 
     #[test]
+    fn test_volume_element_inverse() {
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = -e12;
+        let result = e12.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_vector_inverse1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let mv = e1 * 2_f64;
+        let expected = e1 * (1_f64 / 2_f64);
+        let result = mv.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_vector_inverse2() {
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let mv = e2 * 2_f64;
+        let expected = e2 * (1_f64 / 2_f64);
+        let result = mv.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_scalar_inverse() {
+        let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+        let scalar = unit_scalar * 2_f64;
+        let expected =unit_scalar *  (1_f64 / 2_f64);
+        let result = scalar.inverse().unwrap();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
     fn test_zero_multivector_is_not_invertible() {
         let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
 
