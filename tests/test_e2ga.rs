@@ -135,5 +135,22 @@ mod e2ga_test {
 
         assert_eq!(v_ref, &mut [1, 2, 3, 4]);
     }
+
+    #[test]
+    fn test_magnitude_unit_multivectors() {
+        let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
+        let unit_e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let unit_e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let unit_e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+
+        assert_eq!(unit_scalar.magnitude_squared(), 1.0);
+        assert_eq!(unit_scalar.magnitude(), 1.0);
+        assert_eq!(unit_e1.magnitude_squared(), 1.0);
+        assert_eq!(unit_e1.magnitude(), 1.0);
+        assert_eq!(unit_e2.magnitude_squared(), 1.0);
+        assert_eq!(unit_e2.magnitude(), 1.0);
+        assert_eq!(unit_e12.magnitude_squared(), 1.0);
+        assert_eq!(unit_e12.magnitude(), 1.0);
+    }
 }
 
