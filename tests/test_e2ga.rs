@@ -416,7 +416,7 @@ mod e2ga_test {
     fn test_scalar_inverse() {
         let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let scalar = unit_scalar * 2_f64;
-        let expected =unit_scalar *  (1_f64 / 2_f64);
+        let expected = unit_scalar *  (1_f64 / 2_f64);
         let result = scalar.inverse().unwrap();
 
         assert_eq!(result, expected);
