@@ -137,6 +137,42 @@ mod e2ga_test {
     }
 
     #[test]
+    fn test_magnitude1() {
+        let mv = EuclideanMultivector2::new(4.0, 0.0, 0.0, 0.0);
+        let expected = 4.0;
+        let result = mv.magnitude();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_magnitude2() {
+        let mv = EuclideanMultivector2::new(0.0, 4.0, 0.0, 0.0);
+        let expected = 4.0;
+        let result = mv.magnitude();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_magnitude3() {
+        let mv = EuclideanMultivector2::new(0.0, 0.0, 4.0, 0.0);
+        let expected = 4.0;
+        let result = mv.magnitude();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_magnitude4() {
+        let mv = EuclideanMultivector2::new(0.0, 0.0, 0.0, 4.0);
+        let expected = 4.0;
+        let result = mv.magnitude();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
     fn test_magnitude_unit_multivectors() {
         let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
         let unit_e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
@@ -151,6 +187,13 @@ mod e2ga_test {
         assert_eq!(unit_e2.magnitude(), 1.0);
         assert_eq!(unit_e12.magnitude_squared(), 1.0);
         assert_eq!(unit_e12.magnitude(), 1.0);
+    }
+
+    #[test]
+    fn test_magnitude_zero_multivector() {
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(zero.magnitude(), 0.0);
     }
 }
 
