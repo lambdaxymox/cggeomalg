@@ -17,6 +17,7 @@ use core::ops::{
     BitOr,
     Div,
     Mul,
+    Neg,
     Not,
     Sub,
 };
@@ -241,6 +242,38 @@ where
         result.data[3] = self.data[0];
         
         result
+    }
+}
+
+impl<S> Neg for EuclideanMultivector2<S>
+where
+    S: ScalarSigned
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn neg(self) -> Self::Output {
+        let result_1   = -self.data[0];
+        let result_e1  = -self.data[1];
+        let result_e2  = -self.data[2];
+        let result_e12 = -self.data[3];
+
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+    }
+}
+
+impl<S> Neg for &EuclideanMultivector2<S>
+where
+    S: ScalarSigned
+{
+    type Output = EuclideanMultivector2<S>;
+
+    fn neg(self) -> Self::Output {
+        let result_1   = -self.data[0];
+        let result_e1  = -self.data[1];
+        let result_e2  = -self.data[2];
+        let result_e12 = -self.data[3];
+
+        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 

@@ -71,6 +71,43 @@ mod e2ga_test {
     }
 
     #[test]
+    fn test_multivector_minus_zero() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(5, 75, 2, 92);
+        let zero = EuclideanMultivector2::zero();
+        let expected = mv;
+        let result = mv - zero;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_zero_minus_multivector() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(5, 75, 2, 92);
+        let zero = EuclideanMultivector2::zero();
+        let expected = -mv;
+        let result = zero - mv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_minus_multivector_equals_zero() {
+        let mv = EuclideanMultivector2::new(5, 75, 2, 92);
+        let zero = EuclideanMultivector2::zero();
+        
+        assert_eq!(mv - mv, zero);
+    }
+
+    #[test]
+    fn test_multivector_additive_inverse() {
+        let mv = EuclideanMultivector2::new(5, 75, 2, 92);
+        let zero = EuclideanMultivector2::zero();
+        
+        assert_eq!(-mv + mv, zero);
+        assert_eq!(mv + (-mv), zero);
+    }
+
+    #[test]
     fn test_scalar_multiplication() {
         let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
         let scalar = 9;
