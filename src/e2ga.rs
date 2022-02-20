@@ -103,6 +103,7 @@ where
 {
     type Output = S;
 
+    #[inline]
     fn index(&self, index: usize) -> &Self::Output {
         &self.data[index]
     }
@@ -112,6 +113,7 @@ impl<S> IndexMut<usize> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
+    #[inline]
     fn index_mut(&mut self, index: usize) -> &mut Self::Output {
         &mut self.data[index]
     }
