@@ -77,7 +77,7 @@ where
     }
 
     #[inline]
-    pub fn unit_c() -> Self {
+    pub fn unit_scalar() -> Self {
         Self::new(S::one(), S::zero(), S::zero(), S::zero())
     }
 

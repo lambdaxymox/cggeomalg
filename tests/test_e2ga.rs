@@ -211,7 +211,7 @@ mod e2ga_test {
 
     #[test]
     fn test_magnitude_unit_multivectors() {
-        let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
+        let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let unit_e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
         let unit_e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
         let unit_e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
@@ -246,7 +246,7 @@ mod e2ga_test {
     fn test_multivector_times_inverse1() {
         let mv = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
         let mv_inv = mv.inverse().unwrap();
-        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
+        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let result = mv * mv_inv;
 
         assert_eq!(result, expected);
@@ -256,7 +256,7 @@ mod e2ga_test {
     fn test_multivector_times_inverse2() {
         let mv = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
         let mv_inv = mv.inverse().unwrap();
-        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_c();
+        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let result = mv_inv * mv;
 
         assert_eq!(result, expected);
