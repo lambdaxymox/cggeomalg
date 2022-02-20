@@ -34,6 +34,13 @@ impl<S> EuclideanMultivector2<S>
 where
     S: Copy
 {
+    #[inline]
+    pub fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
+        Self {
+            data: [scalar, e1, e2, e12]
+        }
+    }
+
     /// Get a pointer to the underlying array.
     #[inline]
     pub fn as_ptr(&self) -> *const S {
@@ -57,13 +64,6 @@ impl<S> EuclideanMultivector2<S>
 where
     S: Scalar
 {
-    #[inline]
-    pub fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
-        Self {
-            data: [scalar, e1, e2, e12]
-        }
-    }
-
     #[inline]
     pub fn zero() -> Self {
         Self {
