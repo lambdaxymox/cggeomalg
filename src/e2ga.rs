@@ -58,9 +58,9 @@ where
     S: Scalar
 {
     #[inline]
-    pub fn new(c: S, e1: S, e2: S, e12: S) -> Self {
+    pub fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
         Self {
-            data: [c, e1, e2, e12]
+            data: [scalar, e1, e2, e12]
         }
     }
 
@@ -724,7 +724,7 @@ where
     S: ScalarFloat
 {
     pub fn magnitude_squared(&self) -> S {
-        let scalar_part = (self * self.conjugate())[0];
+        let scalar_part = (self * self.reverse())[0];
 
         scalar_part.abs()
     }

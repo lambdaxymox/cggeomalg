@@ -234,9 +234,49 @@ mod e2ga_test {
     }
 
     #[test]
-    fn test_multivector_inverse() {
+    fn test_magnitude_arbitrary_multivector1() {
+        let mv = EuclideanMultivector2::new(1.0, 2.0, 3.0, 4.0);
+        let expected = 30.0;
+        let result = mv.magnitude_squared();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_magnitude_arbitrary_multivector2() {
         let mv = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
-        let expected = EuclideanMultivector2::new(3.0, 35.0, 13.0, 94.0);
+        let expected = 10239.0;
+        let result = mv.magnitude_squared();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_reverse1() {
+        let mv = EuclideanMultivector2::new(1.0, 2.0, 3.0, 4.0);
+        let expected = EuclideanMultivector2::new(1.0, 2.0, 3.0, -4.0);;
+        let result = mv.reverse();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_reverse2() {
+        let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+        let unit_e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let unit_e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let unit_e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+
+        assert_eq!(unit_scalar.reverse(), unit_scalar);
+        assert_eq!(unit_e1.reverse(), unit_e1);
+        assert_eq!(unit_e2.reverse(), unit_e2);
+        assert_eq!(unit_e12.reverse(), -unit_e12);
+    }
+
+    #[test]
+    fn test_multivector_inverse() {
+        let mv = EuclideanMultivector2::new(1.0, 2.0, 3.0, 4.0);
+        let expected = EuclideanMultivector2::new(0.25, -0.5, -0.75, -1.0);
         let result = mv.inverse().unwrap();
 
         assert_eq!(result, expected);
