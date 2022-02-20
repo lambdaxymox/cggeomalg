@@ -769,6 +769,10 @@ where
         conjugate / self_times_conjugate
     }
 
+    pub fn is_invertible(&self) -> bool {
+        !self.magnitude_squared().is_zero()
+    }
+
     pub fn inverse(&self) -> Option<Self> {
         let magnitude_squared = self.magnitude_squared();
         if magnitude_squared.is_zero() {

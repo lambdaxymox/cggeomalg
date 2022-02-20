@@ -383,6 +383,13 @@ mod e2ga_test {
         assert_eq!(result, expected);
     }
 
+    #[test]
+    fn test_zero_multivector_is_not_invertible() {
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert!(!zero.is_invertible());
+    }
+
     /// In an Euclidean geometric algebra, the square of the volume 
     /// element should be negative one. That is, let `I` denote the volume element. 
     /// Then
