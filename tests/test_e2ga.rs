@@ -94,5 +94,46 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    #[should_panic]
+    fn test_out_of_bounds_array_access() {
+        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
+
+        assert_eq!(mv[4], mv[4]);
+    }
+
+    #[test]
+    fn test_multivector_times_scalar_zero_is_zero() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
+        let expected: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+        let result = mv * 0;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_scalar_zero_times_multivector_is_zero() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
+        let expected: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(true, false);
+    }
+
+    #[test]
+    fn test_as_ref() {
+        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
+        let v_ref: &[isize; 4] = mv.as_ref();
+
+        assert_eq!(v_ref, &[1, 2, 3, 4]);
+    }
+
+    #[test]
+    fn test_as_mut() {
+        let mut mv = EuclideanMultivector2::new(1, 2, 3, 4);
+        let v_ref: &mut [isize; 4] = mv.as_mut();
+
+        assert_eq!(v_ref, &mut [1, 2, 3, 4]);
+    }
 }
 
