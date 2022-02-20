@@ -69,5 +69,30 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_scalar_multiplication() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
+        let scalar = 9;
+        let expected = EuclideanMultivector2::new(9, 18, 27, 36);
+        let result = mv * scalar;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_scalar_division() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let scalar = 9_f64;
+        let expected = EuclideanMultivector2::new(
+            1_f64 / 9_f64, 
+            2_f64 / 9_f64, 
+            3_f64 / 9_f64, 
+            4_f64 / 9_f64
+        );
+        let result = mv / scalar;
+
+        assert_eq!(result, expected);
+    }
 }
 
