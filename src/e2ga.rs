@@ -97,6 +97,11 @@ where
         Self::new(S::zero(), S::zero(), S::zero(), S::one())
     }
 
+    #[inline(always)]
+    pub fn pseudoscalar() -> Self {
+        Self::unit_e12()
+    }
+
     /// Project the multivector onto the grade `grade`.
     /// 
     /// Return a multivector where the components of each grade other than 
