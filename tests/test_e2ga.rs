@@ -589,5 +589,13 @@ mod e2ga_test {
 
         assert_eq!(mv.grade(3), zero);
     }
+
+    #[test]
+    fn test_multivector_grade_large() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(mv.grade(usize::MAX), zero);
+    }
 }
 
