@@ -231,7 +231,7 @@ where
     }
 
     pub fn conjugate_mut(&mut self) {
-        self.data[0] =  self.data[0];
+        // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
         self.data[3] = -self.data[3];
@@ -242,10 +242,10 @@ where
     }
 
     pub fn involute_mut(&mut self) {
-        self.data[0] =  self.data[0];
+        // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
-        self.data[3] =  self.data[3];
+        // self.data[3] =  self.data[3];
     }
 
     pub fn dual(&self) -> Self {
