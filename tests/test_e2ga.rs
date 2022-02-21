@@ -554,5 +554,40 @@ mod e2ga_test {
 
         assert_eq!(e2 ^ e12, zero);
     }
+
+    #[test]
+    fn test_multivector_grade0() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
+        let expected = EuclideanMultivector2::new(1, 0, 0, 0);
+        let result = mv.grade(0);
+    
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_grade1() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
+        let expected = EuclideanMultivector2::new(0, 1, 1, 0);
+        let result = mv.grade(1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_grade2() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
+        let expected = EuclideanMultivector2::new(0, 0, 0, 1);
+        let result = mv.grade(2);
+    
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_grade3() {
+        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(mv.grade(3), zero);
+    }
 }
 

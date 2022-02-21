@@ -95,6 +95,45 @@ where
     pub fn unit_e12() -> Self {
         Self::new(S::zero(), S::zero(), S::zero(), S::one())
     }
+
+    /// Project the multivector onto the grade `grade`.
+    /// 
+    /// For a grade larger than the dimension of the underlying vector space, the
+    /// grade projection is always zero. In this case, any grade projection onto a 
+    /// grade larger than two will be zero.
+    /// 
+    /// # Example
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
+    /// let expected_0 = EuclideanMultivector2::new(1, 0, 0, 0);
+    /// let mv_0 = mv.grade(0);
+    /// let expected_1 = EuclideanMultivector2::new(0, 1, 1, 0);
+    /// let mv_1 = mv.grade(1);
+    /// let expected_2 = EuclideanMultivector2::new(0, 0, 0, 1);
+    /// let mv_2 = mv.grade(2);
+    /// 
+    /// assert_eq!(mv_0, expected_0);
+    /// assert_eq!(mv_1, expected_1);
+    /// assert_eq!(mv_2, expected_2);
+    /// 
+    /// // Any grade larger than two should be zero.
+    /// let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+    /// assert_eq!(mv.grade(3), zero);
+    /// assert_eq!(mv.grade(usize::MAX), zero);
+    /// ```
+    #[inline]
+    pub fn grade(&self, grade: usize) -> Self {
+        match grade {
+            0 => Self::new(self.data[0], S::zero(), S::zero(), S::zero()),
+            1 => Self::new(S::zero(), self.data[1], self.data[2], S::zero()),
+            2 => Self::new(S::zero(), S::zero(), S::zero(), self.data[3]),
+            _ => Self::zero()
+        }
+    }
 }
 
 impl<S> Index<usize> for EuclideanMultivector2<S> 
