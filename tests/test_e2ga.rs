@@ -770,5 +770,23 @@ mod e2ga_test {
         
         assert_eq!(one << mv, mv);
     }
+
+    #[test]
+    fn test_left_contraction_e12_e21() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!((e1 ^ e2) << (e2 ^ e1), one);
+    }
+
+    #[test]
+    fn test_left_contraction_e21_e12() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!((e2 ^ e1) << (e1 ^ e2), one);
+    }
 }
 
