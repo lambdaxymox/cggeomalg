@@ -738,5 +738,30 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_left_contraction_zero_multivector() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let zero = EuclideanMultivector2::zero();
+        
+        assert_eq!(mv << zero, zero);
+        assert_eq!(zero << mv, zero);
+    }
+
+    #[test]
+    fn test_left_contraction_one_multivector() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let one = EuclideanMultivector2::unit_scalar();
+        
+        assert_eq!(mv << one, one);
+    }
+
+    #[test]
+    fn test_left_contraction_multivector_one() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let one = EuclideanMultivector2::unit_scalar();
+        
+        assert_eq!(one << mv, mv);
+    }
 }
 
