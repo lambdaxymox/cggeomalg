@@ -273,6 +273,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn not(self) -> Self::Output {
         let mut result = Self::zero();
         result.data[0] = -self.data[3];
@@ -290,6 +291,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn not(self) -> Self::Output {
         let mut result = EuclideanMultivector2::zero();
         result.data[0] = -self.data[3];
@@ -307,6 +309,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn neg(self) -> Self::Output {
         let result_1   = -self.data[0];
         let result_e1  = -self.data[1];
@@ -323,6 +326,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn neg(self) -> Self::Output {
         let result_1   = -self.data[0];
         let result_e1  = -self.data[1];
@@ -339,6 +343,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn mul(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -357,6 +362,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn mul(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -375,6 +381,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn mul(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -393,6 +400,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn mul(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -411,6 +419,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitxor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -429,6 +438,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitxor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -447,6 +457,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitxor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -465,6 +476,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitxor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -483,6 +495,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -501,6 +514,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -519,6 +533,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -537,6 +552,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn bitor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -555,6 +571,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -573,6 +590,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn add(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -591,6 +609,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -609,6 +628,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn add(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -627,6 +647,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn sub(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -645,6 +666,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn sub(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -663,6 +685,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn sub(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -681,6 +704,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn sub(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -699,6 +723,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn mul(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
@@ -717,6 +742,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn mul(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
@@ -735,6 +761,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn add(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
@@ -753,6 +780,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn add(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
@@ -771,6 +799,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn sub(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
@@ -789,6 +818,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn sub(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
@@ -851,6 +881,7 @@ where
         conjugate / self_times_conjugate
     }
 
+    #[inline]
     pub fn is_invertible(&self) -> bool {
         !self.magnitude_squared().is_zero()
     }
@@ -874,6 +905,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn div(self, other: S) -> Self::Output {
         let one_over_other = S::one() / other;
         let result_1   = self.data[0] * one_over_other;
@@ -891,6 +923,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn div(self, other: S) -> Self::Output {
         let one_over_other = S::one() / other;
         let result_1   = self.data[0] * one_over_other;
@@ -952,6 +985,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn shl(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -970,6 +1004,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn shl(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -988,6 +1023,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn shl(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
@@ -1006,6 +1042,7 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[inline]
     fn shl(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
