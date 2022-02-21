@@ -260,6 +260,11 @@ where
         result.data[3] =  self.data[0];
         *self = result;
     }
+
+    #[inline]
+    pub fn inv_pseudoscalar() -> Self {
+        -Self::unit_e12()
+    }
 }
 
 impl<S> Not for EuclideanMultivector2<S> 
