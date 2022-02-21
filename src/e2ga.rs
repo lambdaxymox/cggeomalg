@@ -329,8 +329,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn mul(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn mul(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -346,8 +347,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn mul(self, b: &EuclideanMultivector2<S>) -> Self::Output {
+    fn mul(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -363,8 +365,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn mul(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn mul(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -380,8 +383,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn mul(self, b: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn mul(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -397,8 +401,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitxor(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn bitxor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0];
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
@@ -414,8 +419,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitxor(self, b: &EuclideanMultivector2<S>) -> Self::Output {
+    fn bitxor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0];
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
@@ -431,8 +437,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitxor(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn bitxor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0];
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
@@ -448,8 +455,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitxor(self, b: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn bitxor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0];
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
@@ -465,8 +473,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitor(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -482,8 +491,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitor(self, b: &EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -499,8 +509,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitor(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -516,8 +527,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn bitor(self, b: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
         let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] + a[3] * b[2];
         let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1];
@@ -533,8 +545,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn add(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] + b[0];
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
@@ -550,8 +563,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn add(self, b: &EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] + b[0];
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
@@ -567,8 +581,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn add(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] + b[0];
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
@@ -584,8 +599,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn add(self, b: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] + b[0];
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
@@ -601,8 +617,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn sub(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn sub(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] - b[0];
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
@@ -618,8 +635,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn sub(self, b: &EuclideanMultivector2<S>) -> Self::Output {
+    fn sub(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] - b[0];
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
@@ -635,8 +653,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn sub(self, b: EuclideanMultivector2<S>) -> Self::Output {
+    fn sub(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] - b[0];
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
@@ -652,8 +671,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn sub(self, b: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn sub(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] - b[0];
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
@@ -669,8 +689,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn mul(self, b: S) -> Self::Output {
+    fn mul(self, other: S) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b;
         let result_e1  = a[1] * b;
         let result_e2  = a[2] * b;
@@ -686,8 +707,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn mul(self, b: S) -> Self::Output {
+    fn mul(self, other: S) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] * b;
         let result_e1  = a[1] * b;
         let result_e2  = a[2] * b;
@@ -703,8 +725,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn add(self, b: S) -> Self::Output {
+    fn add(self, other: S) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] + b;
         let result_e1  = a[1];
         let result_e2  = a[2];
@@ -720,8 +743,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn add(self, b: S) -> Self::Output {
+    fn add(self, other: S) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] + b;
         let result_e1  = a[1];
         let result_e2  = a[2];
@@ -737,8 +761,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn sub(self, b: S) -> Self::Output {
+    fn sub(self, other: S) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] - b;
         let result_e1  = a[1];
         let result_e2  = a[2];
@@ -754,8 +779,9 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
-    fn sub(self, b: S) -> Self::Output {
+    fn sub(self, other: S) -> Self::Output {
         let a = self;
+        let b = other;
         let result_1   = a[0] - b;
         let result_e1  = a[1];
         let result_e2  = a[2];
