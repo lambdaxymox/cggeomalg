@@ -711,12 +711,32 @@ mod e2ga_test {
 
     #[test]
     fn test_left_contraction_scalar_multivector() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let expected = EuclideanMultivector2::new(3_f64, 6_f64, 9_f64, 12_f64);
+        let result = scalar << mv;
 
+        assert_eq!(result, expected);
     }
 
     #[test]
     fn test_left_contraction_multivector_multivector() {
+        let mv1 = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let mv2 = EuclideanMultivector2::new(3_f64, 5_f64, 7_f64, 9_f64);
+        let expected = EuclideanMultivector2::new(-2_f64, -22_f64, 25_f64, 9_f64);
+        let result = mv1 << mv2;
 
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_left_contraction_multivector_with_self() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let expected = EuclideanMultivector2::new(-2_f64, -10_f64, 11_f64, 4_f64);
+        let result = mv << mv;
+
+        assert_eq!(result, expected);
     }
 }
 
