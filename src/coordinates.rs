@@ -34,6 +34,11 @@ macro_rules! impl_coords {
 #[macro_export]
 macro_rules! impl_coords_deref {
     ($Source:ident, $Target:ident) => {
+        use core::ops::{
+            Deref, 
+            DerefMut
+        };
+
         impl<S> Deref for $Source<S> where S: Copy
         {
             type Target = $Target<S>;

@@ -7,21 +7,7 @@ use crate::{
     impl_coords,
     impl_coords_deref,
 };
-use core::ops::{
-    Deref,
-    DerefMut,
-    Index,
-    IndexMut,
-    Add,
-    BitXor,
-    BitOr,
-    Div,
-    Mul,
-    Neg,
-    Not,
-    Sub,
-    Shl,
-};
+use core::ops;
 use core::fmt;
 
 
@@ -143,7 +129,7 @@ where
     }
 }
 
-impl<S> Index<usize> for EuclideanMultivector2<S> 
+impl<S> ops::Index<usize> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -155,7 +141,7 @@ where
     }
 }
 
-impl<S> IndexMut<usize> for EuclideanMultivector2<S> 
+impl<S> ops::IndexMut<usize> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -267,7 +253,7 @@ where
     }
 }
 
-impl<S> Not for EuclideanMultivector2<S> 
+impl<S> ops::Not for EuclideanMultivector2<S> 
 where
     S: ScalarSigned
 {
@@ -285,7 +271,7 @@ where
     }
 }
 
-impl<S> Not for &EuclideanMultivector2<S> 
+impl<S> ops::Not for &EuclideanMultivector2<S> 
 where
     S: ScalarSigned
 {
@@ -303,7 +289,7 @@ where
     }
 }
 
-impl<S> Neg for EuclideanMultivector2<S>
+impl<S> ops::Neg for EuclideanMultivector2<S>
 where
     S: ScalarSigned
 {
@@ -320,7 +306,7 @@ where
     }
 }
 
-impl<S> Neg for &EuclideanMultivector2<S>
+impl<S> ops::Neg for &EuclideanMultivector2<S>
 where
     S: ScalarSigned
 {
@@ -337,7 +323,7 @@ where
     }
 }
 
-impl<S> Mul<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Mul<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -356,7 +342,7 @@ where
     }
 }
 
-impl<S> Mul<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Mul<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -375,7 +361,7 @@ where
     }
 }
 
-impl<S> Mul<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Mul<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -394,7 +380,7 @@ where
     }
 }
 
-impl<'a, 'b, S> Mul<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Mul<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -413,7 +399,7 @@ where
     }
 }
 
-impl<S> BitXor<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitXor<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -432,7 +418,7 @@ where
     }
 }
 
-impl<S> BitXor<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitXor<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -451,7 +437,7 @@ where
     }
 }
 
-impl<S> BitXor<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
+impl<S> ops::BitXor<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -470,7 +456,7 @@ where
     }
 }
 
-impl<'a, 'b, S> BitXor<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
+impl<'a, 'b, S> ops::BitXor<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -489,7 +475,7 @@ where
     }
 }
 
-impl<S> BitOr<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitOr<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -508,7 +494,7 @@ where
     }
 }
 
-impl<S> BitOr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitOr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -527,7 +513,7 @@ where
     }
 }
 
-impl<S> BitOr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
+impl<S> ops::BitOr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -546,7 +532,7 @@ where
     }
 }
 
-impl<'a, 'b, S> BitOr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
+impl<'a, 'b, S> ops::BitOr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -565,7 +551,7 @@ where
     }
 }
 
-impl<S> Add<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Add<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -584,7 +570,7 @@ where
     }
 }
 
-impl<S> Add<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Add<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -603,7 +589,7 @@ where
     }
 }
 
-impl<S> Add<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Add<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -622,7 +608,7 @@ where
     }
 }
 
-impl<'a, 'b, S> Add<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Add<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -641,7 +627,7 @@ where
     }
 }
 
-impl<S> Sub<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Sub<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -660,7 +646,7 @@ where
     }
 }
 
-impl<S> Sub<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Sub<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -679,7 +665,7 @@ where
     }
 }
 
-impl<S> Sub<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Sub<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -698,7 +684,7 @@ where
     }
 }
 
-impl<'a, 'b, S> Sub<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Sub<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -717,7 +703,7 @@ where
     }
 }
 
-impl<S> Mul<S> for EuclideanMultivector2<S> 
+impl<S> ops::Mul<S> for EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -736,7 +722,7 @@ where
     }
 }
 
-impl<S> Mul<S> for &EuclideanMultivector2<S> 
+impl<S> ops::Mul<S> for &EuclideanMultivector2<S> 
 where
     S: Scalar
 {
@@ -755,7 +741,7 @@ where
     }
 }
 
-impl<S> Add<S> for EuclideanMultivector2<S>
+impl<S> ops::Add<S> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -774,7 +760,7 @@ where
     }
 }
 
-impl<S> Add<S> for &EuclideanMultivector2<S>
+impl<S> ops::Add<S> for &EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -793,7 +779,7 @@ where
     }
 }
 
-impl<S> Sub<S> for EuclideanMultivector2<S>
+impl<S> ops::Sub<S> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -812,7 +798,7 @@ where
     }
 }
 
-impl<S> Sub<S> for &EuclideanMultivector2<S>
+impl<S> ops::Sub<S> for &EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -899,7 +885,7 @@ where
     }
 }
 
-impl<S> Div<S> for EuclideanMultivector2<S>
+impl<S> ops::Div<S> for EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
@@ -917,7 +903,7 @@ where
     }
 }
 
-impl<S> Div<S> for &EuclideanMultivector2<S>
+impl<S> ops::Div<S> for &EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
@@ -935,7 +921,7 @@ where
     }
 }
 
-impl<S> Div<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Div<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
@@ -946,7 +932,7 @@ where
     }
 }
 
-impl<S> Div<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Div<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
@@ -957,7 +943,7 @@ where
     }
 }
 
-impl<S> Div<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Div<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
@@ -968,7 +954,7 @@ where
     }
 }
 
-impl<'a, 'b, S> Div<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Div<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
@@ -979,7 +965,7 @@ where
     }
 }
 
-impl<S> Shl<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Shl<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -998,7 +984,7 @@ where
     }
 }
 
-impl<S> Shl<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Shl<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -1017,7 +1003,7 @@ where
     }
 }
 
-impl<S> Shl<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Shl<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
     S: Scalar
 {
@@ -1036,7 +1022,7 @@ where
     }
 }
 
-impl<'a, 'b, S> Shl<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Shl<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
     S: Scalar
 {
