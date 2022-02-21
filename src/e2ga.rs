@@ -98,9 +98,10 @@ where
 
     /// Project the multivector onto the grade `grade`.
     /// 
-    /// For a grade larger than the dimension of the underlying vector space, the
-    /// grade projection is always zero. In this case, any grade projection onto a 
-    /// grade larger than two will be zero.
+    /// Return a multivector where the components of each grade other than 
+    /// input grade are zero. For each grade larger than the dimension of the 
+    /// underlying vector space, the grade projection is always zero. In this 
+    /// case, any grade projection onto a grade larger than two will be zero.
     /// 
     /// # Example
     /// ```
