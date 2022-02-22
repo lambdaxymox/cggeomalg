@@ -788,5 +788,108 @@ mod e2ga_test {
 
         assert_eq!((e2 ^ e1) << (e1 ^ e2), one);
     }
+
+    #[test]
+    fn test_scalar_product_e1_e1() {
+        let e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+        let one: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e1 | e1, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e2() {
+        let e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(e1 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e12() {
+        let e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+        let e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(e1 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e1() {
+        let e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(e2 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e2() {
+        let e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+        let one: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e2 | e2, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e12() {
+        let e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(e2 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e1() {
+        let e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+        let e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(e12 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e2() {
+        let e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+        let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+
+        assert_eq!(e12 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e12() {
+        let e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+        let one: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e12 | e12, one);
+    }
+
+    #[test]
+    fn test_scalar_product_multivector_multivector() {
+        let mv1 = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let mv2 = EuclideanMultivector2::new(3_f64, 5_f64, 7_f64, 9_f64);
+        let expected = EuclideanMultivector2::new(70_f64, 0_f64, 0_f64, 0_f64);
+
+        assert_eq!(mv1 | mv2, expected);
+    }
+
+    #[test]
+    fn test_scalar_product_multivector_zero() {
+        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
+        let zero = EuclideanMultivector2::zero();
+
+        assert_eq!(mv | zero, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_zero_multivector() {
+        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
+        let zero = EuclideanMultivector2::zero();
+
+        assert_eq!(zero | mv, zero);
+    }
 }
 
