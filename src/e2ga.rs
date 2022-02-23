@@ -931,6 +931,8 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
+    #[inline]
     fn div(self, other: EuclideanMultivector2<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
@@ -942,6 +944,8 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
+    #[inline]
     fn div(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
@@ -953,6 +957,8 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
+    #[inline]
     fn div(self, other: EuclideanMultivector2<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
@@ -964,6 +970,8 @@ where
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
+    #[inline]
     fn div(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
