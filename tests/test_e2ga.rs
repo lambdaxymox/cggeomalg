@@ -891,5 +891,196 @@ mod e2ga_test {
 
         assert_eq!(zero | mv, zero);
     }
+    
+    #[test]
+    fn test_right_contraction_scalar_e1() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let expected = EuclideanMultivector2::zero();
+        let result = scalar >> e1;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_scalar_e2() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let expected = EuclideanMultivector2::zero();
+        let result = scalar >> e2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_scalar_e12() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = EuclideanMultivector2::zero();
+        let result = scalar >> e12;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_e1_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e1 >> e1, one);
+    }
+
+    #[test]
+    fn test_right_contraction_e1_e2() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(e1 >> e2, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_e1_e12() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(e1 >> e12, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_e2_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(e2 >> e1, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_e2_e2() {
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e2 >> e2, one);
+    }
+
+    #[test]
+    fn test_right_contraction_e2_e12() {
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(e2 >> e12, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_e12_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+
+        assert_eq!(e12 >> e1, -e2);
+    }
+
+    #[test]
+    fn test_right_contraction_e12_e2() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+
+        assert_eq!(e12 >> e2, e1);
+    }
+
+    #[test]
+    fn test_right_contraction_e12_e12() {
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e12 >> e12, -one);
+    }
+
+    #[test]
+    fn test_right_contraction_scalar_multivector() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let expected = scalar;
+        let result = scalar >> mv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_multivector() {
+        let mv1 = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let mv2 = EuclideanMultivector2::new(3_f64, 5_f64, 7_f64, 9_f64);
+        let expected = EuclideanMultivector2::new(-2_f64, 34_f64, -11_f64, 12_f64);
+        let result = mv1 >> mv2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_with_self() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let expected = EuclideanMultivector2::new(-2_f64, 14_f64, -5_f64, 4_f64);
+        let result = mv >> mv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_zero_multivector() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let zero = EuclideanMultivector2::zero();
+    
+        assert_eq!(zero >> mv, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_zero() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let zero = EuclideanMultivector2::zero();
+
+        assert_eq!(mv >> zero, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_one_multivector() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let one = EuclideanMultivector2::unit_scalar();
+    
+        assert_eq!(mv >> one, mv);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_one() {
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let one = EuclideanMultivector2::unit_scalar();
+    
+        assert_eq!(one >> mv, one);
+    }
+
+    #[test]
+    fn test_right_contraction_e12_e21() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!((e1 ^ e2) >> (e2 ^ e1), one);
+    }
+
+    #[test]
+    fn test_right_contraction_e21_e12() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!((e2 ^ e1) >> (e1 ^ e2), one);
+    }
 }
 

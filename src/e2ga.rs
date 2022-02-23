@@ -1064,7 +1064,7 @@ where
         let a = self;
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[3];
+        let result_e1  = a[1] * b[0] + a[3] * b[2];
         let result_e2  = a[2] * b[0] - a[3] * b[1];
         let result_e12 = a[3] * b[0];
 
@@ -1083,7 +1083,7 @@ where
         let a = self;
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[3];
+        let result_e1  = a[1] * b[0] + a[3] * b[2];
         let result_e2  = a[2] * b[0] - a[3] * b[1];
         let result_e12 = a[3] * b[0];
 
@@ -1102,7 +1102,7 @@ where
         let a = self;
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[3];
+        let result_e1  = a[1] * b[0] + a[3] * b[2];
         let result_e2  = a[2] * b[0] - a[3] * b[1];
         let result_e12 = a[3] * b[0];
 
@@ -1121,7 +1121,7 @@ where
         let a = self;
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[3];
+        let result_e1  = a[1] * b[0] + a[3] * b[2];
         let result_e2  = a[2] * b[0] - a[3] * b[1];
         let result_e12 = a[3] * b[0];
 
