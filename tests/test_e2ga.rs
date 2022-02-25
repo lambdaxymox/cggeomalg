@@ -250,7 +250,6 @@ mod e2ga_test {
         let e21: EuclideanMultivector2<f64> = -EuclideanMultivector2::unit_e12();
         let one = EuclideanMultivector2::unit_scalar();
 
-
         assert_eq!(e21 * e12, one);
     }
 
@@ -601,7 +600,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_scalar_e1() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
         let expected = EuclideanMultivector2::new(0_f64, scalar_part, 0_f64, 0_f64);
         let result = scalar << e1;
@@ -612,7 +611,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_scalar_e2() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
         let expected = EuclideanMultivector2::new(0_f64, 0_f64, scalar_part, 0_f64);
         let result = scalar << e2;
@@ -623,7 +622,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_scalar_e12() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
         let expected = EuclideanMultivector2::new(0_f64, 0_f64, 0_f64, scalar_part);
         let result = scalar << e12;
@@ -634,7 +633,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_e1_scalar() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
         let expected = EuclideanMultivector2::zero();
         let result = e1 << scalar;
@@ -645,7 +644,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_e2_scalar() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
         let expected = EuclideanMultivector2::zero();
         let result = e2 << scalar;
@@ -656,7 +655,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_e12_scalar() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
         let expected = EuclideanMultivector2::zero();
         let result = e12 << scalar;
@@ -745,7 +744,7 @@ mod e2ga_test {
     #[test]
     fn test_left_contraction_scalar_multivector() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let expected = EuclideanMultivector2::new(3_f64, 6_f64, 9_f64, 12_f64);
         let result = scalar << mv;
@@ -904,7 +903,7 @@ mod e2ga_test {
     fn test_scalar_product_multivector_multivector() {
         let mv1 = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let mv2 = EuclideanMultivector2::new(3_f64, 5_f64, 7_f64, 9_f64);
-        let expected = EuclideanMultivector2::new(70_f64, 0_f64, 0_f64, 0_f64);
+        let expected = EuclideanMultivector2::from_scalar(70_f64);
 
         assert_eq!(mv1 | mv2, expected);
     }
@@ -928,7 +927,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_scalar_e1() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
         let expected = EuclideanMultivector2::zero();
         let result = scalar >> e1;
@@ -939,7 +938,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_scalar_e2() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
         let expected = EuclideanMultivector2::zero();
         let result = scalar >> e2;
@@ -950,7 +949,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_scalar_e12() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
         let expected = EuclideanMultivector2::zero();
         let result = scalar >> e12;
@@ -961,7 +960,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_e1_scalar() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
         let expected = scalar * e1;
         let result = e1 >> scalar;
@@ -972,7 +971,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_e2_scalar() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
         let expected = scalar * e2;
         let result = e2 >> scalar;
@@ -983,7 +982,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_e12_scalar() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
         let expected = scalar * e12;
         let result = e12 >> scalar;
@@ -1072,7 +1071,7 @@ mod e2ga_test {
     #[test]
     fn test_right_contraction_scalar_multivector() {
         let scalar_part = 3_f64;
-        let scalar = EuclideanMultivector2::new(scalar_part, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(scalar_part);
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let expected = scalar;
         let result = scalar >> mv;
@@ -1151,8 +1150,8 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_scalar_scalar() {
-        let scalar1 = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
-        let scalar2 = EuclideanMultivector2::new(45_f64, 0_f64, 0_f64, 0_f64);
+        let scalar1 = EuclideanMultivector2::from_scalar(6_f64);
+        let scalar2 = EuclideanMultivector2::from_scalar(45_f64);
         let expected = EuclideanMultivector2::zero();
         let result = scalar1.commutator(&scalar2);
 
@@ -1161,7 +1160,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_scalar_e1() {
-        let scalar = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(6_f64);
         let e1 = EuclideanMultivector2::unit_e1();
         let expected = EuclideanMultivector2::zero();
         let result = scalar.commutator(&e1);
@@ -1171,7 +1170,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_e1_scalar() {
-        let scalar = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(6_f64);
         let e1 = EuclideanMultivector2::unit_e1();
         let expected = EuclideanMultivector2::zero();
         let result = e1.commutator(&scalar);
@@ -1181,7 +1180,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_scalar_e2() {
-        let scalar = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(6_f64);
         let e2 = EuclideanMultivector2::unit_e2();
         let expected = EuclideanMultivector2::zero();
         let result = scalar.commutator(&e2);
@@ -1191,7 +1190,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_e2_scalar() {
-        let scalar = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(6_f64);
         let e2 = EuclideanMultivector2::unit_e2();
         let expected = EuclideanMultivector2::zero();
         let result = e2.commutator(&scalar);
@@ -1201,7 +1200,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_scalar_e12() {
-        let scalar = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(6_f64);
         let e12 = EuclideanMultivector2::unit_e12();
         let expected = EuclideanMultivector2::zero();
         let result = scalar.commutator(&e12);
@@ -1211,7 +1210,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_e12_scalar() {
-        let scalar = EuclideanMultivector2::new(6_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(6_f64);
         let e12 = EuclideanMultivector2::unit_e12();
         let expected = EuclideanMultivector2::zero();
         let result = e12.commutator(&scalar);
@@ -1221,7 +1220,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_scalar_multivector() {
-        let scalar = EuclideanMultivector2::new(7_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(7_f64);
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
         let result = scalar.commutator(&mv);
@@ -1231,7 +1230,7 @@ mod e2ga_test {
 
     #[test]
     fn test_commutator_multivector_scalar() {
-        let scalar = EuclideanMultivector2::new(7_f64, 0_f64, 0_f64, 0_f64);
+        let scalar = EuclideanMultivector2::from_scalar(7_f64);
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
         let result = mv.commutator(&scalar);
