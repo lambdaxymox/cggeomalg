@@ -28,13 +28,13 @@ where
         }
     }
 
-    /// Get a pointer to the underlying array.
+    /// Get a pointer to the underlying component array.
     #[inline]
     pub fn as_ptr(&self) -> *const S {
         &self.data[0]
     }
 
-    /// Get a mutable pointer to the underlying array.
+    /// Get a mutable pointer to the underlying component array.
     #[inline]
     pub fn as_mut_ptr(&mut self) -> *mut S {
         &mut self.data[0]
