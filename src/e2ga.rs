@@ -887,6 +887,19 @@ where
             Some(conjugate / self_times_conjugate)
         }
     }
+
+    pub fn commutator(&self, other: &Self) -> Self {
+        let self_times_other = self * other;
+        let other_times_self = other * self;
+        let one_over_two = S::one() / (S::one() + S::one());
+
+        (self_times_other - other_times_self) * one_over_two
+    }
+
+    #[inline(always)]
+    pub fn x(&self, other: &Self) -> Self {
+        self.commutator(other)
+    }
 }
 
 impl<S> ops::Div<S> for EuclideanMultivector2<S>
