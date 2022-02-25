@@ -1218,5 +1218,118 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_commutator_scalar_multivector() {
+        let scalar = EuclideanMultivector2::new(7_f64, 0_f64, 0_f64, 0_f64);
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+        let result = scalar.commutator(&mv);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_multivector_scalar() {
+        let scalar = EuclideanMultivector2::new(7_f64, 0_f64, 0_f64, 0_f64);
+        let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+        let result = mv.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e1_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let expected = EuclideanMultivector2::zero();
+        let result = e1.commutator(&e1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e1_e2() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = e12;
+        let result = e1.commutator(&e2);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e1_e12() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = e2;
+        let result = e1.commutator(&e12);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = -e12;
+        let result = e2.commutator(&e1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e2() {
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let expected = EuclideanMultivector2::zero();
+        let result = e2.commutator(&e2);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e12() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = -e1;
+        let result = e2.commutator(&e12);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e12_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = -e2;
+        let result = e12.commutator(&e1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e12_e2() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = e1;
+        let result = e12.commutator(&e2);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e12_e12() {
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let expected = EuclideanMultivector2::zero();
+        let result = e12.commutator(&e12);
+
+        assert_eq!(result, expected);
+    }
 }
 
