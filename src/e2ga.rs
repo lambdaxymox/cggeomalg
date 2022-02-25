@@ -66,11 +66,32 @@ where
         self.data[3].is_zero()
     }
 
+    /// Construct a new multivector from the scalar part only.
+    /// 
+    /// A scalar is a multivector whose vector, bivector, etc. components are
+    /// all zero.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let scalar_part = 2;
+    /// let scalar = EuclideanMultivector2::from_scalar(scalar_part);
+    /// 
+    /// assert_eq!(scalar.scalar, scalar_part);
+    /// assert_eq!(scalar.e1, 0);
+    /// assert_eq!(scalar.e2, 0);
+    /// assert_eq!(scalar.e12, 0);
+    /// ```
     #[inline]
     pub fn from_scalar(scalar: S) -> Self {
         Self::new(scalar, S::zero(), S::zero(), S::zero())
     }
 
+    /// Returns the number of components in a multivector.
     #[inline]
     pub fn len(&self) -> usize {
         self.data.len()
@@ -96,6 +117,7 @@ where
         Self::new(S::zero(), S::zero(), S::zero(), S::one())
     }
 
+    /// Returns the unit volume elements for `G2`. This is a synonym from `unit_e12`.
     #[inline(always)]
     pub fn pseudoscalar() -> Self {
         Self::unit_e12()
