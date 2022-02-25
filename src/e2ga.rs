@@ -59,6 +59,11 @@ where
     }
 
     #[inline]
+    pub fn from_scalar(scalar: S) -> Self {
+        Self::new(scalar, S::zero(), S::zero(), S::zero())
+    }
+
+    #[inline]
     pub fn len(&self) -> usize {
         self.data.len()
     }
