@@ -1331,5 +1331,15 @@ mod e2ga_test {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_commutator_multivector_multivector() {
+        let mv1 = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+        let mv2 = EuclideanMultivector2::new(3_f64, 5_f64, 7_f64, 9_f64);
+        let expected = EuclideanMultivector2::new(0_f64, 1_f64, -2_f64, -1_f64);
+        let result = mv1.commutator(&mv2);
+
+        assert_eq!(result, expected);
+    }
 }
 
