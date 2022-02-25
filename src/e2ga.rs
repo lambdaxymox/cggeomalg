@@ -59,6 +59,14 @@ where
     }
 
     #[inline]
+    pub fn is_zero(&self) -> bool {
+        self.data[0].is_zero() &&
+        self.data[1].is_zero() &&
+        self.data[2].is_zero() &&
+        self.data[3].is_zero()
+    }
+
+    #[inline]
     pub fn from_scalar(scalar: S) -> Self {
         Self::new(scalar, S::zero(), S::zero(), S::zero())
     }
