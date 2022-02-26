@@ -1125,7 +1125,7 @@ where
         let result_e12 = a[3] * b[0];
 
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
-    }
+    }   
 }
 
 impl<S> ops::Shr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
@@ -1188,3 +1188,17 @@ where
 impl_coords!(E2ga, { scalar, e1, e2, e12 });
 impl_coords_deref!(EuclideanMultivector2, E2ga);
 
+macro_rules! impl_scalar_multivector_add_ops {
+    ($Lhs:ty => $Rhs:ty => $Output:ty, { $scalar_index:expr }, { $($other_index:expr),* }) => {
+        impl ops::Add<$Rhs> for $Lhs {
+            type Output = $Output;
+
+            #[inline]
+            fn add(self, other: $Rhs) -> $Output {
+                Self::Output::new(self + other[$scalar_index], $(other[$other_index]),* )
+            }
+        }
+    }
+}
+
+impl_scalar_multivector_add_ops!(f32 => EuclideanMultivector2<f32> => EuclideanMultivector2<f32>, {0}, {1, 2, 3});
