@@ -1199,6 +1199,15 @@ macro_rules! impl_scalar_multivector_add_sub_ops {
             }
         }
 
+        impl ops::Add<&$Rhs> for $Lhs {
+            type Output = $Output;
+
+            #[inline]
+            fn add(self, other: &$Rhs) -> $Output {
+                Self::Output::new(self + other[$scalar_index], $(other[$other_index]),* )
+            }
+        }
+
         impl ops::Sub<$Rhs> for $Lhs {
             type Output = $Output;
 
@@ -1207,7 +1216,30 @@ macro_rules! impl_scalar_multivector_add_sub_ops {
                 Self::Output::new(self + other[$scalar_index], $(other[$other_index]),* )
             }
         }
+
+        impl ops::Sub<&$Rhs> for $Lhs {
+            type Output = $Output;
+
+            #[inline]
+            fn sub(self, other: &$Rhs) -> Self::Output {
+                Self::Output::new(self + other[$scalar_index], $(other[$other_index]),* )
+            }
+        }
     }
 }
 
-impl_scalar_multivector_add_sub_ops!(f32 => EuclideanMultivector2<f32> => EuclideanMultivector2<f32>, {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(u8    => EuclideanMultivector2<u8> => EuclideanMultivector2<u8>,       {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(u16   => EuclideanMultivector2<u16> => EuclideanMultivector2<u16>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(u32   => EuclideanMultivector2<u32> => EuclideanMultivector2<u32>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(u64   => EuclideanMultivector2<u64> => EuclideanMultivector2<u64>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(u128  => EuclideanMultivector2<u128> => EuclideanMultivector2<u128>,   {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(usize => EuclideanMultivector2<usize> => EuclideanMultivector2<usize>, {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(i8    => EuclideanMultivector2<i8> => EuclideanMultivector2<i8>,       {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(i16   => EuclideanMultivector2<i16> => EuclideanMultivector2<i16>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(i32   => EuclideanMultivector2<i32> => EuclideanMultivector2<i32>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(i64   => EuclideanMultivector2<i64> => EuclideanMultivector2<i64>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(i128  => EuclideanMultivector2<i128> => EuclideanMultivector2<i128>,   {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(isize => EuclideanMultivector2<isize> => EuclideanMultivector2<isize>, {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(f32   => EuclideanMultivector2<f32> => EuclideanMultivector2<f32>,     {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(f64   => EuclideanMultivector2<f64> => EuclideanMultivector2<f64>,     {0}, {1, 2, 3});
+
