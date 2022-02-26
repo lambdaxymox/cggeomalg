@@ -1535,3 +1535,45 @@ impl_scalar_multivector_bitxor_ops!(isize);
 impl_scalar_multivector_bitxor_ops!(f32);
 impl_scalar_multivector_bitxor_ops!(f64);
 
+
+macro_rules! impl_scalar_multivector_div_ops {
+    ($Lhs:ty) => {
+        impl ops::Div<EuclideanMultivector2<$Lhs>> for $Lhs {
+            type Output = EuclideanMultivector2<$Lhs>;
+
+            #[inline]
+            fn div(self, other: EuclideanMultivector2<$Lhs>) -> Self::Output {
+                let result = other.inverse();
+                assert!(result.is_some(), "Attempt to divide by a zero multivector: {:?}", other);
+                let mut result = result.unwrap();
+                result[0] = self * result[0];
+                result[1] = self * result[1];
+                result[2] = self * result[2];
+                result[3] = self * result[3];
+
+                result
+            }
+        }
+
+        impl ops::Div<&EuclideanMultivector2<$Lhs>> for $Lhs {
+            type Output = EuclideanMultivector2<$Lhs>;
+
+            #[inline]
+            fn div(self, other: &EuclideanMultivector2<$Lhs>) -> Self::Output {
+                let result = other.inverse();
+                assert!(result.is_some(), "Attempt to divide by a zero multivector: {:?}", other);
+                let mut result = result.unwrap();
+                result[0] = self * result[0];
+                result[1] = self * result[1];
+                result[2] = self * result[2];
+                result[3] = self * result[3];
+
+                result
+            }
+        }
+    }
+}
+
+impl_scalar_multivector_div_ops!(f32);
+impl_scalar_multivector_div_ops!(f64);
+
