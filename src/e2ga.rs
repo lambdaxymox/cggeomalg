@@ -1324,8 +1324,8 @@ where
 }
 
 
-impl_coords!(E2ga, { scalar, e1, e2, e12 });
-impl_coords_deref!(EuclideanMultivector2, E2ga);
+impl_coords!(ViewG2, { scalar, e1, e2, e12 });
+impl_coords_deref!(EuclideanMultivector2, ViewG2);
 
 
 macro_rules! impl_scalar_multivector_add_ops {
