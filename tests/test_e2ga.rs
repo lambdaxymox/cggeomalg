@@ -169,8 +169,9 @@ mod e2ga_test {
     fn test_scalar_zero_times_multivector_is_zero() {
         let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
         let expected: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
+        let result = 0 * mv;
 
-        assert_eq!(true, false);
+        assert_eq!(result, expected);
     }
 
     #[test]
