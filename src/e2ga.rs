@@ -1188,7 +1188,7 @@ where
 impl_coords!(E2ga, { scalar, e1, e2, e12 });
 impl_coords_deref!(EuclideanMultivector2, E2ga);
 
-macro_rules! impl_scalar_multivector_add_ops {
+macro_rules! impl_scalar_multivector_add_sub_ops {
     ($Lhs:ty => $Rhs:ty => $Output:ty, { $scalar_index:expr }, { $($other_index:expr),* }) => {
         impl ops::Add<$Rhs> for $Lhs {
             type Output = $Output;
@@ -1198,7 +1198,16 @@ macro_rules! impl_scalar_multivector_add_ops {
                 Self::Output::new(self + other[$scalar_index], $(other[$other_index]),* )
             }
         }
+
+        impl ops::Sub<$Rhs> for $Lhs {
+            type Output = $Output;
+
+            #[inline]
+            fn sub(self, other: $Rhs) -> Self::Output {
+                Self::Output::new(self + other[$scalar_index], $(other[$other_index]),* )
+            }
+        }
     }
 }
 
-impl_scalar_multivector_add_ops!(f32 => EuclideanMultivector2<f32> => EuclideanMultivector2<f32>, {0}, {1, 2, 3});
+impl_scalar_multivector_add_sub_ops!(f32 => EuclideanMultivector2<f32> => EuclideanMultivector2<f32>, {0}, {1, 2, 3});
