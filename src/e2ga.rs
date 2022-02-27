@@ -1038,10 +1038,7 @@ where
         if magnitude_squared.is_zero() {
             None
         } else {
-            let conjugate = self.conjugate();
-            let self_times_conjugate = (self * conjugate)[0];
-
-            Some(conjugate / self_times_conjugate)
+            Some(self.inverse_unchecked())
         }
     }
 
