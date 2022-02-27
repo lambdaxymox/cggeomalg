@@ -384,7 +384,7 @@ mod e2ga_test {
         let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let result = mv_inv * mv;
 
-        assert_eq!(result, expected);
+        assert!(relative_eq!(result, expected, epsilon = 1e-10));
     }
 
     #[test]
@@ -425,7 +425,7 @@ mod e2ga_test {
         let expected = e1 * (3_f64 / magnitude_squared) + e2 * (5_f64 / magnitude_squared);
         let result = mv.inverse().unwrap();
 
-        assert_eq!(result, expected);
+        assert!(relative_eq!(result, expected, epsilon = 1e-10));
     }
 
     #[test]
