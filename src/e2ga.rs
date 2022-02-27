@@ -21,6 +21,7 @@ impl<S> EuclideanMultivector2<S>
 where
     S: Copy
 {
+    /// Construct a new general multivector.
     #[inline]
     pub fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
         Self {
@@ -51,6 +52,7 @@ impl<S> EuclideanMultivector2<S>
 where
     S: Scalar
 {
+    /// Returns the zero multivector.
     #[inline]
     pub fn zero() -> Self {
         Self {
@@ -58,6 +60,23 @@ where
         }
     }
 
+    /// Determine whether a multivector is the zero mutlivector.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+    /// 
+    /// assert!(zero.is_zero());
+    /// 
+    /// let mv: EuclideanMultivector2<f64> = EuclideanMultivector2::new(3_f64, 84_f64, 83_f64, 61_f64);
+    /// 
+    /// assert!(!mv.is_zero());
+    /// ```
     #[inline]
     pub fn is_zero(&self) -> bool {
         self.data[0].is_zero() &&
@@ -92,32 +111,110 @@ where
     }
 
     /// Returns the number of components in a multivector.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1, 1, 1, 1);
+    /// 
+    /// assert_eq!(mv.len(), 4);
+    /// ```
     #[inline]
     pub fn len(&self) -> usize {
         self.data.len()
     }
 
+    /// Returns the unit scalar multivector.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let unit_scalar: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
+    /// 
+    /// assert_eq!(unit_scalar.scalar, 1);
+    /// assert_eq!(unit_scalar.e1, 0);
+    /// assert_eq!(unit_scalar.e2, 0);
+    /// assert_eq!(unit_scalar.e12, 0);
+    /// ```
     #[inline]
     pub fn unit_scalar() -> Self {
         Self::new(S::one(), S::zero(), S::zero(), S::zero())
     }
 
+    /// Returns the unit `x`-axis vector.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let unit_e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+    /// 
+    /// assert_eq!(unit_e1.scalar, 0);
+    /// assert_eq!(unit_e1.e1, 1);
+    /// assert_eq!(unit_e1.e2, 0);
+    /// assert_eq!(unit_e1.e12, 0);
+    /// ```
     #[inline]
     pub fn unit_e1() -> Self {
         Self::new(S::zero(), S::one(), S::zero(), S::zero())
     }
 
+    /// Returns the unit `y`-axis vector.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let unit_e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+    /// 
+    /// assert_eq!(unit_e2.scalar, 0);
+    /// assert_eq!(unit_e2.e1, 0);
+    /// assert_eq!(unit_e2.e2, 1);
+    /// assert_eq!(unit_e2.e12, 0);
+    /// ```
     #[inline]
     pub fn unit_e2() -> Self {
         Self::new(S::zero(), S::zero(), S::one(), S::zero())
     }
 
+    /// Returns the unit volume element for two-dimensional Euclidean space.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let unit_e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+    /// 
+    /// assert_eq!(unit_e12.scalar, 0);
+    /// assert_eq!(unit_e12.e1, 0);
+    /// assert_eq!(unit_e12.e2, 0);
+    /// assert_eq!(unit_e12.e12, 1);
+    /// ```
     #[inline]
     pub fn unit_e12() -> Self {
         Self::new(S::zero(), S::zero(), S::zero(), S::one())
     }
 
-    /// Returns the unit volume elements for `G2`. This is a synonym from `unit_e12`.
+    /// Returns the unit volume elements for two-dimensional Euclidean space. 
+    /// 
+    /// This is a synonym for `unit_e12`.
     #[inline(always)]
     pub fn pseudoscalar() -> Self {
         Self::unit_e12()
