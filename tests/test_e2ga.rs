@@ -1,4 +1,5 @@
 extern crate cggeomalg;
+extern crate approx;
 extern crate num_traits;
 
 
@@ -6,6 +7,9 @@ extern crate num_traits;
 mod e2ga_test {
     use cggeomalg::e2ga::{
         EuclideanMultivector2,
+    };
+    use approx::{
+        relative_eq,
     };
 
 
@@ -370,7 +374,7 @@ mod e2ga_test {
         let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let result = mv * mv_inv;
 
-        assert_eq!(result, expected);
+        assert!(relative_eq!(result, expected, epsilon = 1e-10));
     }
 
     #[test]
