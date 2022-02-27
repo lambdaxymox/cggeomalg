@@ -1030,7 +1030,7 @@ where
 
     #[inline]
     pub fn is_invertible(&self) -> bool {
-        !self.magnitude_squared().is_zero()
+        approx::ulps_ne!(self.magnitude_squared(), S::zero())
     }
 
     pub fn inverse(&self) -> Option<Self> {
