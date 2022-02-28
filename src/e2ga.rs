@@ -17,18 +17,20 @@ pub struct EuclideanMultivector2<S> {
     data: [S; 4],
 }
 
-impl<S> EuclideanMultivector2<S>
-where
-    S: Copy
-{
+impl<S> EuclideanMultivector2<S> {
     /// Construct a new general multivector.
     #[inline]
-    pub fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
+    pub const fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
         Self {
             data: [scalar, e1, e2, e12]
         }
     }
+}
 
+impl<S> EuclideanMultivector2<S>
+where
+    S: Copy
+{
     /// Get a pointer to the underlying component array.
     #[inline]
     pub fn as_ptr(&self) -> *const S {
