@@ -68,7 +68,21 @@ impl<S> EuclideanMultivector2<S>
 where
     S: Scalar
 {
-    /// Returns the zero multivector.
+    /// Construct the additive unit (zero) multivector.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
+    /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+    /// 
+    /// assert_eq!(mv + zero, mv);
+    /// assert_eq!(zero + mv, mv);
+    /// ```
     #[inline]
     pub fn zero() -> Self {
         Self {
