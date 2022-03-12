@@ -41,13 +41,13 @@ impl<S> EuclideanMultivector2<S> {
     /// assert_eq!(mv.len(), 4);
     /// ```
     #[inline]
-    pub fn len(&self) -> usize {
-        self.data.len()
+    pub const fn len(&self) -> usize {
+        4
     }
 
     /// Get a pointer to the underlying component array.
     #[inline]
-    pub fn as_ptr(&self) -> *const S {
+    pub const fn as_ptr(&self) -> *const S {
         &self.data[0]
     }
 
