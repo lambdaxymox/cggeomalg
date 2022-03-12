@@ -11,6 +11,7 @@ use core::ops;
 use core::fmt;
 
 
+/// A stack-allocated, two-dimensional Euclidean multivector.
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct EuclideanMultivector2<S> {
@@ -25,12 +26,25 @@ impl<S> EuclideanMultivector2<S> {
             data: [scalar, e1, e2, e12]
         }
     }
-}
 
-impl<S> EuclideanMultivector2<S>
-where
-    S: Copy
-{
+    /// Returns the number of components in a multivector.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1, 1, 1, 1);
+    /// 
+    /// assert_eq!(mv.len(), 4);
+    /// ```
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.data.len()
+    }
+
     /// Get a pointer to the underlying component array.
     #[inline]
     pub fn as_ptr(&self) -> *const S {
@@ -110,24 +124,6 @@ where
     #[inline]
     pub fn from_scalar(scalar: S) -> Self {
         Self::new(scalar, S::zero(), S::zero(), S::zero())
-    }
-
-    /// Returns the number of components in a multivector.
-    /// 
-    /// # Example
-    /// 
-    /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
-    /// #
-    /// let mv = EuclideanMultivector2::new(1, 1, 1, 1);
-    /// 
-    /// assert_eq!(mv.len(), 4);
-    /// ```
-    #[inline]
-    pub fn len(&self) -> usize {
-        self.data.len()
     }
 
     /// Returns the unit scalar multivector.
