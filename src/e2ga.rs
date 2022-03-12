@@ -13,7 +13,7 @@ use core::fmt;
 
 /// A stack-allocated, two-dimensional Euclidean multivector.
 #[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub struct EuclideanMultivector2<S> {
     data: [S; 4],
 }
