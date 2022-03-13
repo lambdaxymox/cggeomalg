@@ -1191,37 +1191,47 @@ where
         EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
     }
 }
-
-impl<S> ops::BitOr<S> for EuclideanMultivector2<S>
-where
-    S: Scalar
-{
-    type Output = EuclideanMultivector2<S>;
-
-    #[inline]
-    fn bitor(self, other: S) -> Self::Output {
-        let a = self;
-        let result_1 = a[0] * other;
-
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
-    }
-}
-
-impl<S> ops::BitOr<S> for &EuclideanMultivector2<S>
-where
-    S: Scalar
-{
-    type Output = EuclideanMultivector2<S>;
-
-    #[inline]
-    fn bitor(self, other: S) -> Self::Output {
-        let a = self;
-        let result_1 = a[0] * other;
-
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
-    }
-}
 */
+impl<S> ops::BitOr<S> for EuclideanMultivector3<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector3<S>;
+
+    #[inline]
+    fn bitor(self, other: S) -> Self::Output {
+        let a = self;
+        let result_1 = a[0] * other;
+
+        EuclideanMultivector3::new(
+            result_1, 
+            S::zero(), S::zero(), S::zero(),
+            S::zero(), S::zero(), S::zero(),
+            S::zero()
+        )
+    }
+}
+
+impl<S> ops::BitOr<S> for &EuclideanMultivector3<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector3<S>;
+
+    #[inline]
+    fn bitor(self, other: S) -> Self::Output {
+        let a = self;
+        let result_1 = a[0] * other;
+
+        EuclideanMultivector3::new(
+            result_1, 
+            S::zero(), S::zero(), S::zero(),
+            S::zero(), S::zero(), S::zero(),
+            S::zero()
+        )
+    }
+}
+
 impl<S> ops::Add<EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: Scalar
