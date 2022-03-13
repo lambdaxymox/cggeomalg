@@ -274,8 +274,8 @@ where
         }
     }
 }
-
-impl<S> ops::Index<usize> for EuclideanMultivector2<S> 
+*/
+impl<S> ops::Index<usize> for EuclideanMultivector3<S> 
 where
     S: Scalar
 {
@@ -287,7 +287,7 @@ where
     }
 }
 
-impl<S> ops::IndexMut<usize> for EuclideanMultivector2<S> 
+impl<S> ops::IndexMut<usize> for EuclideanMultivector3<S> 
 where
     S: Scalar
 {
@@ -296,7 +296,7 @@ where
         &mut self.data[index]
     }
 }
-*/
+
 impl<S> AsRef<[S; 8]> for EuclideanMultivector3<S> {
     #[inline]
     fn as_ref(&self) -> &[S; 8] {
