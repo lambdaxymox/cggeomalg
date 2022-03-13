@@ -851,41 +851,59 @@ where
         result
     }
 }
-
-impl<S> ops::Neg for EuclideanMultivector2<S>
+*/
+impl<S> ops::Neg for EuclideanMultivector3<S>
 where
     S: ScalarSigned
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn neg(self) -> Self::Output {
-        let result_1   = -self.data[0];
-        let result_e1  = -self.data[1];
-        let result_e2  = -self.data[2];
-        let result_e12 = -self.data[3];
+        let result_1    = -self.data[0];
+        let result_e1   = -self.data[1];
+        let result_e2   = -self.data[2];
+        let result_e3   = -self.data[3];
+        let result_e12  = -self.data[4];
+        let result_e23  = -self.data[5];
+        let result_e31  = -self.data[6];
+        let result_e123 = -self.data[7];
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31, 
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Neg for &EuclideanMultivector2<S>
+impl<S> ops::Neg for &EuclideanMultivector3<S>
 where
     S: ScalarSigned
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn neg(self) -> Self::Output {
-        let result_1   = -self.data[0];
-        let result_e1  = -self.data[1];
-        let result_e2  = -self.data[2];
-        let result_e12 = -self.data[3];
+        let result_1    = -self.data[0];
+        let result_e1   = -self.data[1];
+        let result_e2   = -self.data[2];
+        let result_e3   = -self.data[3];
+        let result_e12  = -self.data[4];
+        let result_e23  = -self.data[5];
+        let result_e31  = -self.data[6];
+        let result_e123 = -self.data[7];
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31, 
+            result_e123
+        )
     }
 }
-
+/*
 impl<S> ops::Mul<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
