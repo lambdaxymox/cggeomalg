@@ -1585,8 +1585,8 @@ where
         )
     }
 }
-/*
-impl<S> approx::AbsDiffEq for EuclideanMultivector2<S>
+
+impl<S> approx::AbsDiffEq for EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
@@ -1602,11 +1602,15 @@ where
         S::abs_diff_eq(&self[0], &other[0], epsilon) &&
         S::abs_diff_eq(&self[1], &other[1], epsilon) &&
         S::abs_diff_eq(&self[2], &other[2], epsilon) &&
-        S::abs_diff_eq(&self[3], &other[3], epsilon)
+        S::abs_diff_eq(&self[3], &other[3], epsilon) &&
+        S::abs_diff_eq(&self[4], &other[4], epsilon) &&
+        S::abs_diff_eq(&self[5], &other[5], epsilon) &&
+        S::abs_diff_eq(&self[6], &other[6], epsilon) &&
+        S::abs_diff_eq(&self[7], &other[7], epsilon)
     }
 }
 
-impl<S> approx::RelativeEq for EuclideanMultivector2<S>
+impl<S> approx::RelativeEq for EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
@@ -1620,11 +1624,15 @@ where
         S::relative_eq(&self[0], &other[0], epsilon, max_relative) &&
         S::relative_eq(&self[1], &other[1], epsilon, max_relative) &&
         S::relative_eq(&self[2], &other[2], epsilon, max_relative) &&
-        S::relative_eq(&self[3], &other[3], epsilon, max_relative)
+        S::relative_eq(&self[3], &other[3], epsilon, max_relative) &&
+        S::relative_eq(&self[4], &other[4], epsilon, max_relative) &&
+        S::relative_eq(&self[5], &other[5], epsilon, max_relative) &&
+        S::relative_eq(&self[6], &other[6], epsilon, max_relative) &&
+        S::relative_eq(&self[7], &other[7], epsilon, max_relative)
     }
 }
 
-impl<S> approx::UlpsEq for EuclideanMultivector2<S>
+impl<S> approx::UlpsEq for EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
@@ -1638,10 +1646,14 @@ where
         S::ulps_eq(&self[0], &other[0], epsilon, max_ulps) &&
         S::ulps_eq(&self[1], &other[1], epsilon, max_ulps) &&
         S::ulps_eq(&self[2], &other[2], epsilon, max_ulps) &&
-        S::ulps_eq(&self[3], &other[3], epsilon, max_ulps)
+        S::ulps_eq(&self[3], &other[3], epsilon, max_ulps) &&
+        S::ulps_eq(&self[4], &other[4], epsilon, max_ulps) &&
+        S::ulps_eq(&self[5], &other[5], epsilon, max_ulps) &&
+        S::ulps_eq(&self[6], &other[6], epsilon, max_ulps) &&
+        S::ulps_eq(&self[7], &other[7], epsilon, max_ulps)
     }
 }
-
+/*
 impl<S> EuclideanMultivector2<S> 
 where
     S: ScalarFloat
@@ -2263,11 +2275,11 @@ impl_scalar_multivector_bitxor_ops!(f64);
 /*
 macro_rules! impl_scalar_multivector_div_ops {
     ($Lhs:ty) => {
-        impl ops::Div<EuclideanMultivector2<$Lhs>> for $Lhs {
-            type Output = EuclideanMultivector2<$Lhs>;
+        impl ops::Div<EuclideanMultivector3<$Lhs>> for $Lhs {
+            type Output = EuclideanMultivector3<$Lhs>;
 
             #[inline]
-            fn div(self, other: EuclideanMultivector2<$Lhs>) -> Self::Output {
+            fn div(self, other: EuclideanMultivector3<$Lhs>) -> Self::Output {
                 let result = other.inverse();
                 assert!(result.is_some(), "Attempt to divide by a multivector with zero magnitude: {:?}", other);
                 let mut result = result.unwrap();
@@ -2275,16 +2287,20 @@ macro_rules! impl_scalar_multivector_div_ops {
                 result[1] = self * result[1];
                 result[2] = self * result[2];
                 result[3] = self * result[3];
+                result[4] = self * result[4];
+                result[5] = self * result[5];
+                result[6] = self * result[6];
+                result[7] = self * result[7];
 
                 result
             }
         }
 
-        impl ops::Div<&EuclideanMultivector2<$Lhs>> for $Lhs {
-            type Output = EuclideanMultivector2<$Lhs>;
+        impl ops::Div<&EuclideanMultivector3<$Lhs>> for $Lhs {
+            type Output = EuclideanMultivector3<$Lhs>;
 
             #[inline]
-            fn div(self, other: &EuclideanMultivector2<$Lhs>) -> Self::Output {
+            fn div(self, other: &EuclideanMultivector3<$Lhs>) -> Self::Output {
                 let result = other.inverse();
                 assert!(result.is_some(), "Attempt to divide by a multivector with zero magnitude: {:?}", other);
                 let mut result = result.unwrap();
@@ -2292,6 +2308,10 @@ macro_rules! impl_scalar_multivector_div_ops {
                 result[1] = self * result[1];
                 result[2] = self * result[2];
                 result[3] = self * result[3];
+                result[4] = self * result[4];
+                result[5] = self * result[5];
+                result[6] = self * result[6];
+                result[7] = self * result[7];
 
                 result
             }
