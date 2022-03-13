@@ -338,7 +338,7 @@ where
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         write!(
             formatter, 
-            "{} + {} e1 + {} e2 + {} e12",
+            "{} + {}^e1 + {}^e2 + {}^e12",
             self.data[0], self.data[1], self.data[2], self.data[3]
         )
     }
