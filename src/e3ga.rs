@@ -1221,121 +1221,175 @@ where
         EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
     }
 }
-
-impl<S> ops::Add<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+*/
+impl<S> ops::Add<EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] + b[0];
-        let result_e1  = a[1] + b[1];
-        let result_e2  = a[2] + b[2];
-        let result_e12 = a[3] + b[3];
+        let result_1    = a[0] + b[0];
+        let result_e1   = a[1] + b[1];
+        let result_e2   = a[2] + b[2];
+        let result_e3   = a[3] + b[3];
+        let result_e12  = a[4] + b[4];
+        let result_e23  = a[5] + b[5];
+        let result_e31  = a[6] + b[6];
+        let result_e123 = a[7] + b[7];
         
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3,
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Add<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Add<&EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn add(self, other: &EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: &EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] + b[0];
-        let result_e1  = a[1] + b[1];
-        let result_e2  = a[2] + b[2];
-        let result_e12 = a[3] + b[3];
+        let result_1    = a[0] + b[0];
+        let result_e1   = a[1] + b[1];
+        let result_e2   = a[2] + b[2];
+        let result_e3   = a[3] + b[3];
+        let result_e12  = a[4] + b[4];
+        let result_e23  = a[5] + b[5];
+        let result_e31  = a[6] + b[6];
+        let result_e123 = a[7] + b[7];
         
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3,
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Add<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Add<EuclideanMultivector3<S>> for &EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] + b[0];
-        let result_e1  = a[1] + b[1];
-        let result_e2  = a[2] + b[2];
-        let result_e12 = a[3] + b[3];
+        let result_1    = a[0] + b[0];
+        let result_e1   = a[1] + b[1];
+        let result_e2   = a[2] + b[2];
+        let result_e3   = a[3] + b[3];
+        let result_e12  = a[4] + b[4];
+        let result_e23  = a[5] + b[5];
+        let result_e31  = a[6] + b[6];
+        let result_e123 = a[7] + b[7];
         
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3,
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<'a, 'b, S> ops::Add<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Add<&'b EuclideanMultivector3<S>> for &'a EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn add(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn add(self, other: &'b EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] + b[0];
-        let result_e1  = a[1] + b[1];
-        let result_e2  = a[2] + b[2];
-        let result_e12 = a[3] + b[3];
+        let result_1    = a[0] + b[0];
+        let result_e1   = a[1] + b[1];
+        let result_e2   = a[2] + b[2];
+        let result_e3   = a[3] + b[3];
+        let result_e12  = a[4] + b[4];
+        let result_e23  = a[5] + b[5];
+        let result_e31  = a[6] + b[6];
+        let result_e123 = a[7] + b[7];
         
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3,
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Add<S> for EuclideanMultivector2<S>
+impl<S> ops::Add<S> for EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn add(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] + b;
-        let result_e1  = a[1];
-        let result_e2  = a[2];
-        let result_e12 = a[3];
+        let result_1    = a[0] + b;
+        let result_e1   = a[1];
+        let result_e2   = a[2];
+        let result_e3   = a[3];
+        let result_e12  = a[4];
+        let result_e23  = a[5];
+        let result_e31  = a[6];
+        let result_e123 = a[7];
         
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31, 
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Add<S> for &EuclideanMultivector2<S>
+impl<S> ops::Add<S> for &EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn add(self, other: S) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] + b;
-        let result_e1  = a[1];
-        let result_e2  = a[2];
-        let result_e12 = a[3];
+        let result_1    = a[0] + b;
+        let result_e1   = a[1];
+        let result_e2   = a[2];
+        let result_e3   = a[3];
+        let result_e12  = a[4];
+        let result_e23  = a[5];
+        let result_e31  = a[6];
+        let result_e123 = a[7];
         
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31, 
+            result_e123
+        )
     }
 }
-
+/*
 impl<S> ops::Sub<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
