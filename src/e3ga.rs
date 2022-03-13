@@ -381,7 +381,7 @@ where
     /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let unit_e123 = EuclideanMultivector3::unit_e123();
+    /// let unit_e123: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e123();
     /// 
     /// assert_eq!(unit_e123.scalar, 0);
     /// assert_eq!(unit_e123.e1, 0);
@@ -1904,11 +1904,11 @@ where
     }
 }
 
+*/
+impl_coords!(ViewG3, { scalar, e1, e2, e3, e12, e23, e31, e123 });
+impl_coords_deref!(EuclideanMultivector3, ViewG3);
 
-impl_coords!(ViewG2, { scalar, e1, e2, e12 });
-impl_coords_deref!(EuclideanMultivector2, ViewG2);
-
-
+/*
 macro_rules! impl_scalar_multivector_add_ops {
     ($Lhs:ty => $Rhs:ty => $Output:ty, { $scalar_index:expr }, { $($other_index:expr),* }) => {
         impl ops::Add<$Rhs> for $Lhs {
