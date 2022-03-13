@@ -348,18 +348,156 @@ impl<S> EuclideanMultivector2<S>
 where
     S: ScalarSigned
 {
+    /// Compute the reverse of a multivector.
+    /// 
+    /// The reverse of a two-dimensional multivector `mv`, for each grade of 
+    /// multivector is given by
+    /// ```text
+    /// ~mv := mv when mv is a scalar
+    /// ~mv := mv when mv is a vector
+    /// let mv := v1 ^ v2, where v1 and v2 are vectors. Then
+    /// ~mv := v2 ^ v1.
+    /// ```
+    /// Then for an arbitrary two-dimensional multivector `mv = a + v1 + v2 ^ v3`,
+    /// where `a` is a scalar, `v1`, `v2`, and `v3` are vectors, we get the 
+    /// reverse of a general multivector by linearity
+    /// ```text
+    /// ~mv = ~(a + v1 +   v2 ^ v2)
+    ///     = ~a + ~v1 + ~(v2 ^ v3)
+    ///     =  a +  v1 +   v3 ^ v2
+    /// ```
+    /// where the last line follows from the definition of reversion of k-vectors 
+    /// on each grade.
+    /// 
+    /// # Reversion In Euclidean Space
+    /// 
+    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
+    /// two-dimensional Euclidean multivector. Then the reversion of `mv` is given
+    /// by
+    /// ```text
+    /// ~mv = ~(a0 + a1 * e1 + a2 * e2 + a12 * e12)
+    ///     = ~a0  + ~(a1 * e1)  + ~(a2 * e2)   + ~(a12 * e12)
+    ///     = ~a0  +  a1 * (~e1) +   a2 * (~e2) +   a12 * (~e12)
+    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * ~(e1 ^ e2)
+    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (e2 ^ e1)
+    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (-(e1 ^ e2))
+    ///     =  a0  +  a1 * e1    +   a2 * e2    -   a12 * e12
+    /// ```
+    /// We illustrate this with an example.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
+    /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
+    /// let result = mv.reverse();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn reverse(&self) -> Self {
         Self::new(self.data[0], self.data[1], self.data[2], -self.data[3])
     }
 
+    /// Compute the reverse of a multivector mutably in place.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mut result = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
+    /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
+    /// result.reverse_mut();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ``` 
     pub fn reverse_mut(&mut self) {
         self.data[3] = -self.data[3];
     }
 
+    /// Compute the conjugate of a multivector.
+    /// 
+    /// The conjugate of a two-dimensional multivector `mv`, for each grade of 
+    /// multivector is given by
+    /// ```text
+    /// mv_conj := mv when mv is scalar
+    /// mv_conj := -mv when mv is a vector
+    /// Let mv = a * b be where a and b are versors. Then
+    /// mv_conj := (a * b).conjugate() = b.conjugate() * a.conjugate()
+    /// ```
+    /// The conjugate of a two-dimensional multivector extends to an arbitrary 
+    /// multivector `mv` by linearity. Let `mv = a + v1 + v2 ^ v3` be an arbitrary
+    /// two-dimenional Euclidean multivector where `a` is a scalar, and `v1`, 
+    /// `v2`, and `v3` are vectors. Then the conjugate of `mv` is given by
+    /// ```text
+    /// mv.conjugate() = (a + v1 + v2 ^ v3).conjugate()
+    ///                = a.conjugate() + v1.conjugate() + (v2 ^ v3).conjugate() 
+    ///                = a - v1 + (v2 * v3 - v2.dot(v3)).conjugate()
+    ///                = a - v1 + (v2 * v3).conjugate() - (v2.dot(v3)).conjugate()
+    ///                = a - v1 + v3.conjugate() * v2.conjugate() - v2.dot(v3)
+    ///                = a - v1 + (-v3) * (-v2) - v3.dot(v2)
+    ///                = a - v1 + v3 * v2 - v3.dot(v2)
+    ///                = a - v1 + v3 ^ v2
+    ///                = a - v1 - v2 ^ v3
+    /// ```
+    /// 
+    /// # Conjugate In Euclidean Space
+    /// 
+    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
+    /// two-dimensional Euclidean multivector. Then the reversion of `mv` is given
+    /// by
+    /// ```text
+    /// mv.conjugate() = (a0 + a1 * e1 + a2 * e2 + a12 * e12).conjugate()
+    ///                = a0.conjugate() + (a1 * e1).conjugate() + (a2 * e2).conjugate() 
+    ///                                 + (a12 * e12).conjugate()
+    ///                = a0 + a1 * e1.conjugate() + a2 * e2.conjugate() 
+    ///                     + a12 * e12.conjugate()
+    ///                = a0 + a1 * (-e1) + a2 * (-e2) + a12 * (e1 ^ e2).conjugate()
+    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (e2.conjugate() ^ e1.conjugate())
+    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (-e2) ^ (-e1)
+    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (e2 ^ v1)
+    ///                = a0 - a1 * e1 - a2 * e2 - a12 * e12
+    /// ```
+    /// We illustrate this with an example.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
+    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
+    /// let result = mv.conjugate();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn conjugate(&self) -> Self {
         Self::new(self.data[0], -self.data[1], -self.data[2], -self.data[3])
     }
 
+    /// Compute the conjugate of a multivector mutably in place.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
+    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
+    /// result.conjugate_mut();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn conjugate_mut(&mut self) {
         // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
