@@ -1075,43 +1075,61 @@ where
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
-
-impl<S> ops::BitXor<S> for EuclideanMultivector2<S>
+*/
+impl<S> ops::BitXor<S> for EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn bitxor(self, other: S) -> Self::Output {
         let a = self;
-        let result_1   = a[0] * other;
-        let result_e1  = a[1] * other;
-        let result_e2  = a[2] * other;
-        let result_e12 = a[3] * other;
+        let result_1    = a[0] * other;
+        let result_e1   = a[1] * other;
+        let result_e2   = a[2] * other;
+        let result_e3   = a[3] * other;
+        let result_e12  = a[4] * other;
+        let result_e23  = a[5] * other;
+        let result_e31  = a[6] * other;
+        let result_e123 = a[7] * other;
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3,
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<S> ops::BitXor<S> for &EuclideanMultivector2<S>
+impl<S> ops::BitXor<S> for &EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn bitxor(self, other: S) -> Self::Output {
         let a = self;
-        let result_1   = a[0] * other;
-        let result_e1  = a[1] * other;
-        let result_e2  = a[2] * other;
-        let result_e12 = a[3] * other;
+        let result_1    = a[0] * other;
+        let result_e1   = a[1] * other;
+        let result_e2   = a[2] * other;
+        let result_e3   = a[3] * other;
+        let result_e12  = a[4] * other;
+        let result_e23  = a[5] * other;
+        let result_e31  = a[6] * other;
+        let result_e123 = a[7] * other;
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3,
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
-
+/*
 impl<S> ops::BitOr<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
 where
     S: Scalar
@@ -2184,34 +2202,42 @@ impl_scalar_multivector_bitor_ops!(isize);
 impl_scalar_multivector_bitor_ops!(f32);
 impl_scalar_multivector_bitor_ops!(f64);
 
-/*
+
 macro_rules! impl_scalar_multivector_bitxor_ops {
     ($Lhs:ty) => {
-        impl ops::BitXor<EuclideanMultivector2<$Lhs>> for $Lhs {
-            type Output = EuclideanMultivector2<$Lhs>;
+        impl ops::BitXor<EuclideanMultivector3<$Lhs>> for $Lhs {
+            type Output = EuclideanMultivector3<$Lhs>;
 
             #[inline]
-            fn bitxor(self, other: EuclideanMultivector2<$Lhs>) -> Self::Output {
+            fn bitxor(self, other: EuclideanMultivector3<$Lhs>) -> Self::Output {
                 let mut result = Self::Output::zero();
                 result[0] = self * other[0];
                 result[1] = self * other[1];
                 result[2] = self * other[2];
                 result[3] = self * other[3];
+                result[4] = self * other[4];
+                result[5] = self * other[5];
+                result[6] = self * other[6];
+                result[7] = self * other[7];
         
                 result
             }
         }
 
-        impl ops::BitXor<&EuclideanMultivector2<$Lhs>> for $Lhs {
-            type Output = EuclideanMultivector2<$Lhs>;
+        impl ops::BitXor<&EuclideanMultivector3<$Lhs>> for $Lhs {
+            type Output = EuclideanMultivector3<$Lhs>;
 
             #[inline]
-            fn bitxor(self, other: &EuclideanMultivector2<$Lhs>) -> Self::Output {
+            fn bitxor(self, other: &EuclideanMultivector3<$Lhs>) -> Self::Output {
                 let mut result = Self::Output::zero();
                 result[0] = self * other[0];
                 result[1] = self * other[1];
                 result[2] = self * other[2];
                 result[3] = self * other[3];
+                result[4] = self * other[4];
+                result[5] = self * other[5];
+                result[6] = self * other[6];
+                result[7] = self * other[7];
         
                 result
             }
@@ -2234,7 +2260,7 @@ impl_scalar_multivector_bitxor_ops!(isize);
 impl_scalar_multivector_bitxor_ops!(f32);
 impl_scalar_multivector_bitxor_ops!(f64);
 
-
+/*
 macro_rules! impl_scalar_multivector_div_ops {
     ($Lhs:ty) => {
         impl ops::Div<EuclideanMultivector2<$Lhs>> for $Lhs {
