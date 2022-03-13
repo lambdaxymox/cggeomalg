@@ -444,7 +444,7 @@ impl<S> AsMut<(S, S, S, S, S, S, S, S)> for EuclideanMultivector3<S> {
         }
     }
 }
-/*
+
 impl<S> fmt::Display for EuclideanMultivector3<S>
 where
     S: fmt::Display
@@ -452,12 +452,15 @@ where
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         write!(
             formatter, 
-            "{} + {}^e1 + {}^e2 + {}^e12",
-            self.data[0], self.data[1], self.data[2], self.data[3]
+            "{} + {}^e1 + {}^e2 + {}^e3 + {}^e12 + {}^e23 + {}^e31 + {}^e123",
+            self.data[0], 
+            self.data[1], self.data[2], self.data[3],
+            self.data[4], self.data[5], self.data[6],
+            self.data[7]
         )
     }
 }
-*/
+
 /*
 impl<S> EuclideanMultivector2<S> 
 where
