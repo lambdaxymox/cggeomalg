@@ -224,7 +224,7 @@ where
         Self::new(S::zero(), S::zero(), S::zero(), S::one())
     }
 
-    /// Returns the unit volume elements for two-dimensional Euclidean space. 
+    /// Returns the unit volume element for two-dimensional Euclidean space. 
     /// 
     /// This is a synonym for `unit_e12`.
     #[inline(always)]

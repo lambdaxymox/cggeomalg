@@ -65,8 +65,8 @@ impl<S> EuclideanMultivector3<S> {
         <Self as AsRef<[S; 8]>>::as_ref(self)
     }
 }
-/*
-impl<S> EuclideanMultivector2<S> 
+
+impl<S> EuclideanMultivector3<S> 
 where
     S: Scalar
 {
@@ -75,12 +75,14 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
-    /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+    /// let mv = EuclideanMultivector3::new(
+    ///     1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+    /// );
+    /// let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
     /// 
     /// assert_eq!(mv + zero, mv);
     /// assert_eq!(zero + mv, mv);
@@ -88,7 +90,7 @@ where
     #[inline]
     pub fn zero() -> Self {
         Self {
-            data: [S::zero(), S::zero(), S::zero(), S::zero()],
+            data: [S::zero(); 8],
         }
     }
 
@@ -97,15 +99,20 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+    /// let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
     /// 
     /// assert!(zero.is_zero());
     /// 
-    /// let mv: EuclideanMultivector2<f64> = EuclideanMultivector2::new(3_f64, 84_f64, 83_f64, 61_f64);
+    /// let mv: EuclideanMultivector3<f64> = EuclideanMultivector3::new(
+    ///     3_f64, 
+    ///     84_f64, 83_f64, 61_f64,
+    ///     345_f64, 7_f64, 6_f64,
+    ///     45_f64
+    /// );
     /// 
     /// assert!(!mv.is_zero());
     /// ```
@@ -114,7 +121,11 @@ where
         self.data[0].is_zero() &&
         self.data[1].is_zero() &&
         self.data[2].is_zero() &&
-        self.data[3].is_zero()
+        self.data[3].is_zero() &&
+        self.data[4].is_zero() &&
+        self.data[5].is_zero() &&
+        self.data[6].is_zero() &&
+        self.data[7].is_zero()
     }
 
     /// Construct a new multivector from the scalar part only.
@@ -125,21 +136,30 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
     /// let scalar_part = 2;
-    /// let scalar = EuclideanMultivector2::from_scalar(scalar_part);
+    /// let scalar = EuclideanMultivector3::from_scalar(scalar_part);
     /// 
     /// assert_eq!(scalar.scalar, scalar_part);
     /// assert_eq!(scalar.e1, 0);
     /// assert_eq!(scalar.e2, 0);
+    /// assert_eq!(scalar.e3, 0);
     /// assert_eq!(scalar.e12, 0);
+    /// assert_eq!(scalar.e23, 0);
+    /// assert_eq!(scalar.e31, 0);
+    /// assert_eq!(scalar.e123, 0);
     /// ```
     #[inline]
     pub fn from_scalar(scalar: S) -> Self {
-        Self::new(scalar, S::zero(), S::zero(), S::zero())
+        Self::new(
+            scalar, 
+            S::zero(), S::zero(), S::zero(), 
+            S::zero(), S::zero(), S::zero(), 
+            S::zero()
+        )
     }
 
     /// Returns the unit scalar multivector.
@@ -147,20 +167,29 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let unit_scalar: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
+    /// let unit_scalar: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_scalar();
     /// 
     /// assert_eq!(unit_scalar.scalar, 1);
     /// assert_eq!(unit_scalar.e1, 0);
     /// assert_eq!(unit_scalar.e2, 0);
+    /// assert_eq!(unit_scalar.e3, 0);
     /// assert_eq!(unit_scalar.e12, 0);
+    /// assert_eq!(unit_scalar.e23, 0);
+    /// assert_eq!(unit_scalar.e31, 0);
+    /// assert_eq!(unit_scalar.e123, 0);
     /// ```
     #[inline]
     pub fn unit_scalar() -> Self {
-        Self::new(S::one(), S::zero(), S::zero(), S::zero())
+        Self::new(
+            S::one(), 
+            S::zero(), S::zero(), S::zero(),
+            S::zero(), S::zero(), S::zero(),
+            S::zero()
+        )
     }
 
     /// Returns the unit `x`-axis vector.
@@ -168,20 +197,29 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let unit_e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
+    /// let unit_e1: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e1();
     /// 
     /// assert_eq!(unit_e1.scalar, 0);
     /// assert_eq!(unit_e1.e1, 1);
     /// assert_eq!(unit_e1.e2, 0);
+    /// assert_eq!(unit_e1.e3, 0);
     /// assert_eq!(unit_e1.e12, 0);
+    /// assert_eq!(unit_e1.e23, 0);
+    /// assert_eq!(unit_e1.e31, 0);
+    /// assert_eq!(unit_e1.e123, 0);
     /// ```
     #[inline]
     pub fn unit_e1() -> Self {
-        Self::new(S::zero(), S::one(), S::zero(), S::zero())
+        Self::new(
+            S::zero(), 
+            S::one(), S::zero(), S::zero(),
+            S::zero(), S::zero(), S::zero(),
+            S::zero()
+        )
     }
 
     /// Returns the unit `y`-axis vector.
@@ -189,49 +227,97 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let unit_e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
+    /// let unit_e2: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e2();
     /// 
     /// assert_eq!(unit_e2.scalar, 0);
     /// assert_eq!(unit_e2.e1, 0);
     /// assert_eq!(unit_e2.e2, 1);
+    /// assert_eq!(unit_e2.e3, 0);
     /// assert_eq!(unit_e2.e12, 0);
+    /// assert_eq!(unit_e2.e23, 0);
+    /// assert_eq!(unit_e2.e31, 0);
+    /// assert_eq!(unit_e2.e123, 0);
     /// ```
     #[inline]
     pub fn unit_e2() -> Self {
-        Self::new(S::zero(), S::zero(), S::one(), S::zero())
+        Self::new(
+            S::zero(), 
+            S::zero(), S::one(), S::zero(),
+            S::zero(), S::zero(), S::zero(),
+            S::zero()
+        )
     }
 
-    /// Returns the unit volume element for two-dimensional Euclidean space.
+    /// Returns the unit `xy`-plane bivector for three-dimensional Euclidean space.
     ///
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let unit_e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
+    /// let unit_e12: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e12();
     /// 
     /// assert_eq!(unit_e12.scalar, 0);
     /// assert_eq!(unit_e12.e1, 0);
     /// assert_eq!(unit_e12.e2, 0);
+    /// assert_eq!(unit_e12.e3, 0);
     /// assert_eq!(unit_e12.e12, 1);
+    /// assert_eq!(unit_e12.e23, 0);
+    /// assert_eq!(unit_e12.e31, 0);
+    /// assert_eq!(unit_e12.e123, 0);
     /// ```
     #[inline]
     pub fn unit_e12() -> Self {
-        Self::new(S::zero(), S::zero(), S::zero(), S::one())
+        Self::new(
+            S::zero(), 
+            S::zero(), S::zero(), S::zero(),
+            S::one(), S::zero(), S::zero(),
+            S::zero()
+        )
     }
 
-    /// Returns the unit volume elements for two-dimensional Euclidean space. 
+    /// Returns the unit volume element for three-dimensional Euclidean space.
     /// 
-    /// This is a synonym for `unit_e12`.
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let unit_e123 = EuclideanMultivector3::unit_e123();
+    /// 
+    /// assert_eq!(unit_e123.scalar, 0);
+    /// assert_eq!(unit_e123.e1, 0);
+    /// assert_eq!(unit_e123.e2, 0);
+    /// assert_eq!(unit_e123.e3, 0);
+    /// assert_eq!(unit_e123.e12, 0);
+    /// assert_eq!(unit_e123.e23, 0);
+    /// assert_eq!(unit_e123.e31, 0);
+    /// assert_eq!(unit_e123.e123, 1);
+    /// ```
+    #[inline]
+    pub fn unit_e123() -> Self {
+        Self::new(
+            S::zero(), 
+            S::zero(), S::zero(), S::zero(),
+            S::zero(), S::zero(), S::zero(),
+            S::one()
+        )
+    }
+
+    /// Returns the unit volume element for three-dimensional Euclidean space. 
+    /// 
+    /// This is a synonym for `unit_e123`.
     #[inline(always)]
     pub fn pseudoscalar() -> Self {
-        Self::unit_e12()
+        Self::unit_e123()
     }
 
     /// Project the multivector onto the grade `grade`.
@@ -243,38 +329,64 @@ where
     /// 
     /// # Example
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
-    /// let expected_0 = EuclideanMultivector2::new(1, 0, 0, 0);
+    /// let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+    ///     1, 1, 1, 1, 1, 1, 1, 1
+    /// );
+    /// let expected_0 = EuclideanMultivector3::new(1, 0, 0, 0, 0, 0, 0, 0);
     /// let mv_0 = mv.grade(0);
-    /// let expected_1 = EuclideanMultivector2::new(0, 1, 1, 0);
+    /// let expected_1 = EuclideanMultivector3::new(0, 1, 1, 1, 0, 0, 0, 0);
     /// let mv_1 = mv.grade(1);
-    /// let expected_2 = EuclideanMultivector2::new(0, 0, 0, 1);
+    /// let expected_2 = EuclideanMultivector3::new(0, 0, 0, 0, 1, 1, 1, 0);
     /// let mv_2 = mv.grade(2);
+    /// let expected_3 = EuclideanMultivector3::new(0, 0, 0, 0, 0, 0, 0, 1);
+    /// let mv_3 = mv.grade(3);
     /// 
     /// assert_eq!(mv_0, expected_0);
     /// assert_eq!(mv_1, expected_1);
     /// assert_eq!(mv_2, expected_2);
+    /// assert_eq!(mv_3, expected_3);
     /// 
-    /// // Any grade larger than two should be zero.
-    /// let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
-    /// assert_eq!(mv.grade(3), zero);
+    /// // Any grade larger than three should be zero.
+    /// let zero: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
+    /// assert_eq!(mv.grade(4), zero);
     /// assert_eq!(mv.grade(usize::MAX), zero);
     /// ```
     #[inline]
     pub fn grade(&self, grade: usize) -> Self {
         match grade {
-            0 => Self::new(self.data[0], S::zero(), S::zero(), S::zero()),
-            1 => Self::new(S::zero(), self.data[1], self.data[2], S::zero()),
-            2 => Self::new(S::zero(), S::zero(), S::zero(), self.data[3]),
+            0 => Self::new(
+                    self.data[0], 
+                    S::zero(), S::zero(), S::zero(),
+                    S::zero(), S::zero(), S::zero(),
+                    S::zero()
+                ),
+            1 => Self::new(
+                    S::zero(), 
+                    self.data[1], self.data[2], self.data[3], 
+                    S::zero(), S::zero(), S::zero(),
+                    S::zero()
+                ),
+            2 => Self::new(
+                    S::zero(), 
+                    S::zero(), S::zero(), S::zero(), 
+                    self.data[4], self.data[5], self.data[6],
+                    S::zero()
+                ),
+            3 => Self::new(
+                    S::zero(),
+                    S::zero(), S::zero(), S::zero(),
+                    S::zero(), S::zero(), S::zero(),
+                    self.data[7]
+            ),
             _ => Self::zero()
         }
     }
 }
-*/
+
 impl<S> ops::Index<usize> for EuclideanMultivector3<S> 
 where
     S: Scalar
