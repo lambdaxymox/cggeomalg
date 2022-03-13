@@ -450,7 +450,7 @@ where
     /// # Conjugate In Euclidean Space
     /// 
     /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the reversion of `mv` is given
+    /// two-dimensional Euclidean multivector. Then the conjugate of `mv` is given
     /// by
     /// ```text
     /// mv.conjugate() = (a0 + a1 * e1 + a2 * e2 + a12 * e12).conjugate()
@@ -505,10 +505,77 @@ where
         self.data[3] = -self.data[3];
     }
 
+    /// Compute the grade involution of a multivector.
+    /// 
+    /// The grade involution of a multivector `mv` is defined by
+    /// ```text
+    /// mv* := mv when mv is a scalar
+    /// mv* := -mv when mv is a vector
+    /// Let mv = v1 * v2 where a and b are versors. Then
+    /// mv* := (v1 * v2)* = v1* * v2*
+    /// ```
+    /// Then for an arbitrary two-dimensional multivector `mv = a + v1 + v2 ^ v3`,
+    /// where `a` is a scalar, `v1`, `v2`, and `v3` are vectors, we get the 
+    /// grade involution of a general multivector by linearity
+    /// ```text
+    /// mv* = (a + v1 + v2 ^ v3)*
+    ///     = a* + v1* + (v2 ^ v3)*
+    ///     = a  - v1  + (v2 * v3 - v2.dot(v3))*
+    ///     = a  - v1  + (v2 * v3)* - v2.dot(v3)
+    ///     = a  - v1  + (v2*) * (v3*) - v2.dot(v3)
+    ///     = a  - v1  + (-v2) * (-v3) - v2.dot(v3)
+    ///     = a  - v1  + (v2 * v3 - v2.dot(v3))
+    ///     = a  - v1  + v2 ^ v3
+    /// ```
+    /// 
+    /// # Involution In Euclidean Space
+    /// 
+    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
+    /// two-dimensional Euclidean multivector. Then the involution of `mv` is 
+    /// given by
+    /// ```text
+    /// mv* = (a0 + a1 * e1 + a2 * e2 + a12 * e12)*
+    ///     =  a0* + (a1 * e1)* + (a2 * e2)* + (a12 * e12)*
+    ///     =  a0* + a1 * (e1*) + a2 * (e2*) + a12 * (e12*)
+    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * ((e1 * e2)*)
+    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * (e1*) * (e2*)
+    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * (-e1) * (-e2)
+    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * e12
+    /// ```
+    /// We illustrate this with an example.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
+    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
+    /// let result = mv.involute();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn involute(&self) -> Self {
         Self::new(self.data[0], -self.data[1], -self.data[2], self.data[3])
     }
 
+    /// Compute the grade involution of a multivector mutably in place.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
+    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
+    /// result.involute_mut();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn involute_mut(&mut self) {
         // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
