@@ -252,6 +252,36 @@ where
         )
     }
 
+    /// Returns the unit `z`-axis vector.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let unit_e3: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e3();
+    /// 
+    /// assert_eq!(unit_e3.scalar, 0);
+    /// assert_eq!(unit_e3.e1, 0);
+    /// assert_eq!(unit_e3.e2, 0);
+    /// assert_eq!(unit_e3.e3, 1);
+    /// assert_eq!(unit_e3.e12, 0);
+    /// assert_eq!(unit_e3.e23, 0);
+    /// assert_eq!(unit_e3.e31, 0);
+    /// assert_eq!(unit_e3.e123, 0);
+    /// ```
+    #[inline]
+    pub fn unit_e3() -> Self {
+        Self::new(
+            S::zero(), 
+            S::zero(), S::zero(), S::one(),
+            S::zero(), S::zero(), S::zero(),
+            S::zero()
+        )
+    }
+
     /// Returns the unit `xy`-plane bivector for three-dimensional Euclidean space.
     ///
     /// # Example
@@ -278,6 +308,66 @@ where
             S::zero(), 
             S::zero(), S::zero(), S::zero(),
             S::one(), S::zero(), S::zero(),
+            S::zero()
+        )
+    }
+
+    /// Returns the unit `xy`-plane bivector for three-dimensional Euclidean space.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let unit_e23: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e23();
+    /// 
+    /// assert_eq!(unit_e23.scalar, 0);
+    /// assert_eq!(unit_e23.e1, 0);
+    /// assert_eq!(unit_e23.e2, 0);
+    /// assert_eq!(unit_e23.e3, 0);
+    /// assert_eq!(unit_e23.e12, 0);
+    /// assert_eq!(unit_e23.e23, 1);
+    /// assert_eq!(unit_e23.e31, 0);
+    /// assert_eq!(unit_e23.e123, 0);
+    /// ```
+    #[inline]
+    pub fn unit_e23() -> Self {
+        Self::new(
+            S::zero(), 
+            S::zero(), S::zero(), S::zero(),
+            S::zero(), S::one(), S::zero(),
+            S::zero()
+        )
+    }
+
+    /// Returns the unit `zx`-plane bivector for three-dimensional Euclidean space.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let unit_e31: EuclideanMultivector3<isize> = EuclideanMultivector3::unit_e31();
+    /// 
+    /// assert_eq!(unit_e31.scalar, 0);
+    /// assert_eq!(unit_e31.e1, 0);
+    /// assert_eq!(unit_e31.e2, 0);
+    /// assert_eq!(unit_e31.e3, 0);
+    /// assert_eq!(unit_e31.e12, 0);
+    /// assert_eq!(unit_e31.e23, 0);
+    /// assert_eq!(unit_e31.e31, 1);
+    /// assert_eq!(unit_e31.e123, 0);
+    /// ```
+    #[inline]
+    pub fn unit_e31() -> Self {
+        Self::new(
+            S::zero(), 
+            S::zero(), S::zero(), S::zero(),
+            S::zero(), S::zero(), S::one(),
             S::zero()
         )
     }
