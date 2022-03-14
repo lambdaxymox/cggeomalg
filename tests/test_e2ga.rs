@@ -61,7 +61,7 @@ mod e2ga_tests {
     }
 
     #[test]
-    fn test_mutlivector_plus_zero() {
+    fn test_multivector_plus_zero() {
         let mv1 = EuclideanMultivector2::new(1, 2, 3, 4);
         let zero = EuclideanMultivector2::zero();
         let expected = mv1;

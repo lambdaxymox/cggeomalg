@@ -68,7 +68,7 @@ mod e3ga_tests {
     }
 
     #[test]
-    fn test_mutlivector_plus_zero() {
+    fn test_multivector_plus_zero() {
         let mv1 = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
         let zero = EuclideanMultivector3::zero();
         let expected = mv1;
