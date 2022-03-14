@@ -56,5 +56,35 @@ mod e3ga_tests {
 
         assert_eq!(v_ref, &mut [1, 2, 3, 4, 5, 6, 7, 8]);
     }
+
+    #[test]
+    fn test_multivector_addition() {
+        let mv1: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+        let mv2: EuclideanMultivector3<isize> = EuclideanMultivector3::new(9, 10, 11, 12, 13, 14, 15, 16);
+        let expected = EuclideanMultivector3::new(10, 12, 14, 16, 18, 20, 22, 24);
+        let result = mv1 + mv2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_mutlivector_plus_zero() {
+        let mv1 = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+        let zero = EuclideanMultivector3::zero();
+        let expected = mv1;
+        let result = mv1 + zero;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_zero_plus_multivector() {
+        let mv1 = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+        let zero = EuclideanMultivector3::zero();
+        let expected = mv1;
+        let result = zero + mv1;
+
+        assert_eq!(result, expected);
+    }
 }
 
