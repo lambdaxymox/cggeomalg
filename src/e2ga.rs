@@ -616,7 +616,7 @@ where
 
     #[inline]
     fn not(self) -> Self::Output {
-        let mut result = Self::zero();
+        let mut result = Self::Output::zero();
         result.data[0] = -self.data[3];
         result.data[1] = -self.data[2];
         result.data[2] =  self.data[1];
@@ -634,7 +634,7 @@ where
 
     #[inline]
     fn not(self) -> Self::Output {
-        let mut result = EuclideanMultivector2::zero();
+        let mut result = Self::Output::zero();
         result.data[0] = -self.data[3];
         result.data[1] = -self.data[2];
         result.data[2] =  self.data[1];
