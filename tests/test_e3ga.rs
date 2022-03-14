@@ -86,5 +86,52 @@ mod e3ga_tests {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_multivector_subtraction() {
+        let mv1: EuclideanMultivector3<isize> = EuclideanMultivector3::new(4, 6, 1, 7, 3, 6, 2, 8);
+        let mv2: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 6, 7, 10, 19, 1, 0, 4);
+        let expected = EuclideanMultivector3::new(3, 0, -6, -3, -16, 5, 2, 4);
+        let result = mv1 - mv2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_minus_zero() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(5, 75, 2, 92, 12, 213, 9, 83);
+        let zero = EuclideanMultivector3::zero();
+        let expected = mv;
+        let result = mv - zero;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_zero_minus_multivector() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(5, 75, 2, 92, 12, 213, 9, 83);
+        let zero = EuclideanMultivector3::zero();
+        let expected = -mv;
+        let result = zero - mv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_minus_multivector_equals_zero() {
+        let mv = EuclideanMultivector3::new(5, 75, 2, 92, 12, 213, 9, 83);
+        let zero = EuclideanMultivector3::zero();
+        
+        assert_eq!(mv - mv, zero);
+    }
+
+    #[test]
+    fn test_multivector_additive_inverse() {
+        let mv = EuclideanMultivector3::new(5, 75, 2, 92, 12, 213, 9, 83);
+        let zero = EuclideanMultivector3::zero();
+        
+        assert_eq!(-mv + mv, zero);
+        assert_eq!(mv + (-mv), zero);
+    }
 }
 
