@@ -86,7 +86,7 @@ where
     #[inline]
     pub fn zero() -> Self {
         Self {
-            data: [S::zero(), S::zero(), S::zero(), S::zero()],
+            data: [S::zero(); 4],
         }
     }
 
