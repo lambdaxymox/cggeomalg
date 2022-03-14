@@ -4,7 +4,7 @@ extern crate num_traits;
 
 
 #[cfg(test)]
-mod e2ga_test {
+mod e2ga_tests {
     use cggeomalg::e2ga::{
         EuclideanMultivector2,
     };
