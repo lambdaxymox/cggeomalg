@@ -9,7 +9,7 @@ mod e2ga_tests {
         EuclideanMultivector2,
     };
     use approx::{
-        relative_eq,
+        assert_relative_eq,
     };
 
 
@@ -374,7 +374,7 @@ mod e2ga_tests {
         let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let result = mv * mv_inv;
 
-        assert!(relative_eq!(result, expected, epsilon = 1e-10));
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
     }
 
     #[test]
@@ -384,7 +384,7 @@ mod e2ga_tests {
         let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let result = mv_inv * mv;
 
-        assert!(relative_eq!(result, expected, epsilon = 1e-10));
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
     }
 
     #[test]
@@ -425,7 +425,7 @@ mod e2ga_tests {
         let expected = e1 * (3_f64 / magnitude_squared) + e2 * (5_f64 / magnitude_squared);
         let result = mv.inverse().unwrap();
 
-        assert!(relative_eq!(result, expected, epsilon = 1e-10));
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
     }
 
     #[test]
