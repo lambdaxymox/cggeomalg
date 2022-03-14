@@ -25,7 +25,7 @@ mod e2ga_tests {
 
     #[test]
     fn test_components2() {
-        let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 2, 3, 4);
+        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
 
         assert_eq!(mv.scalar, mv[0]);
         assert_eq!(mv.e1, mv[1]);
