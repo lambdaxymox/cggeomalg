@@ -2100,7 +2100,7 @@ where
 impl_coords!(ViewG3, { scalar, e1, e2, e3, e12, e23, e31, e123 });
 impl_coords_deref!(EuclideanMultivector3, ViewG3);
 
-/*
+
 macro_rules! impl_scalar_multivector_add_ops {
     ($Lhs:ty => $Rhs:ty => $Output:ty, { $scalar_index:expr }, { $($other_index:expr),* }) => {
         impl ops::Add<$Rhs> for $Lhs {
@@ -2123,20 +2123,20 @@ macro_rules! impl_scalar_multivector_add_ops {
     }
 }
 
-impl_scalar_multivector_add_ops!(u8    => EuclideanMultivector2<u8>    => EuclideanMultivector2<u8>,    {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(u16   => EuclideanMultivector2<u16>   => EuclideanMultivector2<u16>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(u32   => EuclideanMultivector2<u32>   => EuclideanMultivector2<u32>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(u64   => EuclideanMultivector2<u64>   => EuclideanMultivector2<u64>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(u128  => EuclideanMultivector2<u128>  => EuclideanMultivector2<u128>,  {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(usize => EuclideanMultivector2<usize> => EuclideanMultivector2<usize>, {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(i8    => EuclideanMultivector2<i8>    => EuclideanMultivector2<i8>,    {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(i16   => EuclideanMultivector2<i16>   => EuclideanMultivector2<i16>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(i32   => EuclideanMultivector2<i32>   => EuclideanMultivector2<i32>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(i64   => EuclideanMultivector2<i64>   => EuclideanMultivector2<i64>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(i128  => EuclideanMultivector2<i128>  => EuclideanMultivector2<i128>,  {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(isize => EuclideanMultivector2<isize> => EuclideanMultivector2<isize>, {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(f32   => EuclideanMultivector2<f32>   => EuclideanMultivector2<f32>,   {0}, {1, 2, 3});
-impl_scalar_multivector_add_ops!(f64   => EuclideanMultivector2<f64>   => EuclideanMultivector2<f64>,   {0}, {1, 2, 3});
+impl_scalar_multivector_add_ops!(u8    => EuclideanMultivector3<u8>    => EuclideanMultivector3<u8>,    {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(u16   => EuclideanMultivector3<u16>   => EuclideanMultivector3<u16>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(u32   => EuclideanMultivector3<u32>   => EuclideanMultivector3<u32>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(u64   => EuclideanMultivector3<u64>   => EuclideanMultivector3<u64>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(u128  => EuclideanMultivector3<u128>  => EuclideanMultivector3<u128>,  {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(usize => EuclideanMultivector3<usize> => EuclideanMultivector3<usize>, {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(i8    => EuclideanMultivector3<i8>    => EuclideanMultivector3<i8>,    {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(i16   => EuclideanMultivector3<i16>   => EuclideanMultivector3<i16>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(i32   => EuclideanMultivector3<i32>   => EuclideanMultivector3<i32>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(i64   => EuclideanMultivector3<i64>   => EuclideanMultivector3<i64>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(i128  => EuclideanMultivector3<i128>  => EuclideanMultivector3<i128>,  {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(isize => EuclideanMultivector3<isize> => EuclideanMultivector3<isize>, {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(f32   => EuclideanMultivector3<f32>   => EuclideanMultivector3<f32>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_add_ops!(f64   => EuclideanMultivector3<f64>   => EuclideanMultivector3<f64>,   {0}, {1, 2, 3, 4, 5, 6, 7});
 
 
 macro_rules! impl_scalar_multivector_sub_ops {
@@ -2161,21 +2161,21 @@ macro_rules! impl_scalar_multivector_sub_ops {
     }
 }
 
-impl_scalar_multivector_sub_ops!(u8    => EuclideanMultivector2<u8>    => EuclideanMultivector2<u8>,    {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(u16   => EuclideanMultivector2<u16>   => EuclideanMultivector2<u16>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(u32   => EuclideanMultivector2<u32>   => EuclideanMultivector2<u32>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(u64   => EuclideanMultivector2<u64>   => EuclideanMultivector2<u64>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(u128  => EuclideanMultivector2<u128>  => EuclideanMultivector2<u128>,  {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(usize => EuclideanMultivector2<usize> => EuclideanMultivector2<usize>, {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(i8    => EuclideanMultivector2<i8>    => EuclideanMultivector2<i8>,    {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(i16   => EuclideanMultivector2<i16>   => EuclideanMultivector2<i16>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(i32   => EuclideanMultivector2<i32>   => EuclideanMultivector2<i32>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(i64   => EuclideanMultivector2<i64>   => EuclideanMultivector2<i64>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(i128  => EuclideanMultivector2<i128>  => EuclideanMultivector2<i128>,  {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(isize => EuclideanMultivector2<isize> => EuclideanMultivector2<isize>, {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(f32   => EuclideanMultivector2<f32>   => EuclideanMultivector2<f32>,   {0}, {1, 2, 3});
-impl_scalar_multivector_sub_ops!(f64   => EuclideanMultivector2<f64>   => EuclideanMultivector2<f64>,   {0}, {1, 2, 3});
-*/
+impl_scalar_multivector_sub_ops!(u8    => EuclideanMultivector3<u8>    => EuclideanMultivector3<u8>,    {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(u16   => EuclideanMultivector3<u16>   => EuclideanMultivector3<u16>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(u32   => EuclideanMultivector3<u32>   => EuclideanMultivector3<u32>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(u64   => EuclideanMultivector3<u64>   => EuclideanMultivector3<u64>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(u128  => EuclideanMultivector3<u128>  => EuclideanMultivector3<u128>,  {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(usize => EuclideanMultivector3<usize> => EuclideanMultivector3<usize>, {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(i8    => EuclideanMultivector3<i8>    => EuclideanMultivector3<i8>,    {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(i16   => EuclideanMultivector3<i16>   => EuclideanMultivector3<i16>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(i32   => EuclideanMultivector3<i32>   => EuclideanMultivector3<i32>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(i64   => EuclideanMultivector3<i64>   => EuclideanMultivector3<i64>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(i128  => EuclideanMultivector3<i128>  => EuclideanMultivector3<i128>,  {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(isize => EuclideanMultivector3<isize> => EuclideanMultivector3<isize>, {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(f32   => EuclideanMultivector3<f32>   => EuclideanMultivector3<f32>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+impl_scalar_multivector_sub_ops!(f64   => EuclideanMultivector3<f64>   => EuclideanMultivector3<f64>,   {0}, {1, 2, 3, 4, 5, 6, 7});
+
 
 macro_rules! impl_scalar_multivector_mul_ops {
     ($Lhs:ty => $Rhs:ty => $Output:ty, { $($index:expr),* }) => {
