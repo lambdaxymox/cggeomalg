@@ -133,5 +133,57 @@ mod e3ga_tests {
         assert_eq!(-mv + mv, zero);
         assert_eq!(mv + (-mv), zero);
     }
+
+    #[test]
+    fn test_scalar_multiplication() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+        let scalar = 9;
+        let expected = EuclideanMultivector3::new(9, 18, 27, 36, 45, 54, 63, 72);
+        let result = mv * scalar;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_scalar_division() {
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let scalar = 9_f64;
+        let expected = EuclideanMultivector3::new(
+            1_f64 / 9_f64, 
+            2_f64 / 9_f64, 3_f64 / 9_f64, 4_f64 / 9_f64,
+            5_f64 / 9_f64,6_f64 / 9_f64, 7_f64 / 9_f64,
+            8_f64 / 9_f64
+        );
+        assert!(false);
+        // let result = mv / scalar;
+
+        // assert_eq!(result, expected);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_out_of_bounds_array_access() {
+        let mv = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+
+        assert_eq!(mv[8], mv[8]);
+    }
+
+    #[test]
+    fn test_multivector_times_scalar_zero_is_zero() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+        let expected: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
+        let result = mv * 0;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_scalar_zero_times_multivector_is_zero() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+        let expected: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
+        let result = 0 * mv;
+
+        assert_eq!(result, expected);
+    }
 }
 
