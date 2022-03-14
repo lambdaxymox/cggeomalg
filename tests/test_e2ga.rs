@@ -460,7 +460,7 @@ mod e2ga_tests {
     }
 
     #[test]
-    fn test_outer_prooduct_scalar_e1() {
+    fn test_outer_product_scalar_e1() {
         let scalar = EuclideanMultivector2::unit_scalar() * 3_f64;
         let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
         let expected = e1 * scalar;
@@ -470,7 +470,7 @@ mod e2ga_tests {
     }
 
     #[test]
-    fn test_outer_prooduct_scalar_e2() {
+    fn test_outer_product_scalar_e2() {
         let scalar = EuclideanMultivector2::unit_scalar() * 3_f64;
         let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
         let expected = e2 * scalar;
@@ -480,7 +480,7 @@ mod e2ga_tests {
     }
 
     #[test]
-    fn test_outer_prooduct_scalar_e12() {
+    fn test_outer_product_scalar_e12() {
         let scalar = EuclideanMultivector2::unit_scalar() * 3_f64;
         let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
         let expected = e12 * scalar;
