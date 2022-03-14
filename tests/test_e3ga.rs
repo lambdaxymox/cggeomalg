@@ -5,9 +5,9 @@ extern crate num_traits;
 
 #[cfg(test)]
 mod e3ga_tests {
-    use cggeomalg::e3ga::{
+    use cggeomalg::{e3ga::{
         EuclideanMultivector3,
-    };
+    }, e2ga::EuclideanMultivector2};
     use approx::{
         assert_relative_eq,
     };
@@ -184,6 +184,226 @@ mod e3ga_tests {
         let result = 0 * mv;
 
         assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_outer_product_scalar_e1() {
+        let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        // let expected = e1 * scalar;
+
+        // assert_eq!(scalar ^ e1, expected);
+        // assert_eq!(e1 ^ scalar, expected);
+        assert!(false);
+    }
+
+    #[test]
+    fn test_outer_product_scalar_e2() {
+        let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        // let expected = e2 * scalar;
+
+        // assert_eq!(scalar ^ e2, expected);
+        // assert_eq!(e2 ^ scalar, expected);
+        assert!(false);
+    }
+
+    #[test]
+    fn test_outer_product_scalar_e12() {
+        let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        // let expected = e12 * scalar;
+
+        // assert_eq!(scalar ^ e12, expected);
+        // assert_eq!(e12 ^ scalar, expected);
+        assert!(false);
+    }
+
+    #[test]
+    fn test_outer_product_scalar_e23() {
+        let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        // let expected = e23 * scalar;
+
+        // assert_eq!(scalar ^ e23, expected);
+        // assert_eq!(e23 ^ scalar, expected);
+        assert!(false);
+    }
+
+    #[test]
+    fn test_outer_product_e1_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 ^ e1, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e1_e2() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+
+        assert_eq!(e1 ^ e2, e12);
+    }
+
+    #[test]
+    fn test_outer_product_e1_e3() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+
+        assert_eq!(e1 ^ e3, -e31);
+    }
+
+    #[test]
+    fn test_outer_product_e1_e12() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 ^ e12, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e1_e23() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+
+        assert_eq!(e1 ^ e23, e123);
+    }
+
+    #[test]
+    fn test_outer_product_e2_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+
+        assert_eq!(e2 ^ e1, -e12);
+    }
+
+    #[test]
+    fn test_outer_product_e2_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 ^ e2, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e2_e3() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+
+        assert_eq!(e2 ^ e3, e23);
+    }
+
+    #[test]
+    fn test_outer_product_e2_e12() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 ^ e12, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e2_e23() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 ^ e23, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e3_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+
+        assert_eq!(e3 ^ e1, e31);
+    }
+
+    #[test]
+    fn test_outer_product_e3_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+
+        assert_eq!(e3 ^ e2, -e23);
+    }
+
+    #[test]
+    fn test_outer_product_e3_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 ^ e3, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e3_e12() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+
+        assert_eq!(e3 ^ e12, e123);
+    }
+
+    #[test]
+    fn test_outer_product_e3_e23() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 ^ e23, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e12_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 ^ e1, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e12_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 ^ e2, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e12_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+
+        assert_eq!(e12 ^ e3, e123);
+    }
+
+    #[test]
+    fn test_outer_product_e12_e12() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 ^ e12, zero);
+    }
+
+    #[test]
+    fn test_outer_product_e12_e23() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 ^ e23, zero);
     }
 }
 
