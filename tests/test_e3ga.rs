@@ -192,77 +192,70 @@ mod e3ga_tests {
     fn test_outer_product_scalar_e1() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
-        // let expected = e1 * scalar;
+        let expected = e1 * scalar;
 
-        // assert_eq!(scalar ^ e1, expected);
-        // assert_eq!(e1 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e1, expected);
+        assert_eq!(e1 ^ scalar, expected);
     }
 
     #[test]
     fn test_outer_product_scalar_e2() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
-        // let expected = e2 * scalar;
+        let expected = e2 * scalar;
 
-        // assert_eq!(scalar ^ e2, expected);
-        // assert_eq!(e2 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e2, expected);
+        assert_eq!(e2 ^ scalar, expected);
     }
 
     #[test]
     fn test_outer_product_scalar_e3() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
-        // let expected = e3 * scalar;
+        let expected = e3 * scalar;
 
-        // assert_eq!(scalar ^ e3, expected);
-        // assert_eq!(e3 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e3, expected);
+        assert_eq!(e3 ^ scalar, expected);
     }
 
     #[test]
     fn test_outer_product_scalar_e12() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
-        // let expected = e12 * scalar;
+        let expected = e12 * scalar;
 
-        // assert_eq!(scalar ^ e12, expected);
-        // assert_eq!(e12 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e12, expected);
+        assert_eq!(e12 ^ scalar, expected);
     }
 
     #[test]
     fn test_outer_product_scalar_e23() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
-        // let expected = e23 * scalar;
+        let expected = e23 * scalar;
 
-        // assert_eq!(scalar ^ e23, expected);
-        // assert_eq!(e23 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e23, expected);
+        assert_eq!(e23 ^ scalar, expected);
     }
 
     #[test]
     fn test_outer_product_scalar_e31() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
-        // let expected = e31 * scalar;
+        let expected = e31 * scalar;
 
-        // assert_eq!(scalar ^ e31, expected);
-        // assert_eq!(e31 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e31, expected);
+        assert_eq!(e31 ^ scalar, expected);
     }
 
     #[test]
     fn test_outer_product_scalar_e123() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
         let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
-        // let expected = e123 * scalar;
+        let expected = e123 * scalar;
 
-        // assert_eq!(scalar ^ e123, expected);
-        // assert_eq!(e123 ^ scalar, expected);
-        assert!(false);
+        assert_eq!(scalar ^ e123, expected);
+        assert_eq!(e123 ^ scalar, expected);
     }
 
     #[test]
