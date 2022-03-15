@@ -1251,5 +1251,37 @@ mod e3ga_tests {
 
         assert_eq!(mv.grade(usize::MAX), zero);
     }
+
+    #[test]
+    fn test_multivector_reverse1() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let expected = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, -5_f64, -6_f64, -7_f64, -8_f64);
+        let result = mv.reverse();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_reverse2() {
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+
+        assert_eq!(one.reverse(), one);
+        assert_eq!(e1.reverse(), e1);
+        assert_eq!(e2.reverse(), e2);
+        assert_eq!(e3.reverse(), e3);
+        assert_eq!(e12.reverse(), -e12);
+        assert_eq!(e23.reverse(), -e23);
+        assert_eq!(e31.reverse(), -e31);
+        assert_eq!(e123.reverse(), -e123);
+    }
 }
 
