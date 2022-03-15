@@ -590,7 +590,7 @@ where
     /// 
     /// # Reversion In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123` 
+    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123` 
     /// be a three-dimensional Euclidean multivector. The reversion of each 
     /// basis blade is given by
     /// ```text
