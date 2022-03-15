@@ -2012,7 +2012,7 @@ where
         )
     }
 }
-/*
+
 impl<S> ops::Div<EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: ScalarFloat
@@ -2064,7 +2064,7 @@ where
         self * other.inverse_unchecked()
     }
 }
-*/
+
 /*
 impl<S> ops::Shl<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
