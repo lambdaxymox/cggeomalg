@@ -1430,12 +1430,7 @@ where
         let a = self;
         let result_1 = a[0] * other;
 
-        EuclideanMultivector3::new(
-            result_1, 
-            S::zero(), S::zero(), S::zero(),
-            S::zero(), S::zero(), S::zero(),
-            S::zero()
-        )
+        EuclideanMultivector3::from_scalar(result_1)
     }
 }
 
@@ -1450,12 +1445,7 @@ where
         let a = self;
         let result_1 = a[0] * other;
 
-        EuclideanMultivector3::new(
-            result_1, 
-            S::zero(), S::zero(), S::zero(),
-            S::zero(), S::zero(), S::zero(),
-            S::zero()
-        )
+        EuclideanMultivector3::from_scalar(result_1)
     }
 }
 
