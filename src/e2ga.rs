@@ -353,34 +353,49 @@ where
     /// The reverse of a two-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
-    /// ~mv := mv when mv is a scalar
-    /// ~mv := mv when mv is a vector
-    /// let mv := v1 ^ v2, where v1 and v2 are vectors. Then
-    /// ~mv := v2 ^ v1.
+    /// When mv is a scalar, ~mv := mv
+    /// When mv is a vector, ~mv := mv
+    /// When mv is a bivector, ~mv := -mv
     /// ```
-    /// Then for an arbitrary two-dimensional multivector `mv = a + v1 + v2 ^ v3`,
-    /// where `a` is a scalar, `v1`, `v2`, and `v3` are vectors, we get the 
+    /// In particular, let `v1` and `v2` be vectors,
+    /// ```text
+    /// When v = v1 is a vector,
+    /// ~v = ~v1 = v1 = v.
+    /// When B = v1 ^ v2 is a 2-blade,
+    /// ~B = ~(v1 ^ v2) = (~v2) ^ (~v1) 
+    ///    = v2 ^ v1 
+    ///    = -(v1 ^ v2)
+    ///    = -B.
+    /// ```
+    /// Then for an arbitrary two-dimensional multivector `mv = a + v + B`,
+    /// where `a` is a scalar, `v` is a vector, and `B` is a bivector, we get the 
     /// reverse of a general multivector by linearity
     /// ```text
-    /// ~mv = ~(a + v1 +   v2 ^ v2)
-    ///     = ~a + ~v1 + ~(v2 ^ v3)
-    ///     =  a +  v1 +   v3 ^ v2
+    /// ~mv = ~(a + v + B)
+    ///     = ~a + ~v + ~B
+    ///     =  a +  v - B
     /// ```
     /// where the last line follows from the definition of reversion of k-vectors 
     /// on each grade.
     /// 
     /// # Reversion In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the reversion of `mv` is given
-    /// by
+    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
+    /// two-dimensional Euclidean multivector. The reversion of each 
+    /// basis blade is given by
+    /// ```text
+    /// ~1    = 1
+    /// ~e1   = e1
+    /// ~e2   = e2
+    /// ~e12  = ~(e1 * e2) = (~e2) * (~e1) = e2 * e1 = -(e1 * e2) = -e12
+    /// ```
+    /// The reversion of a general multivector in the basis `{1, e1, e2, e12}` is 
+    /// the following
     /// ```text
     /// ~mv = ~(a0 + a1 * e1 + a2 * e2 + a12 * e12)
     ///     = ~a0  + ~(a1 * e1)  + ~(a2 * e2)   + ~(a12 * e12)
     ///     = ~a0  +  a1 * (~e1) +   a2 * (~e2) +   a12 * (~e12)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * ~(e1 ^ e2)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (e2 ^ e1)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (-(e1 ^ e2))
+    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (-e12)
     ///     =  a0  +  a1 * e1    +   a2 * e2    -   a12 * e12
     /// ```
     /// We illustrate this with an example.

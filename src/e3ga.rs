@@ -561,12 +561,23 @@ where
     /// The reverse of a three-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
-    /// ~mv := mv when mv is a scalar
-    /// ~mv := mv when mv is a vector
-    /// let mv := v1 ^ v2, where v1 and v2 are vectors. Then
-    /// ~mv := v2 ^ v1.
-    /// let mv := v1 ^ v2 ^ v3 where v1, v2, and v3 are vectors. Then
-    /// ~mv := v3 ^ v2 ^ v1.
+    /// When mv is a scalar, ~mv := mv
+    /// When mv is a vector, ~mv := mv
+    /// When mv is a bivector, ~mv := -mv
+    /// When mv is a trivector, ~mv := -mv
+    /// ```
+    /// In particular, let `v1`, `v2`, and `v3` be vectors
+    /// ```text
+    /// When v = v1 is a vector,
+    /// ~v = ~v1 = -v1 = -v.
+    /// When B = v1 ^ v2 is a 2-blade, 
+    /// ~B = ~(v1 ^ v2) = (~v2) ^ (~v1) = (-v2) ^ (-v1) 
+    ///    = v2 ^ v1 
+    ///    = -(v1 ^ v2).
+    /// When T = v1 ^ v2 ^ v3 is a 3-blade, 
+    /// ~T = ~(v1 ^ v2 ^ v3) = (~v3) ^ (~(v1 ^ v2)) = (~v3) ^ ((~v2) ^ ~v1) 
+    ///    = v3 ^ v2 ^ v1 
+    ///    = -(v1 ^ v2 ^ v3).
     /// ```
     /// Then for an arbitrary three-dimensional multivector `mv = a + v + B + T`,
     /// where `a` is a scalar, `v` is a vector, `B` is a bivector, and `T` is a trivector.
