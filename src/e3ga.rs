@@ -2510,7 +2510,7 @@ impl_scalar_multivector_bitxor_ops!(isize);
 impl_scalar_multivector_bitxor_ops!(f32);
 impl_scalar_multivector_bitxor_ops!(f64);
 
-/*
+
 macro_rules! impl_scalar_multivector_div_ops {
     ($Lhs:ty) => {
         impl ops::Div<EuclideanMultivector3<$Lhs>> for $Lhs {
@@ -2560,4 +2560,3 @@ macro_rules! impl_scalar_multivector_div_ops {
 impl_scalar_multivector_div_ops!(f32);
 impl_scalar_multivector_div_ops!(f64);
 
-*/
