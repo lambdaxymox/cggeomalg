@@ -347,15 +347,15 @@ mod e2ga_tests {
 
     #[test]
     fn test_multivector_reverse2() {
-        let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
-        let unit_e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
-        let unit_e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
-        let unit_e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
 
-        assert_eq!(unit_scalar.reverse(), unit_scalar);
-        assert_eq!(unit_e1.reverse(), unit_e1);
-        assert_eq!(unit_e2.reverse(), unit_e2);
-        assert_eq!(unit_e12.reverse(), -unit_e12);
+        assert_eq!(one.reverse(), one);
+        assert_eq!(e1.reverse(), e1);
+        assert_eq!(e2.reverse(), e2);
+        assert_eq!(e12.reverse(), -e12);
     }
 
     #[test]
