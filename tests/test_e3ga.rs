@@ -1143,6 +1143,46 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_geometric_product_zero_multivector() {
+        let mv = EuclideanMultivector3::new(
+            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
+        );
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(zero * mv, zero);
+    }
+
+    #[test]
+    fn test_geometric_product_multivector_zero() {
+        let mv = EuclideanMultivector3::new(
+            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
+        );
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(mv * zero, zero);
+    }
+
+    #[test]
+    fn test_geometric_product_one_multivector() {
+        let mv = EuclideanMultivector3::new(
+            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
+        );
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(one * mv, mv);
+    }
+
+    #[test]
+    fn test_geometric_product_multivector_one() {
+        let mv = EuclideanMultivector3::new(
+            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
+        );
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(mv * one, mv);
+    }
+
+    #[test]
     fn test_multivector_grade0() {
         let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
             1, 1, 1, 1, 1, 1, 1, 1
