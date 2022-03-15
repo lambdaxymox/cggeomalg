@@ -1392,6 +1392,438 @@ mod e3ga_tests {
         assert!(!zero.is_invertible());
     }
 
+    #[test]
+    fn test_scalar_product_e1_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e1 | e1, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e2() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e3() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 | e3, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e12() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e23() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 | e23, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e31() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 | e31, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e1_e123() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 | e123, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e2 | e2, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e3() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 | e3, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e12() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e23() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 | e23, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e31() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 | e31, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e2_e123() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 | e123, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e3 | e3, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e12() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e23() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 | e23, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e31() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 | e31, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e3_e123() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 | e123, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 | e3, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e12() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e12 | e12, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e23() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 | e23, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e31() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 | e31, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e12_e123() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 | e123, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 | e3, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e12() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e23() {
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e23 | e23, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e31() {
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 | e31, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e23_e123() {
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 | e123, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e31 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e31 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e31 | e3, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e12() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e31 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e23() {
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e31 | e23, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e31() {
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e31 | e31, one);
+    }
+
+    #[test]
+    fn test_scalar_product_e31_e123() {
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
     
+        assert_eq!(e31 | e123, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e123 | e1, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e123 | e2, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e123 | e3, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e12() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e123 | e12, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e23() {
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e123 | e23, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e31() {
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e123 | e31, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_e123_e123() {
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(e123 | e123, one);
+    }
 }
 
