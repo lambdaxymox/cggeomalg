@@ -1913,7 +1913,7 @@ where
         (self - other).magnitude()
     }
 }
-/*
+
 impl<S> EuclideanMultivector3<S>
 where
     S: ScalarFloat
@@ -1960,7 +1960,7 @@ where
         (self_times_other + other_times_self) * one_over_two
     }
 }
-*/
+
 impl<S> ops::Div<S> for EuclideanMultivector3<S>
 where
     S: ScalarFloat
