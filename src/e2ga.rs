@@ -445,7 +445,7 @@ where
     /// ```
     /// The conjugate of a two-dimensional multivector extends to an arbitrary 
     /// multivector `mv` by linearity. Let `mv = a + v + B` be an arbitrary
-    /// two-dimenional Euclidean multivector where `a` is a scalar, `v` is a vector, 
+    /// two-dimensional Euclidean multivector where `a` is a scalar, `v` is a vector, 
     /// `B` is a bivectors. Then the conjugate of `mv` is given by
     /// ```text
     /// conj(mv) = conj(a + v + B)
@@ -516,38 +516,37 @@ where
     /// 
     /// The grade involution of a multivector `mv` is defined by
     /// ```text
-    /// mv* := mv when mv is a scalar
-    /// mv* := -mv when mv is a vector
-    /// Let mv = v1 * v2 where a and b are versors. Then
-    /// mv* := (v1 * v2)* = v1* * v2*
+    /// When mv is a scalar, invol(mv) := mv
+    /// When mv is a vector, invol(mv) := -mv
+    /// When mv is a bivector, invol(mv) := mv
     /// ```
-    /// Then for an arbitrary two-dimensional multivector `mv = a + v1 + v2 ^ v3`,
-    /// where `a` is a scalar, `v1`, `v2`, and `v3` are vectors, we get the 
-    /// grade involution of a general multivector by linearity
+    /// The grade involution of a two-dimensional multivector `mv = a + v + B`,
+    /// where `a` is a scalar, `v` is a vector, and `B` is a bivector, is
+    /// given by linearity
     /// ```text
-    /// mv* = (a + v1 + v2 ^ v3)*
-    ///     = a* + v1* + (v2 ^ v3)*
-    ///     = a  - v1  + (v2 * v3 - v2.dot(v3))*
-    ///     = a  - v1  + (v2 * v3)* - v2.dot(v3)
-    ///     = a  - v1  + (v2*) * (v3*) - v2.dot(v3)
-    ///     = a  - v1  + (-v2) * (-v3) - v2.dot(v3)
-    ///     = a  - v1  + (v2 * v3 - v2.dot(v3))
-    ///     = a  - v1  + v2 ^ v3
+    /// invol(mv) = invol(a + v + B)
+    ///           = invol(a) + invol(v) + invol(B)
+    ///           = a - v + B
     /// ```
     /// 
     /// # Involution In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the involution of `mv` is 
+    /// The grade involution of each basis blade in the basis `{1, e1, e2, e12}` are 
     /// given by
     /// ```text
-    /// mv* = (a0 + a1 * e1 + a2 * e2 + a12 * e12)*
-    ///     =  a0* + (a1 * e1)* + (a2 * e2)* + (a12 * e12)*
-    ///     =  a0* + a1 * (e1*) + a2 * (e2*) + a12 * (e12*)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * ((e1 * e2)*)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * (e1*) * (e2*)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * (-e1) * (-e2)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * e12
+    /// invol(1)   = 1
+    /// invol(e1)  = -e1
+    /// invol(e2)  = -e2
+    /// invol(e12) = e12
+    /// ```
+    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a general multivector.
+    /// The conjugate of `mv` is given by
+    /// ```text
+    /// invol(mv) = invol(a0 + a1 * e1 + a2 * e2 + a12 * e12)
+    ///     =  invol(a0) + invol(a1 * e1) + invol(a2 * e2) + invol(a12 * e12)
+    ///     =  invol(a0) + a1 * (invol(e1)) + a2 * (invol(e2)) + a12 * (invol(e12))
+    ///     =  a0 + a1 * (-e1) + a2 * (-e2) + a12 * e12
+    ///     =  a0 - a1 * e1    - a2 * e2    + a12 * e12
     /// ```
     /// We illustrate this with an example.
     /// 

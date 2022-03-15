@@ -687,7 +687,7 @@ where
     /// ```
     /// The conjugate of a three-dimensional multivector extends to an arbitrary 
     /// multivector `mv` by linearity. Let `mv = a + v + B + T` be an arbitrary
-    /// three-dimenional Euclidean multivector where `a` is a scalar, `v` is a 
+    /// three-dimensional Euclidean multivector where `a` is a scalar, `v` is a 
     /// vector, `B` is a bivector, and `T` is a trivector. Then the conjugate of 
     /// `mv` is given by
     /// ```text
