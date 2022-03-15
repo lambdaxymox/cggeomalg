@@ -540,13 +540,13 @@ where
     /// invol(e12) = e12
     /// ```
     /// Let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a general multivector.
-    /// The conjugate of `mv` is given by
+    /// The grade involution of `mv` is given by
     /// ```text
     /// invol(mv) = invol(a0 + a1 * e1 + a2 * e2 + a12 * e12)
-    ///     =  invol(a0) + invol(a1 * e1) + invol(a2 * e2) + invol(a12 * e12)
-    ///     =  invol(a0) + a1 * (invol(e1)) + a2 * (invol(e2)) + a12 * (invol(e12))
-    ///     =  a0 + a1 * (-e1) + a2 * (-e2) + a12 * e12
-    ///     =  a0 - a1 * e1    - a2 * e2    + a12 * e12
+    ///           = invol(a0) + invol(a1 * e1) + invol(a2 * e2) + invol(a12 * e12)
+    ///           = invol(a0) + a1 * (invol(e1)) + a2 * (invol(e2)) + a12 * (invol(e12))
+    ///           = a0 + a1 * (-e1) + a2 * (-e2) + a12 * e12
+    ///           = a0 - a1 * e1    - a2 * e2    + a12 * e12
     /// ```
     /// We illustrate this with an example.
     /// 

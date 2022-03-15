@@ -783,61 +783,82 @@ where
         self.data[5] = -self.data[5];
         self.data[6] = -self.data[6];
     }
-/*
+
     /// Compute the grade involution of a multivector.
     /// 
     /// The grade involution of a multivector `mv` is defined by
     /// ```text
-    /// mv* := mv when mv is a scalar
-    /// mv* := -mv when mv is a vector
-    /// Let mv = v1 * v2 where a and b are versors. Then
-    /// mv* := (v1 * v2)* = v1* * v2*
+    /// When mv is a scalar, invol(mv) := mv
+    /// When mv is a vector, invol(mv) := -mv
+    /// When mv is a bivector, invol(mv) := mv
+    /// When mv is a trivector, invol(mv) := -mv
     /// ```
-    /// Then for an arbitrary two-dimensional multivector `mv = a + v1 + v2 ^ v3`,
-    /// where `a` is a scalar, `v1`, `v2`, and `v3` are vectors, we get the 
-    /// grade involution of a general multivector by linearity
+    /// The grade involution of a three-dimensional multivector `mv = a + v + B + T`,
+    /// where `a` is a scalar, `v` is a vector, `B` is a bivector, and `T` is a 
+    /// trivector, is given by linearity
     /// ```text
-    /// mv* = (a + v1 + v2 ^ v3)*
-    ///     = a* + v1* + (v2 ^ v3)*
-    ///     = a  - v1  + (v2 * v3 - v2.dot(v3))*
-    ///     = a  - v1  + (v2 * v3)* - v2.dot(v3)
-    ///     = a  - v1  + (v2*) * (v3*) - v2.dot(v3)
-    ///     = a  - v1  + (-v2) * (-v3) - v2.dot(v3)
-    ///     = a  - v1  + (v2 * v3 - v2.dot(v3))
-    ///     = a  - v1  + v2 ^ v3
+    /// invol(mv) = invol(a + v + B + T)
+    ///           = invol(a) + invol(v) + invol(B) + invol(T)
+    ///           = a - v + B - T
     /// ```
     /// 
     /// # Involution In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the involution of `mv` is 
-    /// given by
+    /// The grade involution of each basis blade in the basis 
+    /// `{1, e1, e2, e3, e12, e23, e31, e123}` are given by
     /// ```text
-    /// mv* = (a0 + a1 * e1 + a2 * e2 + a12 * e12)*
-    ///     =  a0* + (a1 * e1)* + (a2 * e2)* + (a12 * e12)*
-    ///     =  a0* + a1 * (e1*) + a2 * (e2*) + a12 * (e12*)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * ((e1 * e2)*)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * (e1*) * (e2*)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * (-e1) * (-e2)
-    ///     =  a0  - a1 * e1    - a2 * e2    + a12 * e12
+    /// invol(1)    = 1
+    /// invol(e1)   = -e1
+    /// invol(e2)   = -e2
+    /// invol(e3)   = -e3
+    /// invol(e12)  = e12
+    /// invol(e23)  = e23
+    /// invol(e31)  = e31
+    /// invol(e123) = -e123
+    /// ```
+    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e1213` 
+    /// be a general multivector. The grade involution of `mv` is given by
+    /// ```text
+    /// invol(mv) = invol(a0 + a1 * e1 + a2 * e2 + a12 * e12)
+    ///           = invol(a0) + invol(a1 * e1) + invol(a2 * e2) + invol(a3 * e3) 
+    ///                       + invol(a12 * e12) + invol(a23 * e23) + invol(a31 * e31) 
+    ///                       + invol(a123 * e123)
+    ///           = invol(a0) + a1 * (invol(e1)) + a2 * (invol(e2)) + a3 * (invol(e3)) 
+    ///                       + a12 * (invol(e12)) + a23 * (invol(e23)) + a31 * (invol(e31)) 
+    ///                       + a123 * (invol(e123))
+    ///           = a0 + a1 * (-e1) + a2 * (-e2) + a3 * (-e3) 
+    ///                + a12 * e12 + a23 * e23 + a31 * e31 
+    ///                + a123 * (-e123)
+    ///           = a0 - a1 * e1 - a2 * e2 - a3 * e3 
+    ///                + a12 * e12 + a23 * e23 + a31 * e31 
+    ///                - a123 * e123
     /// ```
     /// We illustrate this with an example.
     /// 
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
-    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
+    /// let mv = EuclideanMultivector3::new(
+    ///     1_i32, 2_i32, 3_i32, 4_i32, 5_i32, 6_i32, 7_i32, 8_i32
+    /// );
+    /// let expected = EuclideanMultivector3::new(
+    ///     1_i32, -2_i32, -3_i32, -4_i32, 5_i32, 6_i32, 7_i32, -8_i32
+    /// );
     /// let result = mv.involute();
     /// 
     /// assert_eq!(result, expected);
     /// ```
     pub fn involute(&self) -> Self {
-        Self::new(self.data[0], -self.data[1], -self.data[2], self.data[3])
+        Self::new(
+            self.data[0], 
+            -self.data[1], -self.data[2], -self.data[3],
+            self.data[4], self.data[5], self.data[6],
+            -self.data[7]
+        )
     }
 
     /// Compute the grade involution of a multivector mutably in place.
@@ -845,23 +866,27 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
-    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
+    /// let mut result = EuclideanMultivector3::new(
+    ///     1_i32, 2_i32, 3_i32, 4_i32, 5_i32, 6_i32, 7_i32, 8_i32
+    /// );
+    /// let expected = EuclideanMultivector3::new(
+    ///     1_i32, -2_i32, -3_i32, -4_i32, 5_i32, 6_i32, 7_i32, -8_i32
+    /// );
     /// result.involute_mut();
     /// 
     /// assert_eq!(result, expected);
     /// ```
     pub fn involute_mut(&mut self) {
-        // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
-        // self.data[3] =  self.data[3];
+        self.data[3] = -self.data[3];
+        self.data[7] = -self.data[7];
     }
-
+/*
     /// Compute the dual of a multivector.
     pub fn dual(&self) -> Self {
         Self::new(-self.data[3], -self.data[2], self.data[1], self.data[0])
