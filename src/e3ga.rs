@@ -1350,87 +1350,75 @@ where
         )
     }
 }
-/*
-impl<S> ops::BitOr<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+
+impl<S> ops::BitOr<EuclideanMultivector3<S>> for EuclideanMultivector3<S> 
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] +
+            a[4] * b[4] + a[5] * b[5] + a[6] * b[6] + a[7] * b[7];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector3::from_scalar(result_1)
     }
 }
 
-impl<S> ops::BitOr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitOr<&EuclideanMultivector3<S>> for EuclideanMultivector3<S> 
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn bitor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: &EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] +
+            a[4] * b[4] + a[5] * b[5] + a[6] * b[6] + a[7] * b[7];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector3::from_scalar(result_1)
     }
 }
 
-impl<S> ops::BitOr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
+impl<S> ops::BitOr<EuclideanMultivector3<S>> for &EuclideanMultivector3<S> 
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] +
+            a[4] * b[4] + a[5] * b[5] + a[6] * b[6] + a[7] * b[7];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector3::from_scalar(result_1)
     }
 }
 
-impl<'a, 'b, S> ops::BitOr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
+impl<'a, 'b, S> ops::BitOr<&'b EuclideanMultivector3<S>> for &'a EuclideanMultivector3<S> 
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn bitor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn bitor(self, other: &'b EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] +
+            a[4] * b[4] + a[5] * b[5] + a[6] * b[6] + a[7] * b[7];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector3::from_scalar(result_1)
     }
 }
-*/
+
 impl<S> ops::BitOr<S> for EuclideanMultivector3<S>
 where
     S: Scalar
