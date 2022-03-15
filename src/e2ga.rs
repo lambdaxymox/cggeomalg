@@ -353,17 +353,17 @@ where
     /// The reverse of a two-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
-    /// When mv is a scalar, ~mv := mv
-    /// When mv is a vector, ~mv := mv
-    /// When mv is a bivector, ~mv := -mv
+    /// When mv is a scalar, rev(mv) := mv
+    /// When mv is a vector, rev(mv) := mv
+    /// When mv is a bivector, rev(mv) := -mv
     /// ```
     /// In particular, let `v1` and `v2` be vectors,
     /// ```text
     /// When v = v1 is a vector,
-    /// ~v = ~v1 = v1 = v.
+    /// rev(v) = rev(v1) = v1 = v.
     /// When B = v1 ^ v2 is a 2-blade,
-    /// ~B = ~(v1 ^ v2) = (~v2) ^ (~v1) 
-    ///    = v2 ^ v1 
+    /// rev(B) = rev(v1 ^ v2) = (rev(v2)) ^ (rev(v1))
+    ///    = v2 ^ v1
     ///    = -(v1 ^ v2)
     ///    = -B.
     /// ```
@@ -371,8 +371,8 @@ where
     /// where `a` is a scalar, `v` is a vector, and `B` is a bivector, we get the 
     /// reverse of a general multivector by linearity
     /// ```text
-    /// ~mv = ~(a + v + B)
-    ///     = ~a + ~v + ~B
+    /// rev(mv) = rev(a + v + B)
+    ///     = rev(a) + rev(v) + rev(B)
     ///     =  a +  v - B
     /// ```
     /// where the last line follows from the definition of reversion of k-vectors 
@@ -382,19 +382,19 @@ where
     /// 
     /// The reversion of each basis blade in the basis `{1, e1, e2, e12}` are given by
     /// ```text
-    /// ~1    = 1
-    /// ~e1   = e1
-    /// ~e2   = e2
-    /// ~e12  = ~(e1 * e2) = (~e2) * (~e1) = e2 * e1 = -(e1 * e2) = -e12
+    /// rev(1)   = 1
+    /// rev(e1)  = e1
+    /// rev(e2)  = e2
+    /// rev(e12) = rev(e1 * e2) = (rev(e2)) * (rev(e1)) = e2 * e1 = -(e1 * e2) = -e12
     /// ```
     /// The reversion of a general multivector in the basis `{1, e1, e2, e12}` is 
     /// the following
     /// ```text
-    /// ~mv = ~(a0 + a1 * e1 + a2 * e2 + a12 * e12)
-    ///     = ~a0  + ~(a1 * e1)  + ~(a2 * e2)   + ~(a12 * e12)
-    ///     = ~a0  +  a1 * (~e1) +   a2 * (~e2) +   a12 * (~e12)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (-e12)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    -   a12 * e12
+    /// rev(mv) = rev(a0 + a1 * e1 + a2 * e2 + a12 * e12)
+    ///         = rev(a0) + rev(a1 * e1) + rev(a2 * e2) + rev(a12 * e12)
+    ///         = rev(a0) + a1 * rev(e1) + a2 * rev(e2) + a12 * rev(e12)
+    ///         = a0      + a1 * e1      + a2 * e2      + a12 * (-e12)
+    ///         = a0      + a1 * e1      + a2 * e2      - a12 * e12
     /// ```
     /// We illustrate this with an example.
     /// 

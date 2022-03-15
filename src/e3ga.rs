@@ -561,31 +561,33 @@ where
     /// The reverse of a three-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
-    /// When mv is a scalar, ~mv := mv
-    /// When mv is a vector, ~mv := mv
-    /// When mv is a bivector, ~mv := -mv
-    /// When mv is a trivector, ~mv := -mv
+    /// When mv is a scalar, rev(mv) := mv
+    /// When mv is a vector, rev(mv) := mv
+    /// When mv is a bivector, rev(mv) := -mv
+    /// When mv is a trivector, rev(mv) := -mv
     /// ```
     /// In particular, let `v1`, `v2`, and `v3` be vectors
     /// ```text
     /// When v = v1 is a vector,
-    /// ~v = ~v1 = -v1 = -v.
+    /// rev(v) = rev(v1) = -v1 = -v.
     /// When B = v1 ^ v2 is a 2-blade, 
-    /// ~B = ~(v1 ^ v2) = (~v2) ^ (~v1) = (-v2) ^ (-v1) 
-    ///    = v2 ^ v1 
-    ///    = -(v1 ^ v2).
+    /// rev(B) = rev(v1 ^ v2) = (rev(v2)) ^ (rev(v1)) = (-v2) ^ (-v1) 
+    ///        = v2 ^ v1 
+    ///        = -(v1 ^ v2)
+    ///        = -B.
     /// When T = v1 ^ v2 ^ v3 is a 3-blade, 
-    /// ~T = ~(v1 ^ v2 ^ v3) = (~v3) ^ (~(v1 ^ v2)) = (~v3) ^ ((~v2) ^ (~v1))
-    ///    = v3 ^ v2 ^ v1 
-    ///    = -(v1 ^ v2 ^ v3).
+    /// rev(T) = rev(v1 ^ v2 ^ v3) = (rev(v3)) ^ (rev(v1 ^ v2)) = (rev(v3)) ^ ((rev(v2)) ^ (rev(v1)))
+    ///        = v3 ^ v2 ^ v1 
+    ///        = -(v1 ^ v2 ^ v3)
+    ///        = -T.
     /// ```
     /// Then for an arbitrary three-dimensional multivector `mv = a + v + B + T`,
     /// where `a` is a scalar, `v` is a vector, `B` is a bivector, and `T` is a trivector.
     /// The reverse of the multivector is given by linearity
     /// ```text
-    /// ~mv = ~(a + v + B + T)
-    ///     = ~a + ~v + ~B + ~T
-    ///     = a + v - B - T
+    /// rev(mv) = rev(a + v + B + T)
+    ///         = rev(a) + rev(v) + rev(B) + rev(T)
+    ///         = a + v - B - T
     /// ```
     /// 
     /// # Reversion In Euclidean Space
@@ -594,22 +596,30 @@ where
     /// be a three-dimensional Euclidean multivector. The reversion of each 
     /// basis blade is given by
     /// ```text
-    /// ~1    = 1
-    /// ~e1   = e1
-    /// ~e2   = e2
-    /// ~e3   = e3
-    /// ~e12  = ~(e1 * e2) = (~e2) * (~e1) = e2 * e1 = -(e1 * e2) = -e12
-    /// ~e23  = ~(e2 * e3) = (~e3) * (~e2) = e3 * e2 = -(e2 * e3) = -e23
-    /// ~e31  = ~(e3 * e1) = (~e1) * (~e3) = e1 * e3 = -(e3 * e1) = -e31
-    /// ~e123 = ~(e1 * e2 * e3) = (~e3) * (~(e1 * e2)) = e3 * ((~e2) * (~e1)) = e3 * e2 * e1 = -e123
+    /// rev(1)    = 1
+    /// rev(e1)   = e1
+    /// rev(e2)   = e2
+    /// rev(e3)   = e3
+    /// rev(e12)  = rev(e1 * e2) = (rev(e2)) * (rev(e1)) = e2 * e1 = -(e1 * e2) = -e12
+    /// rev(e23)  = rev(e2 * e3) = (rev(e3)) * (rev(e2)) = e3 * e2 = -(e2 * e3) = -e23
+    /// rev(e31)  = rev(e3 * e1) = (rev(e1)) * (rev(e3)) = e1 * e3 = -(e3 * e1) = -e31
+    /// rev(e123) = rev(e1 * e2 * e3) 
+    ///           = (rev(e3)) * (rev(e1 * e2)) 
+    ///           = e3 * ((rev(e2)) * (rev(e1))) 
+    ///           = e3 * e2 * e1 
+    ///           = -e123
     /// ```
     /// The reversion of a general multivector in the basis 
     /// `{1, e1, e2, e3, e12, e23, e31, e123}` is the following
     /// ```text
-    /// ~mv = ~(a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123)
-    ///     = ~a0  + ~(a1 * e1)  + ~(a2 * e2)  + ~(a3 * e3)  + ~(a12 * e12)  + ~(a23 * e23)  + ~(a31 * e31) + ~(a123 * e123)
-    ///     = ~a0  +  a1 * (~e1) +  a2 * (~e2) +  a3 * (~e3) +  a12 * (~e12) +  a23 * (~e23) +  a31 * (~e31) + a123 * (~e123)
-    ///     =  a0  +  a1 * e1    +  a2 * e2    +  a3 * e3    -  a12 * e12    -  a23 * e23    -  a31 * e31    - a123 * e123
+    /// rev(mv) = rev(a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123)
+    ///     = rev(a0) + rev(a1 * e1) + rev(a2 * e2) + rev(a3 * e3) 
+    ///               + rev(a12 * e12) + rev(a23 * e23) + rev(a31 * e31) 
+    ///               + rev(a123 * e123)
+    ///     = rev(a0) + a1 * (rev(e1)) + a2 * (rev(e2)) + a3 * (rev(e3)) 
+    ///               + a12 * (rev(e12)) + a23 * (rev(e23)) + a31 * (rev(e31))
+    ///               + a123 * (rev(e123))
+    ///     = a0 + a1 * e1 + a2 * e2 + a3 * e3 - a12 * e12 - a23 * e23 - a31 * e31 - a123 * e123
     /// ```
     /// We illustrate this with an example.
     /// 
