@@ -1825,5 +1825,59 @@ mod e3ga_tests {
 
         assert_eq!(e123 | e123, one);
     }
+
+    #[test]
+    fn test_scalar_product() {
+        let mv1 = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let mv2 = EuclideanMultivector3::new(
+            9_f64, 10_f64, 11_f64, 12_f64, 13_f64, 14_f64, 15_f64, 16_f64
+        );
+        let expected = EuclideanMultivector3::from_scalar(492_f64);
+        let result = mv1 | mv2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_scalar_product_zero_multivector() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(zero | mv, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_multivector_zero() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(mv | zero, zero);
+    }
+
+    #[test]
+    fn test_scalar_product_one_multivector() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(one | mv, one);
+    }
+
+    #[test]
+    fn test_scalar_product_multivector_one() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+
+        assert_eq!(mv | one, one);
+    }
 }
 
