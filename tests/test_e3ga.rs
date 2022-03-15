@@ -1285,5 +1285,112 @@ mod e3ga_tests {
         assert_eq!(e31.reverse(), -e31);
         assert_eq!(e123.reverse(), -e123);
     }
+
+    #[test]
+    fn test_multivector_inverse() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let expected = EuclideanMultivector3::new(
+            0.25, -0.5, -0.75, -1_f64, 1_f64, 1_f64, 1_f64, 1_f64
+        );
+        let result = mv.inverse().unwrap();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_times_inverse1() {
+        let mv = EuclideanMultivector3::new(
+            3_f64, 35_f64, 13_f64, 94_f64, 2_f64, 2089_f64, 120_f64, 3_f64
+        );
+        let mv_inv = mv.inverse().unwrap();
+        let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+        let result = mv * mv_inv;
+
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
+    }
+
+    #[test]
+    fn test_multivector_times_inverse2() {
+        let mv = EuclideanMultivector3::new(
+            3_f64, 35_f64, 13_f64, 94_f64, 2_f64, 2089_f64, 120_f64, 3_f64
+        );
+        let mv_inv = mv.inverse().unwrap();
+        let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+        let result = mv_inv * mv;
+
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
+    }
+
+    #[test]
+    fn test_volume_element_inverse() {
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let expected = -e123;
+        let result = e123.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_vector_inverse1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let mv = e1 * 2_f64;
+        let expected = e1 * (1_f64 / 2_f64);
+        let result = mv.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_vector_inverse2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let mv = e2 * 2_f64;
+        let expected = e2 * (1_f64 / 2_f64);
+        let result = mv.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_vector_inverse3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let mv = e3 * 2_f64;
+        let expected = e3 * (1_f64 / 2_f64);
+        let result = mv.inverse().unwrap();
+        
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_vector_inverse4() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let mv = e1 * 3_f64 + e2 * 5_f64 + e3 * 7_f64;
+        let magnitude_squared = 83_f64;
+        let expected = 
+            e1 * (3_f64 / magnitude_squared) + e2 * (5_f64 / magnitude_squared) + e3 * (7_f64 / magnitude_squared);
+        let result = mv.inverse().unwrap();
+
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
+    }
+
+    #[test]
+    fn test_scalar_inverse() {
+        let unit_scalar: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+        let scalar = unit_scalar * 2_f64;
+        let expected = unit_scalar *  (1_f64 / 2_f64);
+        let result = scalar.inverse().unwrap();
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_zero_multivector_is_not_invertible() {
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert!(!zero.is_invertible());
+    }
 }
 
