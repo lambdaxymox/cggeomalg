@@ -1960,95 +1960,112 @@ where
         (self_times_other + other_times_self) * one_over_two
     }
 }
-
-impl<S> ops::Div<S> for EuclideanMultivector2<S>
+*/
+impl<S> ops::Div<S> for EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn div(self, other: S) -> Self::Output {
         let one_over_other = S::one() / other;
-        let result_1   = self.data[0] * one_over_other;
-        let result_e1  = self.data[1] * one_over_other;
-        let result_e2  = self.data[2] * one_over_other;
-        let result_e12 = self.data[3] * one_over_other;
+        let result_1    = self.data[0] * one_over_other;
+        let result_e1   = self.data[1] * one_over_other;
+        let result_e2   = self.data[2] * one_over_other;
+        let result_e3   = self.data[3] * one_over_other;
+        let result_e12  = self.data[4] * one_over_other;
+        let result_e23  = self.data[5] * one_over_other;
+        let result_e31  = self.data[6] * one_over_other;
+        let result_e123 = self.data[7] * one_over_other;
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Div<S> for &EuclideanMultivector2<S>
+impl<S> ops::Div<S> for &EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
     fn div(self, other: S) -> Self::Output {
         let one_over_other = S::one() / other;
-        let result_1   = self.data[0] * one_over_other;
-        let result_e1  = self.data[1] * one_over_other;
-        let result_e2  = self.data[2] * one_over_other;
-        let result_e12 = self.data[3] * one_over_other;
+        let result_1    = self.data[0] * one_over_other;
+        let result_e1   = self.data[1] * one_over_other;
+        let result_e2   = self.data[2] * one_over_other;
+        let result_e3   = self.data[3] * one_over_other;
+        let result_e12  = self.data[4] * one_over_other;
+        let result_e23  = self.data[5] * one_over_other;
+        let result_e31  = self.data[6] * one_over_other;
+        let result_e123 = self.data[7] * one_over_other;
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
-
-impl<S> ops::Div<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+/*
+impl<S> ops::Div<EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[allow(clippy::suspicious_arithmetic_impl)]
     #[inline]
-    fn div(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn div(self, other: EuclideanMultivector3<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
 }
 
-impl<S> ops::Div<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Div<&EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[allow(clippy::suspicious_arithmetic_impl)]
     #[inline]
-    fn div(self, other: &EuclideanMultivector2<S>) -> Self::Output {
+    fn div(self, other: &EuclideanMultivector3<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
 }
 
-impl<S> ops::Div<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Div<EuclideanMultivector3<S>> for &EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[allow(clippy::suspicious_arithmetic_impl)]
     #[inline]
-    fn div(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn div(self, other: EuclideanMultivector3<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
 }
 
-impl<'a, 'b, S> ops::Div<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Div<&'b EuclideanMultivector3<S>> for &'a EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[allow(clippy::suspicious_arithmetic_impl)]
     #[inline]
-    fn div(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn div(self, other: &'b EuclideanMultivector3<S>) -> Self::Output {
         self * other.inverse_unchecked()
     }
 }
-
+*/
+/*
 impl<S> ops::Shl<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
     S: Scalar
