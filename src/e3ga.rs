@@ -692,13 +692,13 @@ where
     /// The conjugate of each basis blade in the basis 
     /// `{1, e1, e2, e3, e12, e23, e31, e123}` are given by
     /// ```text
-    /// conj(1) = 1
-    /// conj(e1) = -e1
-    /// conj(e2) = -e2
-    /// conj(e3) = -e3
-    /// conj(e12) = -e12
-    /// conj(e23) = -e23
-    /// conj(e31) = -e31
+    /// conj(1)    = 1
+    /// conj(e1)   = -e1
+    /// conj(e2)   = -e2
+    /// conj(e3)   = -e3
+    /// conj(e12)  = -e12
+    /// conj(e23)  = -e23
+    /// conj(e31)  = -e31
     /// conj(e123) = e123
     /// ```
     /// Let `mv = a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123`
@@ -766,7 +766,6 @@ where
     /// assert_eq!(result, expected);
     /// ```
     pub fn conjugate_mut(&mut self) {
-        // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
         self.data[3] = -self.data[3];

@@ -459,9 +459,9 @@ where
     /// The conjugate of each basis blade in the basis `{1, e1, e2, e12}` are 
     /// given by
     /// ```text
-    /// conj(1) = 1
-    /// conj(e1) = -e1
-    /// conj(e2) = -e2
+    /// conj(1)   = 1
+    /// conj(e1)  = -e1
+    /// conj(e2)  = -e2
     /// conj(e12) = -e12
     /// ```
     /// Let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a general multivector.
@@ -507,7 +507,6 @@ where
     /// assert_eq!(result, expected);
     /// ```
     pub fn conjugate_mut(&mut self) {
-        // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
         self.data[3] = -self.data[3];
@@ -585,10 +584,8 @@ where
     /// assert_eq!(result, expected);
     /// ```
     pub fn involute_mut(&mut self) {
-        // self.data[0] =  self.data[0];
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
-        // self.data[3] =  self.data[3];
     }
 
     /// Compute the dual of a multivector.
@@ -922,11 +919,7 @@ where
     fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
         
         EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
     }
@@ -942,11 +935,7 @@ where
     fn bitor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
         
         EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
     }
@@ -962,11 +951,7 @@ where
     fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
         
         EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
     }
@@ -982,11 +967,7 @@ where
     fn bitor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        // All of the results of calculating a | b := (~a) * b are included for reference.
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        // let result_e1  = a[0] * b[1] + a[1] * b[0] - a[2] * b[3] - a[3] * b[2];
-        // let result_e2  = a[0] * b[2] + a[1] * b[3] + a[2] * b[0] + a[3] * b[1];
-        // let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] - a[3] * b[0];
         
         EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
     }
