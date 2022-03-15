@@ -914,7 +914,22 @@ where
     /// Construct the inverse pseudoscalar of the geometric algebra.
     /// 
     /// In the case of the two-dimensional Euclidean geometric algebra, the
-    /// inverse of the pseudoscalar is the two-blade `inv(e123) = -e12`.
+    /// inverse of the pseudoscalar is the two-blade `inv(e123) = -e123`.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let ps: EuclideanMultivector3<f64> = EuclideanMultivector3::pseudoscalar();
+    /// let ps_inv: EuclideanMultivector3<f64> = EuclideanMultivector3::inv_pseudoscalar();
+    /// let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+    /// 
+    /// assert_eq!(ps * ps_inv, one);
+    /// assert_eq!(ps_inv * ps, one);
+    /// ```
     #[inline]
     pub fn inv_pseudoscalar() -> Self {
         -Self::unit_e123()
