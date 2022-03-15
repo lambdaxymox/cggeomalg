@@ -1255,9 +1255,11 @@ mod e3ga_tests {
     #[test]
     fn test_multivector_reverse1() {
         let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
         let expected = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, -5_f64, -6_f64, -7_f64, -8_f64);
+            1_f64, 2_f64, 3_f64, 4_f64, -5_f64, -6_f64, -7_f64, -8_f64
+        );
         let result = mv.reverse();
 
         assert_eq!(result, expected);
