@@ -7,9 +7,9 @@ extern crate num_traits;
 mod e3ga_tests {
     use std::f64::consts::E;
 
-    use cggeomalg::{e3ga::{
+    use cggeomalg::e3ga::{
         EuclideanMultivector3,
-    }, e2ga::EuclideanMultivector2};
+    };
     use approx::{
         assert_relative_eq,
     };
@@ -1124,6 +1124,76 @@ mod e3ga_tests {
         let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
 
         assert_eq!(e123 * e123, -one);
+    }
+
+    #[test]
+    fn test_multivector_grade0() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            1, 1, 1, 1, 1, 1, 1, 1
+        );
+        let expected = EuclideanMultivector3::new(
+            1, 0, 0, 0, 0, 0, 0, 0
+        );
+        let result = mv.grade(0);
+    
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_grade1() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            1, 1, 1, 1, 1, 1, 1, 1
+        );
+        let expected = EuclideanMultivector3::new(
+            0, 1, 1, 1, 0, 0, 0, 0
+        );
+        let result = mv.grade(1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_grade2() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            1, 1, 1, 1, 1, 1, 1, 1
+        );
+        let expected = EuclideanMultivector3::new(
+            0, 0, 0, 0, 1, 1, 1, 0);
+        let result = mv.grade(2);
+    
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_multivector_grade3() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            1, 1, 1, 1, 1, 1, 1, 1
+        );
+        let expected: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            0, 0, 0, 0, 0, 0, 0, 1
+        );
+
+        assert_eq!(mv.grade(3), expected);
+    }
+
+    #[test]
+    fn test_multivector_grade4() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            1, 1, 1, 1, 1, 1, 1, 1
+        );
+        let zero: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
+
+        assert_eq!(mv.grade(4), zero);
+    }
+
+    #[test]
+    fn test_multivector_grade_large() {
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
+            1, 1, 1, 1, 1, 1, 1, 1
+        );
+        let zero: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
+
+        assert_eq!(mv.grade(usize::MAX), zero);
     }
 }
 
