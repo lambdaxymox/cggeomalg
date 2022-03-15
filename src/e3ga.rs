@@ -551,63 +551,81 @@ where
     }
 }
 
-/*
-impl<S> EuclideanMultivector2<S> 
+
+impl<S> EuclideanMultivector3<S> 
 where
     S: ScalarSigned
 {
     /// Compute the reverse of a multivector.
     /// 
-    /// The reverse of a two-dimensional multivector `mv`, for each grade of 
+    /// The reverse of a three-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
     /// ~mv := mv when mv is a scalar
     /// ~mv := mv when mv is a vector
     /// let mv := v1 ^ v2, where v1 and v2 are vectors. Then
     /// ~mv := v2 ^ v1.
+    /// let mv := v1 ^ v2 ^ v3 where v1, v2, and v3 are vectors. Then
+    /// ~mv := v3 ^ v2 ^ v1.
     /// ```
-    /// Then for an arbitrary two-dimensional multivector `mv = a + v1 + v2 ^ v3`,
-    /// where `a` is a scalar, `v1`, `v2`, and `v3` are vectors, we get the 
-    /// reverse of a general multivector by linearity
+    /// Then for an arbitrary three-dimensional multivector `mv = a + v + B + T`,
+    /// where `a` is a scalar, `v` is a vector, `B` is a bivector, and `T` is a trivector.
+    /// The reverse of the multivector is given by linearity
     /// ```text
-    /// ~mv = ~(a + v1 +   v2 ^ v2)
-    ///     = ~a + ~v1 + ~(v2 ^ v3)
-    ///     =  a +  v1 +   v3 ^ v2
+    /// ~mv = ~(a + v + B + T)
+    ///     = ~a + ~v + ~B + ~T
+    ///     = a + v - B - T
     /// ```
-    /// where the last line follows from the definition of reversion of k-vectors 
-    /// on each grade.
     /// 
     /// # Reversion In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the reversion of `mv` is given
-    /// by
+    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123` 
+    /// be a three-dimensional Euclidean multivector. The reversion of each 
+    /// basis blade is given by
     /// ```text
-    /// ~mv = ~(a0 + a1 * e1 + a2 * e2 + a12 * e12)
-    ///     = ~a0  + ~(a1 * e1)  + ~(a2 * e2)   + ~(a12 * e12)
-    ///     = ~a0  +  a1 * (~e1) +   a2 * (~e2) +   a12 * (~e12)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * ~(e1 ^ e2)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (e2 ^ e1)
-    ///     =  a0  +  a1 * e1    +   a2 * e2    +   a12 * (-(e1 ^ e2))
-    ///     =  a0  +  a1 * e1    +   a2 * e2    -   a12 * e12
+    /// ~1    = 1
+    /// ~e1   = e1
+    /// ~e2   = e2
+    /// ~e3   = e3
+    /// ~e12  = ~(e1 * e2) = (~e2) * (~e1) = e2 * e1 = -(e1 * e2) = -e12
+    /// ~e23  = ~(e2 * e3) = (~e3) * (~e2) = e3 * e2 = -(e2 * e3) = -e23
+    /// ~e31  = ~(e3 * e1) = (~e1) * (~e3) = e1 * e3 = -(e3 * e1) = -e31
+    /// ~e123 = ~(e1 * e2 * e3) = (~e3) * (~(e1 * e2)) = e3 * ((~e2) * (~e1)) = e3 * e2 * e1 = -e123
+    /// ```
+    /// The reversion of a general multivector in the basis 
+    /// `{1, e1, e2, e3, e12, e23, e31, e123}` is the following
+    /// ```text
+    /// ~mv = ~(a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123)
+    ///     = ~a0  + ~(a1 * e1)  + ~(a2 * e2)  + ~(a3 * e3)  + ~(a12 * e12)  + ~(a23 * e23)  + ~(a31 * e31) + ~(a123 * e123)
+    ///     = ~a0  +  a1 * (~e1) +  a2 * (~e2) +  a3 * (~e3) +  a12 * (~e12) +  a23 * (~e23) +  a31 * (~e31) + a123 * (~e123)
+    ///     =  a0  +  a1 * e1    +  a2 * e2    +  a3 * e3    -  a12 * e12    -  a23 * e23    -  a31 * e31    - a123 * e123
     /// ```
     /// We illustrate this with an example.
     /// 
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mv = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
-    /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
+    /// let mv = EuclideanMultivector3::new(
+    ///     1_i32, 1_i32, 1_i32, 1_i32, 2_i32, 2_i32, 2_i32, 3_i32
+    /// );
+    /// let expected = EuclideanMultivector3::new(
+    ///     1_i32, 1_i32, 1_i32, 1_i32, -2_i32, -2_i32, -2_i32, -3_i32
+    /// );
     /// let result = mv.reverse();
     /// 
     /// assert_eq!(result, expected);
     /// ```
     pub fn reverse(&self) -> Self {
-        Self::new(self.data[0], self.data[1], self.data[2], -self.data[3])
+        Self::new(
+            self.data[0],
+            self.data[1], self.data[2], self.data[3],
+            -self.data[4], -self.data[5], -self.data[6],
+            -self.data[7]
+        )
     }
 
     /// Compute the reverse of a multivector mutably in place.
@@ -615,20 +633,27 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mut result = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
-    /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
+    /// let mut result = EuclideanMultivector3::new(
+    ///     1_i32, 1_i32, 1_i32, 1_i32, 2_i32, 2_i32, 2_i32, 3_i32
+    /// );
+    /// let expected = EuclideanMultivector3::new(
+    ///     1_i32, 1_i32, 1_i32, 1_i32, -2_i32, -2_i32, -2_i32, -3_i32
+    /// );
     /// result.reverse_mut();
     /// 
     /// assert_eq!(result, expected);
-    /// ``` 
+    /// ```
     pub fn reverse_mut(&mut self) {
-        self.data[3] = -self.data[3];
+        self.data[4] = -self.data[4];
+        self.data[5] = -self.data[5];
+        self.data[6] = -self.data[6];
+        self.data[7] = -self.data[7];
     }
-
+/*
     /// Compute the conjugate of a multivector.
     /// 
     /// The conjugate of a two-dimensional multivector `mv`, for each grade of 
@@ -814,8 +839,9 @@ where
     pub fn inv_pseudoscalar() -> Self {
         -Self::unit_e12()
     }
-}
 */
+}
+
 impl<S> ops::Not for EuclideanMultivector3<S> 
 where
     S: ScalarSigned
