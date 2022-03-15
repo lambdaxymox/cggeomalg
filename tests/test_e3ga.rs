@@ -156,10 +156,9 @@ mod e3ga_tests {
             5_f64 / 9_f64,6_f64 / 9_f64, 7_f64 / 9_f64,
             8_f64 / 9_f64
         );
-        assert!(false);
-        // let result = mv / scalar;
+        let result = mv / scalar;
 
-        // assert_eq!(result, expected);
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
     }
 
     #[test]
@@ -1392,5 +1391,7 @@ mod e3ga_tests {
 
         assert!(!zero.is_invertible());
     }
+
+    
 }
 
