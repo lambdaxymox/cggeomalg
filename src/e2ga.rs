@@ -380,9 +380,7 @@ where
     /// 
     /// # Reversion In Euclidean Space
     /// 
-    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. The reversion of each 
-    /// basis blade is given by
+    /// The reversion of each basis blade in the basis `{1, e1, e2, e12}` are given by
     /// ```text
     /// ~1    = 1
     /// ~e1   = e1
@@ -441,43 +439,38 @@ where
     /// The conjugate of a two-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
-    /// mv_conj := mv when mv is scalar
-    /// mv_conj := -mv when mv is a vector
-    /// Let mv = a * b be where a and b are versors. Then
-    /// mv_conj := (a * b).conjugate() = b.conjugate() * a.conjugate()
+    /// When mv is a scalar, conj(mv) := mv
+    /// When mv is a vector, conj(mv) := -mv
+    /// When mv is a bivector, conj(mv) := -mv
     /// ```
     /// The conjugate of a two-dimensional multivector extends to an arbitrary 
-    /// multivector `mv` by linearity. Let `mv = a + v1 + v2 ^ v3` be an arbitrary
-    /// two-dimenional Euclidean multivector where `a` is a scalar, and `v1`, 
-    /// `v2`, and `v3` are vectors. Then the conjugate of `mv` is given by
+    /// multivector `mv` by linearity. Let `mv = a + v + B` be an arbitrary
+    /// two-dimenional Euclidean multivector where `a` is a scalar, `v` is a vector, 
+    /// `B` is a bivectors. Then the conjugate of `mv` is given by
     /// ```text
-    /// mv.conjugate() = (a + v1 + v2 ^ v3).conjugate()
-    ///                = a.conjugate() + v1.conjugate() + (v2 ^ v3).conjugate() 
-    ///                = a - v1 + (v2 * v3 - v2.dot(v3)).conjugate()
-    ///                = a - v1 + (v2 * v3).conjugate() - (v2.dot(v3)).conjugate()
-    ///                = a - v1 + v3.conjugate() * v2.conjugate() - v2.dot(v3)
-    ///                = a - v1 + (-v3) * (-v2) - v3.dot(v2)
-    ///                = a - v1 + v3 * v2 - v3.dot(v2)
-    ///                = a - v1 + v3 ^ v2
-    ///                = a - v1 - v2 ^ v3
+    /// conj(mv) = conj(a + v + B)
+    ///          = conj(a) + conj(v) + conj(B)
+    ///          = a + (-v) + (-B)
+    ///          = a - v - B
     /// ```
     /// 
     /// # Conjugate In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the conjugate of `mv` is given
-    /// by
+    /// The conjugate of each basis blade in the basis `{1, e1, e2, e12}` are 
+    /// given by
     /// ```text
-    /// mv.conjugate() = (a0 + a1 * e1 + a2 * e2 + a12 * e12).conjugate()
-    ///                = a0.conjugate() + (a1 * e1).conjugate() + (a2 * e2).conjugate() 
-    ///                                 + (a12 * e12).conjugate()
-    ///                = a0 + a1 * e1.conjugate() + a2 * e2.conjugate() 
-    ///                     + a12 * e12.conjugate()
-    ///                = a0 + a1 * (-e1) + a2 * (-e2) + a12 * (e1 ^ e2).conjugate()
-    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (e2.conjugate() ^ e1.conjugate())
-    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (-e2) ^ (-e1)
-    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (e2 ^ v1)
-    ///                = a0 - a1 * e1 - a2 * e2 - a12 * e12
+    /// conj(1) = 1
+    /// conj(e1) = -e1
+    /// conj(e2) = -e2
+    /// conj(e12) = -e12
+    /// ```
+    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a general multivector.
+    /// The conjugate of `mv` is given by
+    /// ```text
+    /// conj(mv) = conj(a0 + a1 * e1 + a2 * e2 + a12 * e12)
+    ///          = conj(a0) + conj(a1 * e1) + conj(a2 * e2) + conj(a12 * e12)
+    ///          = conj(a0) + a1 * conj(e1) + a2 * conj(e2) + a12 * conj(e12)
+    ///          = a0 - a1 * e1 - a2 * e2 - a12 * e12
     /// ```
     /// We illustrate this with an example.
     /// 

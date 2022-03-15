@@ -664,67 +664,86 @@ where
         self.data[6] = -self.data[6];
         self.data[7] = -self.data[7];
     }
-/*
+
     /// Compute the conjugate of a multivector.
     /// 
-    /// The conjugate of a two-dimensional multivector `mv`, for each grade of 
+    /// The conjugate of a three-dimensional multivector `mv`, for each grade of 
     /// multivector is given by
     /// ```text
-    /// mv_conj := mv when mv is scalar
-    /// mv_conj := -mv when mv is a vector
-    /// Let mv = a * b be where a and b are versors. Then
-    /// mv_conj := (a * b).conjugate() = b.conjugate() * a.conjugate()
+    /// When mv is a scalar, conj(mv) := mv
+    /// When mv is a vector, conj(mv) := -mv
+    /// When mv is a bivector, conj(mv) := -mv
+    /// When mv is a trivector, conj(mv) := mv
     /// ```
-    /// The conjugate of a two-dimensional multivector extends to an arbitrary 
-    /// multivector `mv` by linearity. Let `mv = a + v1 + v2 ^ v3` be an arbitrary
-    /// two-dimenional Euclidean multivector where `a` is a scalar, and `v1`, 
-    /// `v2`, and `v3` are vectors. Then the conjugate of `mv` is given by
+    /// The conjugate of a three-dimensional multivector extends to an arbitrary 
+    /// multivector `mv` by linearity. Let `mv = a + v + B + T` be an arbitrary
+    /// three-dimenional Euclidean multivector where `a` is a scalar, `v` is a 
+    /// vector, `B` is a bivector, and `T` is a trivector. Then the conjugate of 
+    /// `mv` is given by
     /// ```text
-    /// mv.conjugate() = (a + v1 + v2 ^ v3).conjugate()
-    ///                = a.conjugate() + v1.conjugate() + (v2 ^ v3).conjugate() 
-    ///                = a - v1 + (v2 * v3 - v2.dot(v3)).conjugate()
-    ///                = a - v1 + (v2 * v3).conjugate() - (v2.dot(v3)).conjugate()
-    ///                = a - v1 + v3.conjugate() * v2.conjugate() - v2.dot(v3)
-    ///                = a - v1 + (-v3) * (-v2) - v3.dot(v2)
-    ///                = a - v1 + v3 * v2 - v3.dot(v2)
-    ///                = a - v1 + v3 ^ v2
-    ///                = a - v1 - v2 ^ v3
+    /// conj(mv) = conj(a + v + B + T)
+    ///          = conj(a) + conj(v) + conj(B) + conj(T)
+    ///          = a + (-v) + (-B) + T
+    ///          = a - v - B + T
     /// ```
     /// 
     /// # Conjugate In Euclidean Space
     /// 
-    /// In particular, let `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` be a 
-    /// two-dimensional Euclidean multivector. Then the conjugate of `mv` is given
-    /// by
+    /// The conjugate of each basis blade in the basis 
+    /// `{1, e1, e2, e3, e12, e23, e31, e123}` are given by
     /// ```text
-    /// mv.conjugate() = (a0 + a1 * e1 + a2 * e2 + a12 * e12).conjugate()
-    ///                = a0.conjugate() + (a1 * e1).conjugate() + (a2 * e2).conjugate() 
-    ///                                 + (a12 * e12).conjugate()
-    ///                = a0 + a1 * e1.conjugate() + a2 * e2.conjugate() 
-    ///                     + a12 * e12.conjugate()
-    ///                = a0 + a1 * (-e1) + a2 * (-e2) + a12 * (e1 ^ e2).conjugate()
-    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (e2.conjugate() ^ e1.conjugate())
-    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (-e2) ^ (-e1)
-    ///                = a0 - a1 * e1 - a2 * e2 + a12 * (e2 ^ v1)
-    ///                = a0 - a1 * e1 - a2 * e2 - a12 * e12
+    /// conj(1) = 1
+    /// conj(e1) = -e1
+    /// conj(e2) = -e2
+    /// conj(e3) = -e3
+    /// conj(e12) = -e12
+    /// conj(e23) = -e23
+    /// conj(e31) = -e31
+    /// conj(e123) = e123
+    /// ```
+    /// Let `mv = a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123`
+    /// be a general multivector. The conjugate of `mv` is given by
+    /// ```text
+    /// conj(mv) = conj(a0 + a1 * e1 + a2 * e2 + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123)
+    ///          = conj(a0) + conj(a1 * e1) + conj(a2 * e2) + conj(a3 * e3)
+    ///                     + conj(a12 * e12) + conj(a23 * e23) + conj(a31 * e31)
+    ///                     + conj(a123 * e123)
+    ///          = a0 + a1 * conj(e1) + a2 * conj(e2) + a3 * conj(e3)
+    ///               + a12 * conj(e12) + a23 * conj(e23) + a31 * conj(e31)
+    ///               + a123 * conj(e123)
+    ///          = a0 + a1 * (-e1) + a2 * (-e2) + a3 * (-e3)
+    ///               + a12 * (-e12) + a23 * (-e23) + a31 * (-e31)
+    ///               + a123 * e123
+    ///          = a0 - a1 * e1 - a2 * e2 - a3 * e3
+    ///               - a12 * e12  - a23 * e23 - a31 * e31
+    ///               + a123 * e123
     /// ```
     /// We illustrate this with an example.
     /// 
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
-    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
+    /// let mv = EuclideanMultivector3::new(
+    ///     1_i32, 2_i32, 3_i32, 4_i32, 5_i32, 6_i32, 7_i32, 8_i32
+    /// );
+    /// let expected = EuclideanMultivector3::new(
+    ///     1_i32, -2_i32, -3_i32, -4_i32, -5_i32, -6_i32, -7_i32, 8_i32
+    /// );
     /// let result = mv.conjugate();
     /// 
     /// assert_eq!(result, expected);
     /// ```
     pub fn conjugate(&self) -> Self {
-        Self::new(self.data[0], -self.data[1], -self.data[2], -self.data[3])
+        Self::new(
+            self.data[0], 
+            -self.data[1], -self.data[2], -self.data[3],
+            -self.data[4], -self.data[5], -self.data[6],
+            self.data[7]
+        )
     }
 
     /// Compute the conjugate of a multivector mutably in place.
@@ -732,12 +751,16 @@ where
     /// # Example
     /// 
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
     /// # };
     /// #
-    /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
-    /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
+    /// let mut result = EuclideanMultivector3::new(
+    ///     1_i32, 2_i32, 3_i32, 4_i32, 5_i32, 6_i32, 7_i32, 8_i32
+    /// );
+    /// let expected = EuclideanMultivector3::new(
+    ///     1_i32, -2_i32, -3_i32, -4_i32, -5_i32, -6_i32, -7_i32, 8_i32
+    /// );
     /// result.conjugate_mut();
     /// 
     /// assert_eq!(result, expected);
@@ -747,8 +770,11 @@ where
         self.data[1] = -self.data[1];
         self.data[2] = -self.data[2];
         self.data[3] = -self.data[3];
+        self.data[4] = -self.data[4];
+        self.data[5] = -self.data[5];
+        self.data[6] = -self.data[6];
     }
-
+/*
     /// Compute the grade involution of a multivector.
     /// 
     /// The grade involution of a multivector `mv` is defined by
