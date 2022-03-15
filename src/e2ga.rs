@@ -920,7 +920,7 @@ where
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
@@ -936,7 +936,7 @@ where
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
@@ -952,7 +952,7 @@ where
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
@@ -968,7 +968,7 @@ where
         let b = other;
         let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
         
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
@@ -983,7 +983,7 @@ where
         let a = self;
         let result_1 = a[0] * other;
 
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
@@ -998,7 +998,7 @@ where
         let a = self;
         let result_1 = a[0] * other;
 
-        EuclideanMultivector2::new(result_1, S::zero(), S::zero(), S::zero())
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
