@@ -886,31 +886,39 @@ where
         self.data[3] = -self.data[3];
         self.data[7] = -self.data[7];
     }
-/*
+
     /// Compute the dual of a multivector.
     pub fn dual(&self) -> Self {
-        Self::new(-self.data[3], -self.data[2], self.data[1], self.data[0])
+        Self::new(
+            -self.data[7],
+            -self.data[5], -self.data[6], -self.data[4],
+            self.data[3], self.data[1], self.data[2],
+            self.data[0]
+        )
     }
 
     /// Computer the dual of a multivector mutably in place.
     pub fn dual_mut(&mut self) {
         let mut result = Self::zero();
-        result.data[0] = -self.data[3];
-        result.data[1] = -self.data[2];
-        result.data[2] =  self.data[1];
-        result.data[3] =  self.data[0];
+        result.data[0] = -self.data[7];
+        result.data[1] = -self.data[5];
+        result.data[2] = -self.data[6];
+        result.data[3] = -self.data[4];
+        result.data[4] =  self.data[3];
+        result.data[5] =  self.data[1];
+        result.data[6] =  self.data[2];
+        result.data[7] =  self.data[0];
         *self = result;
     }
 
     /// Construct the inverse pseudoscalar of the geometric algebra.
     /// 
     /// In the case of the two-dimensional Euclidean geometric algebra, the
-    /// inverse of the pseudoscalar is the two-blade `e12_inv = -e12`.
+    /// inverse of the pseudoscalar is the two-blade `inv(e123) = -e12`.
     #[inline]
     pub fn inv_pseudoscalar() -> Self {
-        -Self::unit_e12()
+        -Self::unit_e123()
     }
-*/
 }
 
 impl<S> ops::Not for EuclideanMultivector3<S> 

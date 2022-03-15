@@ -605,7 +605,7 @@ where
     /// Construct the inverse pseudoscalar of the geometric algebra.
     /// 
     /// In the case of the two-dimensional Euclidean geometric algebra, the
-    /// inverse of the pseudoscalar is the two-blade `e12_inv = -e12`.
+    /// inverse of the pseudoscalar is the two-blade `inv(e12) = -e12`.
     #[inline]
     pub fn inv_pseudoscalar() -> Self {
         -Self::unit_e12()
