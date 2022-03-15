@@ -1127,6 +1127,22 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_geometric_product_multivectors() {
+        let mv1 = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let mv2 = EuclideanMultivector3::new(
+            9_f64, 10_f64, 11_f64, 12_f64, 13_f64, 14_f64, 15_f64, 16_f64
+        );
+        let expected = EuclideanMultivector3::new(
+            -272_f64, -188_f64, -202_f64, -120_f64, 218_f64, 156_f64, 238_f64, 410_f64
+        );
+        let result = mv1 * mv2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
     fn test_multivector_grade0() {
         let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
             1, 1, 1, 1, 1, 1, 1, 1
