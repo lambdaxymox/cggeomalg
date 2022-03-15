@@ -1874,8 +1874,8 @@ where
         S::ulps_eq(&self[7], &other[7], epsilon, max_ulps)
     }
 }
-/*
-impl<S> EuclideanMultivector2<S> 
+
+impl<S> EuclideanMultivector3<S> 
 where
     S: ScalarFloat
 {
@@ -1913,8 +1913,8 @@ where
         (self - other).magnitude()
     }
 }
-
-impl<S> EuclideanMultivector2<S>
+/*
+impl<S> EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
