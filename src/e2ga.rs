@@ -1707,7 +1707,7 @@ where
     #[inline]
     fn shl(self, other: S) -> Self::Output {
         let a = self;
-        let result_1   = a[0] * other;
+        let result_1 = a[0] * other;
 
         EuclideanMultivector2::from_scalar(result_1)
     }
@@ -1722,7 +1722,7 @@ where
     #[inline]
     fn shl(self, other: S) -> Self::Output {
         let a = self;
-        let result_1   = a[0] * other;
+        let result_1 = a[0] * other;
 
         EuclideanMultivector2::from_scalar(result_1)
     }
