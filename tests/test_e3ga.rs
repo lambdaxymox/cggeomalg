@@ -3652,6 +3652,81 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_commutator_e2_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let expected = -e12;
+        let result = e2.commutator(&e1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let expected = EuclideanMultivector3::zero();
+        let result = e2.commutator(&e2);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e3() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let expected = e23;
+        let result = e2.commutator(&e3);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e12() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let expected = -e1;
+        let result = e2.commutator(&e12);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e23() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let expected = e3;
+        let result = e2.commutator(&e23);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e31() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+        let expected = zero;
+        let result = e2.commutator(&e31);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_e123() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+        let expected = zero;
+        let result = e2.commutator(&e123);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
     fn test_dual_e1() {
         let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
         let e1_dual = e1.dual();
