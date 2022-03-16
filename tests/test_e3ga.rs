@@ -2273,6 +2273,15 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_left_contraction_e12_e23() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 << e23, zero);
+    }
+
+    #[test]
     fn test_left_contraction_e12_e31() {
         let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
         let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
