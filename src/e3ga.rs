@@ -888,26 +888,94 @@ where
     }
 
     /// Compute the dual of a multivector.
+    /// 
+    /// The dual of a multivector is also known as the orthogonal complement.
+    /// 
+    /// The dual of a multivector `mv` is defined by
+    /// ```text
+    /// dual(mv) := mv << inv(e12e) == mv * inv(e123)
+    /// ```
+    /// where `<<` denotes the left contraction, and `inv` denotes the inverse
+    /// operator.
+    /// 
+    /// # Duality In Euclidean Space
+    /// 
+    /// In three-dimensional Euclidean geometric algebra, the dual of the elements
+    /// of the bases `{1, e1, e2, e3, e12, e23, e31, e123}` is given by
+    /// ```text
+    /// dual(1)    = -e123
+    /// dual(e1)   = -e23
+    /// dual(e2)   = -e31
+    /// dual(e3)   = -e12
+    /// dual(e12)  = e3
+    /// dual(e23)  = e1
+    /// dual(e31)  = e2
+    /// dual(e123) = 1
+    /// ```
+    /// The dual of a multivector 
+    /// `mv = a0 + a1 * e1 + a2 * e2 + + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123` 
+    /// is given by
+    /// ```text
+    /// dual(mv) = dual(a0 + a1 * e1 + a2 * e2 + + a3 * e3 + a12 * e12 + a23 * e23 + a31 * e31 + a123 * e123)
+    ///          = dual(a0) + dual(a1 * e1) + dual(a2 * e2) + dual(a3 * e3)
+    ///                     + dual(a12 * e12) + dual(a23 * e23) + dual(a31 * e31)
+    ///                     + dual(a123 * e123)
+    ///          = a0 * (dual(1)) + a1 * (dual(e1)) + a2 * (dual(e2)) + a3 * (dual(e3))
+    ///                           + a12 * (dual(e12)) + a23 * (dual(e23)) + a31 * (dual(e31))
+    ///                           + a123 * (dual(e123))
+    ///          = a0 * (-e123) + a1 * (-e23) + a2 * (-e31) + a3 * (-e12)
+    ///                         + a12 * e3 + a23 * e1 + a31 * e2
+    ///                         + a123
+    ///          = a123 + a23 * e1 + a31 * e2 + a12 * e3 - a3 * e12 - a1 * e23 - a2 * e31 - a0 * e123
+    /// ```
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+    /// let expected = EuclideanMultivector3::new(8, 6, 7, 5, -4, -2, -3, -1);
+    /// let result = mv.dual();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn dual(&self) -> Self {
         Self::new(
-            -self.data[7],
-            -self.data[5], -self.data[6], -self.data[4],
-            self.data[3], self.data[1], self.data[2],
-            self.data[0]
+            self.data[7],
+            self.data[5], self.data[6], self.data[4],
+            -self.data[3], -self.data[1], -self.data[2],
+            -self.data[0]
         )
     }
 
     /// Computer the dual of a multivector mutably in place.
+    ///
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let mut result = EuclideanMultivector3::new(1, 2, 3, 4, 5, 6, 7, 8);
+    /// let expected = EuclideanMultivector3::new(8, 6, 7, 5, -4, -2, -3, -1);
+    /// result.dual_mut();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn dual_mut(&mut self) {
         let mut result = Self::zero();
-        result.data[0] = -self.data[7];
-        result.data[1] = -self.data[5];
-        result.data[2] = -self.data[6];
-        result.data[3] = -self.data[4];
-        result.data[4] =  self.data[3];
-        result.data[5] =  self.data[1];
-        result.data[6] =  self.data[2];
-        result.data[7] =  self.data[0];
+        result.data[0] =  self.data[7];
+        result.data[1] =  self.data[5];
+        result.data[2] =  self.data[6];
+        result.data[3] =  self.data[4];
+        result.data[4] = -self.data[3];
+        result.data[5] = -self.data[1];
+        result.data[6] = -self.data[2];
+        result.data[7] = -self.data[0];
         *self = result;
     }
 

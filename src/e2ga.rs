@@ -693,10 +693,10 @@ where
     #[inline]
     fn not(self) -> Self::Output {
         let mut result = Self::Output::zero();
-        result.data[0] = -self.data[3];
-        result.data[1] = -self.data[2];
-        result.data[2] =  self.data[1];
-        result.data[3] =  self.data[0];
+        result.data[0] =  self.data[3];
+        result.data[1] =  self.data[2];
+        result.data[2] = -self.data[1];
+        result.data[3] = -self.data[0];
         
         result
     }
@@ -711,10 +711,10 @@ where
     #[inline]
     fn not(self) -> Self::Output {
         let mut result = Self::Output::zero();
-        result.data[0] = -self.data[3];
-        result.data[1] = -self.data[2];
-        result.data[2] =  self.data[1];
-        result.data[3] =  self.data[0];
+        result.data[0] =  self.data[3];
+        result.data[1] =  self.data[2];
+        result.data[2] = -self.data[1];
+        result.data[3] = -self.data[0];
         
         result
     }
