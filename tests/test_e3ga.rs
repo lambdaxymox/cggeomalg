@@ -3403,6 +3403,180 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_commutator_scalar_scalar() {
+        let scalar1 = EuclideanMultivector3::from_scalar(6_f64);
+        let scalar2 = EuclideanMultivector3::from_scalar(45_f64);
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar1.commutator(&scalar2);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e1() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e1 = EuclideanMultivector3::unit_e1();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e1);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e1_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e1 = EuclideanMultivector3::unit_e1();
+        let expected = EuclideanMultivector3::zero();
+        let result = e1.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e2() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e2 = EuclideanMultivector3::unit_e2();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e2);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e2_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e2 = EuclideanMultivector3::unit_e2();
+        let expected = EuclideanMultivector3::zero();
+        let result = e2.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e3() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e3 = EuclideanMultivector3::unit_e3();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e3);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e3_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e3 = EuclideanMultivector3::unit_e3();
+        let expected = EuclideanMultivector3::zero();
+        let result = e3.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e12() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e12 = EuclideanMultivector3::unit_e12();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e12);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e12_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e12 = EuclideanMultivector3::unit_e12();
+        let expected = EuclideanMultivector3::zero();
+        let result = e12.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e23() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e23 = EuclideanMultivector3::unit_e23();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e23);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e23_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e23 = EuclideanMultivector3::unit_e23();
+        let expected = EuclideanMultivector3::zero();
+        let result = e23.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e31() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e31 = EuclideanMultivector3::unit_e31();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e31);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e31_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e31 = EuclideanMultivector3::unit_e31();
+        let expected = EuclideanMultivector3::zero();
+        let result = e31.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_e123() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e123 = EuclideanMultivector3::unit_e123();
+        let expected = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&e123);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_e123_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(6_f64);
+        let e123 = EuclideanMultivector3::unit_e123();
+        let expected = EuclideanMultivector3::zero();
+        let result = e123.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_scalar_multivector() {
+        let scalar = EuclideanMultivector3::from_scalar(7_f64);
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+        let result = scalar.commutator(&mv);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_commutator_multivector_scalar() {
+        let scalar = EuclideanMultivector3::from_scalar(7_f64);
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+        let result = mv.commutator(&scalar);
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
     fn test_dual_e1() {
         let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
         let e1_dual = e1.dual();
