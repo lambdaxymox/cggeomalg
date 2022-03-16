@@ -11,7 +11,8 @@ use core::ops;
 use core::fmt;
 
 
-/// A stack-allocated, two-dimensional Euclidean multivector.
+/// A stack-allocated, two-dimensional Euclidean multivector 
+/// in the basis the basis `{1, e1, e2, e12}`.
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub struct EuclideanMultivector2<S> {

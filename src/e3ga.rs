@@ -11,9 +11,8 @@ use core::ops;
 use core::fmt;
 
 
-/// A stack-allocated, three-dimensional Euclidean multivector.
-/// 
-/// Euclidean multivectors use a `e12/e23/e31` bitvector order.
+/// A stack-allocated, three-dimensional Euclidean multivector 
+/// in the basis the basis `{1, e1, e2, e3, e12, e23, e31, e123}`.
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub struct EuclideanMultivector3<S> {
