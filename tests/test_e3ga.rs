@@ -3187,5 +3187,89 @@ mod e3ga_tests {
 
         assert_eq!(e123 >> e123, -one);
     }
+
+    #[test]
+    fn test_right_contraction_scalar_multivector() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector3::from_scalar(scalar_part);
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let expected = EuclideanMultivector3::new(
+            3_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64
+        );
+        let result = scalar >> mv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_multivector() {
+        let mv1 = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let mv2 = EuclideanMultivector3::new(
+            3_f64, 5_f64, 7_f64, 9_f64, 11_f64, 13_f64, 15_f64, 17_f64
+        );
+        let expected = EuclideanMultivector3::new(
+            -304_f64, -126_f64, -82_f64, -83_f64, 87_f64, 58_f64, -77_f64, 24_f64
+        );
+        let result = mv1 >> mv2;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_with_self() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let expected = EuclideanMultivector3::new(
+            -144_f64, -33_f64, -67_f64, -32_f64, 37_f64, 22_f64, 31_f64, 8_f64
+        );
+        let result = mv >> mv;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_right_contraction_zero_multivector() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let zero = EuclideanMultivector3::zero();
+    
+        assert_eq!(zero >> mv, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_zero() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let zero = EuclideanMultivector3::zero();
+
+        assert_eq!(mv >> zero, zero);
+    }
+
+    #[test]
+    fn test_right_contraction_one_multivector() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let one = EuclideanMultivector3::unit_scalar();
+    
+        assert_eq!(mv >> one, mv);
+    }
+
+    #[test]
+    fn test_right_contraction_multivector_one() {
+        let mv = EuclideanMultivector3::new(
+            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
+        );
+        let one = EuclideanMultivector3::unit_scalar();
+    
+        assert_eq!(one >> mv, one);
+    }
 }
 
