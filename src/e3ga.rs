@@ -1913,9 +1913,12 @@ where
 {
     fn inverse_unchecked(&self) -> Self {
         let conjugate = self.conjugate();
-        let self_times_conjugate = (self * conjugate)[0];
+        let reversion = self.reverse();
+        let involution = self.involute();
+        let numerator = conjugate * involution * reversion;
+        let denominator = (self * numerator)[0];
 
-        conjugate / self_times_conjugate
+        numerator / denominator
     }
 
     #[inline]

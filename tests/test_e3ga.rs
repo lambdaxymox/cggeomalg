@@ -1291,11 +1291,14 @@ mod e3ga_tests {
             1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
         );
         let expected = EuclideanMultivector3::new(
-            0.25, -0.5, -0.75, -1_f64, 1_f64, 1_f64, 1_f64, 1_f64
+            -0.083333333333333,
+            0.05982905982906, 0.068376068376068, 0.044871794871795,
+            -0.053418803418803, -0.034188034188034, -0.047008547008547,
+            0.027777777777778
         );
         let result = mv.inverse().unwrap();
 
-        assert_eq!(result, expected);
+        assert_relative_eq!(result, expected, epsilon = 1e-10);
     }
 
     #[test]
