@@ -2364,83 +2364,119 @@ where
         EuclideanMultivector3::from_scalar(result_1)
     }
 }
-/*
-impl<S> ops::Shr<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+
+impl<S> ops::Shr<EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn shr(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn shr(self, other: EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[2];
-        let result_e2  = a[2] * b[0] - a[3] * b[1];
-        let result_e12 = a[3] * b[0];
+        let result_1    = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
+        let result_e1   = a[1] * b[0] + a[4] * b[2] - a[6] * b[3] - a[7] * b[5];
+        let result_e2   = a[2] * b[0] - a[4] * b[1] + a[5] * b[3] - a[7] * b[6];
+        let result_e3   = a[3] * b[0] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
+        let result_e12  = a[4] * b[0] + a[7] * b[3];
+        let result_e23  = a[5] * b[0] + a[7] * b[1];
+        let result_e31  = a[6] * b[0] + a[7] * b[2];
+        let result_e123 = a[7] * b[0];
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }   
 }
 
-impl<S> ops::Shr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
+impl<S> ops::Shr<&EuclideanMultivector3<S>> for EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn shr(self, other: &EuclideanMultivector2<S>) -> Self::Output {
+    fn shr(self, other: &EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[2];
-        let result_e2  = a[2] * b[0] - a[3] * b[1];
-        let result_e12 = a[3] * b[0];
+        let result_1    = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
+        let result_e1   = a[1] * b[0] + a[4] * b[2] - a[6] * b[3] - a[7] * b[5];
+        let result_e2   = a[2] * b[0] - a[4] * b[1] + a[5] * b[3] - a[7] * b[6];
+        let result_e3   = a[3] * b[0] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
+        let result_e12  = a[4] * b[0] + a[7] * b[3];
+        let result_e23  = a[5] * b[0] + a[7] * b[1];
+        let result_e31  = a[6] * b[0] + a[7] * b[2];
+        let result_e123 = a[7] * b[0];
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<S> ops::Shr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
+impl<S> ops::Shr<EuclideanMultivector3<S>> for &EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn shr(self, other: EuclideanMultivector2<S>) -> Self::Output {
+    fn shr(self, other: EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[2];
-        let result_e2  = a[2] * b[0] - a[3] * b[1];
-        let result_e12 = a[3] * b[0];
+        let result_1    = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
+        let result_e1   = a[1] * b[0] + a[4] * b[2] - a[6] * b[3] - a[7] * b[5];
+        let result_e2   = a[2] * b[0] - a[4] * b[1] + a[5] * b[3] - a[7] * b[6];
+        let result_e3   = a[3] * b[0] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
+        let result_e12  = a[4] * b[0] + a[7] * b[3];
+        let result_e23  = a[5] * b[0] + a[7] * b[1];
+        let result_e31  = a[6] * b[0] + a[7] * b[2];
+        let result_e123 = a[7] * b[0];
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
 
-impl<'a, 'b, S> ops::Shr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
+impl<'a, 'b, S> ops::Shr<&'b EuclideanMultivector3<S>> for &'a EuclideanMultivector3<S>
 where
     S: Scalar
 {
-    type Output = EuclideanMultivector2<S>;
+    type Output = EuclideanMultivector3<S>;
 
     #[inline]
-    fn shr(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
+    fn shr(self, other: &'b EuclideanMultivector3<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] - a[3] * b[3];
-        let result_e1  = a[1] * b[0] + a[3] * b[2];
-        let result_e2  = a[2] * b[0] - a[3] * b[1];
-        let result_e12 = a[3] * b[0];
+        let result_1    = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] - a[4] * b[4] - a[5] * b[5] - a[6] * b[6] - a[7] * b[7];
+        let result_e1   = a[1] * b[0] + a[4] * b[2] - a[6] * b[3] - a[7] * b[5];
+        let result_e2   = a[2] * b[0] - a[4] * b[1] + a[5] * b[3] - a[7] * b[6];
+        let result_e3   = a[3] * b[0] - a[5] * b[2] + a[6] * b[1] - a[7] * b[4];
+        let result_e12  = a[4] * b[0] + a[7] * b[3];
+        let result_e23  = a[5] * b[0] + a[7] * b[1];
+        let result_e31  = a[6] * b[0] + a[7] * b[2];
+        let result_e123 = a[7] * b[0];
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
     }
 }
-*/
+
 impl<S> ops::Shr<S> for EuclideanMultivector3<S>
 where
     S: Scalar
