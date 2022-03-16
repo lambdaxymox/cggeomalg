@@ -1943,36 +1943,34 @@ impl<S> EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
+    /// Calculate the squared magnitude of a multivector.
     pub fn magnitude_squared(&self) -> S {
         let scalar_part = (self * self.reverse())[0];
 
         scalar_part.abs()
     }
 
+    /// Calculate the magnitude of a multivector.
     pub fn magnitude(&self) -> S {
         self.magnitude_squared().sqrt()
     }
 
-    pub fn imagnitude_squared(&self) -> S {
-        self.dual().magnitude_squared()
-    }
-
-    pub fn imagnitude(&self) -> S {
-        self.dual().magnitude()
-    }
-
+    /// Normalize a multivector to a unit multivector.
     pub fn normalize(&self) -> Self {
         self * (S::one() / self.magnitude())
     }
     
+    /// Normalize a multivector to a specified magnitude.
     pub fn normalize_to(&self, magnitude: S) -> Self {
         self * (magnitude / self.magnitude())
     }
 
+    /// Calculate the squared Euclidean distance between two multivectors.
     pub fn distance_squared(&self, other: &Self) -> S {
         (self - other).magnitude_squared()
     }
 
+    /// Calculate the Euclidean distance between two multivectors.
     pub fn distance(&self, other: &Self) -> S {
         (self - other).magnitude()
     }
