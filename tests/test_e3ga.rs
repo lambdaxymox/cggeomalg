@@ -1997,12 +1997,56 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_left_contraction_e3_scalar() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector3::from_scalar(scalar_part);
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let expected = EuclideanMultivector3::zero();
+        let result = e3 << scalar;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
     fn test_left_contraction_e12_scalar() {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
         let expected = EuclideanMultivector3::zero();
         let result = e12 << scalar;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_left_contraction_e23_scalar() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector3::from_scalar(scalar_part);
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let expected = EuclideanMultivector3::zero();
+        let result = e23 << scalar;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_left_contraction_e31_scalar() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector3::from_scalar(scalar_part);
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let expected = EuclideanMultivector3::zero();
+        let result = e31 << scalar;
+
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn test_left_contraction_e123_scalar() {
+        let scalar_part = 3_f64;
+        let scalar = EuclideanMultivector3::from_scalar(scalar_part);
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+        let expected = EuclideanMultivector3::zero();
+        let result = e123 << scalar;
 
         assert_eq!(result, expected);
     }
