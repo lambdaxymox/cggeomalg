@@ -1466,6 +1466,28 @@ where
         }
     }
 
+    /// Compute the commutator of two multivectors.
+    /// 
+    /// The commutator of multivectors `mv1` and `mv2` is given by
+    /// ```text
+    /// comm(mv1, mv2) := (mv1 * mv2 - mv2 * mv1) / 2
+    /// ```
+    /// where `*` denotes the geometric product.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv1 = EuclideanMultivector2::from_scalar(2_f64);
+    /// let mv2 = EuclideanMultivector2::from_scalar(3_f64);
+    /// let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+    /// let result = mv1.commutator(&mv2);
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn commutator(&self, other: &Self) -> Self {
         let self_times_other = self * other;
         let other_times_self = other * self;
@@ -1474,11 +1496,36 @@ where
         (self_times_other - other_times_self) * one_over_two
     }
 
+    /// Compute the commutator of two multivectors.
+    /// 
+    /// This is a synonym for `commutator`.
     #[inline(always)]
     pub fn x(&self, other: &Self) -> Self {
         self.commutator(other)
     }
 
+    /// Compute the anticommutator of two multivectors.
+    /// 
+    /// The anticommutator of multivectors `mv1` and `mv2` is given by
+    /// ```text
+    /// anticomm(mv1, mv2) := (mv1 * mv2 + mv2 * mv1) / 2
+    /// ```
+    /// where `*` denotes the geometric product.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv1 = EuclideanMultivector2::from_scalar(2_f64);
+    /// let mv2 = EuclideanMultivector2::from_scalar(3_f64);
+    /// let expected: EuclideanMultivector2<f64> = mv1 * mv2;
+    /// let result = mv1.anticommutator(&mv2);
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn anticommutator(&self, other: &Self) -> Self {
         let self_times_other = self * other;
         let other_times_self = other * self;
