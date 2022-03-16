@@ -3401,5 +3401,65 @@ mod e3ga_tests {
 
         assert_eq!((e3 ^ e2 ^ e1) >> (e1 ^ e2 ^ e3), one);
     }
+
+    #[test]
+    fn test_dual_e1() {
+        let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
+        let e1_dual = e1.dual();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e1 << e1_dual, zero);
+        assert_eq!(e1 >> e1_dual, zero);
+    }
+
+    #[test]
+    fn test_dual_e2() {
+        let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
+        let e2_dual = e2.dual();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e2 << e2_dual, zero);
+        assert_eq!(e2 >> e2_dual, zero);
+    }
+
+    #[test]
+    fn test_dual_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e3_dual = e3.dual();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e3 << e3_dual, zero);
+        assert_eq!(e3 >> e3_dual, zero);
+    }
+
+    #[test]
+    fn test_dual_e12() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e12_dual = e12.dual();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 << e12_dual, zero);
+        assert_eq!(e12 >> e12_dual, zero);
+    }
+
+    #[test]
+    fn test_dual_e23() {
+        let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
+        let e23_dual = e23.dual();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e23 << e23_dual, zero);
+        assert_eq!(e23 >> e23_dual, zero);
+    }
+
+    #[test]
+    fn test_dual_e31() {
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let e31_dual = e31.dual();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e31 << e31_dual, zero);
+        assert_eq!(e31 >> e31_dual, zero);
+    }
 }
 

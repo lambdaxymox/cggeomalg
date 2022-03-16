@@ -1345,5 +1345,25 @@ mod e2ga_tests {
 
         assert_eq!(result, expected);
     }
+
+    #[test]
+    fn test_dual_e1() {
+        let e1: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e1();
+        let e1_dual = e1.dual();
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(e1 << e1_dual, zero);
+        assert_eq!(e1 >> e1_dual, zero);
+    }
+
+    #[test]
+    fn test_dual_e2() {
+        let e2: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e2();
+        let e2_dual = e2.dual();
+        let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
+
+        assert_eq!(e2 << e2_dual, zero);
+        assert_eq!(e2 >> e2_dual, zero);
+    }
 }
 
