@@ -1561,11 +1561,8 @@ where
     fn shl(self, other: S) -> Self::Output {
         let a = self;
         let result_1   = a[0] * other;
-        let result_e1  = S::zero();
-        let result_e2  = S::zero();
-        let result_e12 = S::zero();
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
@@ -1579,11 +1576,8 @@ where
     fn shl(self, other: S) -> Self::Output {
         let a = self;
         let result_1   = a[0] * other;
-        let result_e1  = S::zero();
-        let result_e2  = S::zero();
-        let result_e12 = S::zero();
 
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
+        EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
