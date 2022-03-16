@@ -40,8 +40,16 @@ default-features = false
 features = ["libm"]
 
 [dev-dependencies]
+criterion = "0.3.4"
+rand = "0.8.5"
+rand_isaac = "0.3.0"
 
 [profile.release]
 opt-level = 2
 
 [profile.test]
+
+[[bench]]
+name = "bench_e2ga"
+harness = false
+
