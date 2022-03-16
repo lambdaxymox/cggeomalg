@@ -12,7 +12,7 @@ use core::fmt;
 
 
 /// A stack-allocated, three-dimensional Euclidean multivector 
-/// in the basis the basis `{1, e1, e2, e3, e12, e23, e31, e123}`.
+/// in the basis the basis orthonormal `{1, e1, e2, e3, e12, e23, e31, e123}`.
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub struct EuclideanMultivector3<S> {
