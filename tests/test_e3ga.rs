@@ -5,11 +5,9 @@ extern crate num_traits;
 
 #[cfg(test)]
 mod e3ga_tests {
-    use std::f64::consts::E;
-
-    use cggeomalg::{e3ga::{
+    use cggeomalg::e3ga::{
         EuclideanMultivector3,
-    }, e2ga::EuclideanMultivector2};
+    };
     use approx::{
         assert_relative_eq,
     };
