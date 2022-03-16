@@ -2256,11 +2256,38 @@ mod e3ga_tests {
     }
 
     #[test]
+    fn test_left_contraction_e12_e3() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 << e3, zero);
+    }
+
+    #[test]
     fn test_left_contraction_e12_e12() {
         let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
         let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
 
         assert_eq!(e12 << e12, -one);
+    }
+
+    #[test]
+    fn test_left_contraction_e12_e31() {
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
+        let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
+
+        assert_eq!(e12 << e31, zero);
+    }
+
+    #[test]
+    fn test_left_contraction_e12_e123() {
+        let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
+        let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
+        let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+
+        assert_eq!(e12 << e123, -e3);
     }
 
     #[test]
