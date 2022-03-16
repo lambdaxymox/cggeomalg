@@ -588,17 +588,74 @@ where
     }
 
     /// Compute the dual of a multivector.
+    /// 
+    /// The dual is also known as the orthogonal complement.
+    /// 
+    /// The dual of a multivector `mv` is defined by
+    /// ```text
+    /// dual(mv) := mv << inv(e12) == mv * inv(e12)
+    /// ```
+    /// where `<<` denotes the left contraction, and `inv` denotes the inverse
+    /// operator.
+    /// 
+    /// # Duality In Euclidean Space
+    /// 
+    /// In two-dimensional Euclidean geometric algebra, the dual of the elements
+    /// of the bases `{1, e1, e2, e12}` is given by
+    /// ```text
+    /// dual(1)   = -e12
+    /// dual(e1)  = -e2
+    /// dual(e2)  = e1
+    /// dual(e12) = 1
+    /// ```
+    /// The dual of a multivector `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` is 
+    /// given by
+    /// ```text
+    /// dual(mv) = dual(a0 + a1 * e1 + a2 * e2 + a12 * e12)
+    ///          = dual(a0) + dual(a1 * e1) + dual(a2 * e2) + dual(a12 * e12)
+    ///          = a0 * (dual1)) + a1 * (dual(e1)) + a2 * (dual(e2)) + a12 * (dual(e12))
+    ///          = a0 * (-e12) + a1 * (-e2) + a2 * e1 + a12
+    ///          = a12 + a2 * e1 - a1 * e2 - a0 * e12
+    /// ```
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector2::new(1, 2, 3, 4);
+    /// let expected = EuclideanMultivector2::new(4, 3, -2, -1);
+    /// let result = mv.dual();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn dual(&self) -> Self {
-        Self::new(-self.data[3], -self.data[2], self.data[1], self.data[0])
+        Self::new(self.data[3], self.data[2], -self.data[1], -self.data[0])
     }
 
     /// Computer the dual of a multivector mutably in place.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e2ga::{
+    /// #     EuclideanMultivector2,
+    /// # };
+    /// #
+    /// let mut result = EuclideanMultivector2::new(1, 2, 3, 4);
+    /// let expected = EuclideanMultivector2::new(4, 3, -2, -1);
+    /// result.dual_mut();
+    /// 
+    /// assert_eq!(result, expected);
+    /// ```
     pub fn dual_mut(&mut self) {
         let mut result = Self::zero();
-        result.data[0] = -self.data[3];
-        result.data[1] = -self.data[2];
-        result.data[2] =  self.data[1];
-        result.data[3] =  self.data[0];
+        result.data[0] =  self.data[3];
+        result.data[1] =  self.data[2];
+        result.data[2] = -self.data[1];
+        result.data[3] = -self.data[0];
         *self = result;
     }
 
