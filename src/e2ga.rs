@@ -1346,9 +1346,9 @@ where
 {
     fn inverse_unchecked(&self) -> Self {
         let conjugate = self.conjugate();
-        let self_times_conjugate = (self * conjugate)[0];
+        let denominator = (self * conjugate)[0];
 
-        conjugate / self_times_conjugate
+        conjugate / denominator
     }
 
     #[inline]

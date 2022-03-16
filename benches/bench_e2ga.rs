@@ -32,15 +32,6 @@ use criterion::{
     criterion_main,
 };
 
-fn gen_scalar<S>() -> S
-where
-    Standard: Distribution<S>
-{
-    use rand::SeedableRng;
-    let mut rng = IsaacRng::seed_from_u64(0);
-
-    rng.gen()
-}
 
 fn gen_multivector2<S>() -> EuclideanMultivector2<S> 
 where 
