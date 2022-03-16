@@ -1405,13 +1405,6 @@ impl<S> EuclideanMultivector2<S>
 where
     S: ScalarFloat
 {
-    fn inverse_unchecked(&self) -> Self {
-        let conjugate = self.conjugate();
-        let denominator = (self * conjugate)[0];
-
-        conjugate / denominator
-    }
-
     /// Determine whether a multivector is invertible.
     /// 
     /// # Example
@@ -1464,6 +1457,13 @@ where
         } else {
             Some(self.inverse_unchecked())
         }
+    }
+
+    fn inverse_unchecked(&self) -> Self {
+        let conjugate = self.conjugate();
+        let denominator = (self * conjugate)[0];
+
+        conjugate / denominator
     }
 
     /// Compute the commutator of two multivectors.

@@ -1983,16 +1983,6 @@ impl<S> EuclideanMultivector3<S>
 where
     S: ScalarFloat
 {
-    fn inverse_unchecked(&self) -> Self {
-        let conjugate = self.conjugate();
-        let reversion = self.reverse();
-        let involution = self.involute();
-        let numerator = conjugate * involution * reversion;
-        let denominator = (self * numerator)[0];
-
-        numerator / denominator
-    }
-
     /// Determine whether a multivector is invertible.
     /// 
     /// # Example
@@ -2047,6 +2037,16 @@ where
         } else {
             Some(self.inverse_unchecked())
         }
+    }
+
+    fn inverse_unchecked(&self) -> Self {
+        let conjugate = self.conjugate();
+        let reversion = self.reverse();
+        let involution = self.involute();
+        let numerator = conjugate * involution * reversion;
+        let denominator = (self * numerator)[0];
+
+        numerator / denominator
     }
 
     /// Compute the commutator of two multivectors.
