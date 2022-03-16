@@ -3268,7 +3268,7 @@ mod e3ga_tests {
             3_f64, 5_f64, 7_f64, 9_f64, 11_f64, 13_f64, 15_f64, 17_f64
         );
         let expected = EuclideanMultivector3::new(
-            -304_f64, -126_f64, -82_f64, -83_f64, 87_f64, 58_f64, -77_f64, 24_f64
+            -304_f64, -126_f64, -82_f64, -83_f64, 87_f64, 58_f64, 77_f64, 24_f64
         );
         let result = mv1 >> mv2;
 
@@ -3281,7 +3281,7 @@ mod e3ga_tests {
             1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
         );
         let expected = EuclideanMultivector3::new(
-            -144_f64, -33_f64, -67_f64, -32_f64, 37_f64, 22_f64, 31_f64, 8_f64
+            -144_f64, -59_f64, -39_f64, -40_f64, 37_f64, 22_f64, 31_f64, 8_f64
         );
         let result = mv >> mv;
 
