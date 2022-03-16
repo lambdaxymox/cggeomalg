@@ -2076,7 +2076,7 @@ where
         let result_e1   = a[0] * b[1] - a[2] * b[4] + a[3] * b[6] - a[5] * b[7];
         let result_e2   = a[0] * b[2] + a[1] * b[4] - a[3] * b[5] - a[6] * b[7];
         let result_e3   = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] - a[4] * b[7];
-        let result_e12  = a[0] * b[3] + a[3] * b[7];
+        let result_e12  = a[0] * b[4] + a[3] * b[7];
         let result_e23  = a[0] * b[5] + a[1] * b[7];
         let result_e31  = a[0] * b[6] + a[2] * b[7];
         let result_e123 = a[0] * b[7];
@@ -2104,7 +2104,7 @@ where
         let result_e1   = a[0] * b[1] - a[2] * b[4] + a[3] * b[6] - a[5] * b[7];
         let result_e2   = a[0] * b[2] + a[1] * b[4] - a[3] * b[5] - a[6] * b[7];
         let result_e3   = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] - a[4] * b[7];
-        let result_e12  = a[0] * b[3] + a[3] * b[7];
+        let result_e12  = a[0] * b[4] + a[3] * b[7];
         let result_e23  = a[0] * b[5] + a[1] * b[7];
         let result_e31  = a[0] * b[6] + a[2] * b[7];
         let result_e123 = a[0] * b[7];
@@ -2132,7 +2132,7 @@ where
         let result_e1   = a[0] * b[1] - a[2] * b[4] + a[3] * b[6] - a[5] * b[7];
         let result_e2   = a[0] * b[2] + a[1] * b[4] - a[3] * b[5] - a[6] * b[7];
         let result_e3   = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] - a[4] * b[7];
-        let result_e12  = a[0] * b[3] + a[3] * b[7];
+        let result_e12  = a[0] * b[4] + a[3] * b[7];
         let result_e23  = a[0] * b[5] + a[1] * b[7];
         let result_e31  = a[0] * b[6] + a[2] * b[7];
         let result_e123 = a[0] * b[7];
@@ -2160,7 +2160,7 @@ where
         let result_e1   = a[0] * b[1] - a[2] * b[4] + a[3] * b[6] - a[5] * b[7];
         let result_e2   = a[0] * b[2] + a[1] * b[4] - a[3] * b[5] - a[6] * b[7];
         let result_e3   = a[0] * b[3] - a[1] * b[6] + a[2] * b[5] - a[4] * b[7];
-        let result_e12  = a[0] * b[3] + a[3] * b[7];
+        let result_e12  = a[0] * b[4] + a[3] * b[7];
         let result_e23  = a[0] * b[5] + a[1] * b[7];
         let result_e31  = a[0] * b[6] + a[2] * b[7];
         let result_e123 = a[0] * b[7];
