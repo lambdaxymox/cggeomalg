@@ -1993,11 +1993,53 @@ where
         numerator / denominator
     }
 
+    /// Determine whether a multivector is invertible.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// #
+    /// let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
+    /// 
+    /// assert!(e123.is_invertible());
+    /// ```
     #[inline]
     pub fn is_invertible(&self) -> bool {
         approx::ulps_ne!(self.magnitude_squared(), S::zero())
     }
 
+    /// Compute the multiplicative inverse of a multivector.
+    /// 
+    /// The inverse of a multivector `mv` is a multivector `mv_inv`
+    /// such that
+    /// ```text
+    /// mv * mv_inv = mv_inv * mv = 1
+    /// ```
+    /// Even though the geometric product is noncommutative, in
+    /// dimension three, the left and right inverses are both identical.
+    /// 
+    /// # Example
+    /// 
+    /// ```
+    /// # use cggeomalg::e3ga::{
+    /// #     EuclideanMultivector3,
+    /// # };
+    /// # use approx::{
+    /// #     assert_relative_eq,
+    /// # };
+    /// #
+    /// let mv = EuclideanMultivector3::new(
+    ///     13_f64, -4_f64, 98_f64, 4_f64, 7_f64, -10_f64, 30_f64, 2_f64
+    /// );
+    /// let mv_inv = mv.inverse().unwrap();
+    /// let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
+    /// 
+    /// assert_relative_eq!(mv * mv_inv, one, epsilon = 1e-10);
+    /// assert_relative_eq!(mv_inv * mv, one, epsilon = 1e-10);
+    /// ```
     pub fn inverse(&self) -> Option<Self> {
         let magnitude_squared = self.magnitude_squared();
         if magnitude_squared.is_zero() {
