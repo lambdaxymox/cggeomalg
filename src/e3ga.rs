@@ -2279,44 +2279,62 @@ where
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
-
-impl<S> ops::Shr<S> for EuclideanMultivector2<S>
-where
-    S: Scalar
-{
-    type Output = EuclideanMultivector2<S>;
-
-    #[inline]
-    fn shr(self, other: S) -> Self::Output {
-        let a = self;
-        let result_1   = a[0] * other;
-        let result_e1  = a[1] * other;
-        let result_e2  = a[2] * other;
-        let result_e12 = a[3] * other;
-
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
-    }
-}
-
-impl<S> ops::Shr<S> for &EuclideanMultivector2<S>
-where
-    S: Scalar
-{
-    type Output = EuclideanMultivector2<S>;
-
-    #[inline]
-    fn shr(self, other: S) -> Self::Output {
-        let a = self;
-        let result_1   = a[0] * other;
-        let result_e1  = a[1] * other;
-        let result_e2  = a[2] * other;
-        let result_e12 = a[3] * other;
-
-        EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
-    }
-}
-
 */
+impl<S> ops::Shr<S> for EuclideanMultivector3<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector3<S>;
+
+    #[inline]
+    fn shr(self, other: S) -> Self::Output {
+        let a = self;
+        let result_1    = a[0] * other;
+        let result_e1   = a[1] * other;
+        let result_e2   = a[2] * other;
+        let result_e3   = a[3] * other;
+        let result_e12  = a[4] * other;
+        let result_e23  = a[5] * other;
+        let result_e31  = a[6] * other;
+        let result_e123 = a[7] * other;
+
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
+    }
+}
+
+impl<S> ops::Shr<S> for &EuclideanMultivector3<S>
+where
+    S: Scalar
+{
+    type Output = EuclideanMultivector3<S>;
+
+    #[inline]
+    fn shr(self, other: S) -> Self::Output {
+        let a = self;
+        let result_1    = a[0] * other;
+        let result_e1   = a[1] * other;
+        let result_e2   = a[2] * other;
+        let result_e3   = a[3] * other;
+        let result_e12  = a[4] * other;
+        let result_e23  = a[5] * other;
+        let result_e31  = a[6] * other;
+        let result_e123 = a[7] * other;
+
+        EuclideanMultivector3::new(
+            result_1, 
+            result_e1, result_e2, result_e3, 
+            result_e12, result_e23, result_e31,
+            result_e123
+        )
+    }
+}
+
+
 impl_coords!(ViewG3, { scalar, e1, e2, e3, e12, e23, e31, e123 });
 impl_coords_deref!(EuclideanMultivector3, ViewG3);
 
