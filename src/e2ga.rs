@@ -630,6 +630,10 @@ where
     /// let result = mv.dual();
     /// 
     /// assert_eq!(result, expected);
+    /// 
+    /// let e12: EuclideanMultivector2<i32> = EuclideanMultivector2::unit_e12();
+    /// 
+    /// assert_eq!(result * e12, mv);
     /// ```
     pub fn dual(&self) -> Self {
         Self::new(self.data[3], self.data[2], -self.data[1], -self.data[0])

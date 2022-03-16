@@ -941,6 +941,10 @@ where
     /// let result = mv.dual();
     /// 
     /// assert_eq!(result, expected);
+    /// 
+    /// let e123: EuclideanMultivector3<i32> = EuclideanMultivector3::unit_e123();
+    /// 
+    /// assert_eq!(result * e123, mv);
     /// ```
     pub fn dual(&self) -> Self {
         Self::new(
