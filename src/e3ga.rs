@@ -2038,7 +2038,8 @@ where
     /// mv * mv_inv = mv_inv * mv = 1
     /// ```
     /// Even though the geometric product is noncommutative, in
-    /// dimension three, the left and right inverses are both identical.
+    /// dimension three, the left and right inverses are both identical. For 
+    /// more information on the inversion of multivectors in general, see [1].
     /// 
     /// # Example
     /// 
@@ -2059,6 +2060,12 @@ where
     /// assert_relative_eq!(mv * mv_inv, one, epsilon = 1e-10);
     /// assert_relative_eq!(mv_inv * mv, one, epsilon = 1e-10);
     /// ```
+    /// 
+    /// # References
+    /// 
+    /// [1] _Eckhard Hitzer, Stephen Sangwine. Multivector and multivector matrix 
+    ///     inverse in real Clifford algebras. Applied Mathematics and Computation 
+    ///     (311) (2017) 375-389. Elsevier. DOI:10.1016/j.amc.2017.05.027._
     pub fn inverse(&self) -> Option<Self> {
         let magnitude_squared = self.magnitude_squared();
         if magnitude_squared.is_zero() {
