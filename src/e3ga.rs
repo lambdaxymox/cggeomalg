@@ -954,7 +954,7 @@ where
         )
     }
 
-    /// Computer the dual of a multivector mutably in place.
+    /// Compute the dual of a multivector mutably in place.
     ///
     /// # Example
     /// 

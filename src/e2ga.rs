@@ -640,7 +640,7 @@ where
         Self::new(self.data[3], self.data[2], -self.data[1], -self.data[0])
     }
 
-    /// Computer the dual of a multivector mutably in place.
+    /// Compute the dual of a multivector mutably in place.
     /// 
     /// # Example
     /// 
