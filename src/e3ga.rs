@@ -474,6 +474,38 @@ where
             _ => Self::zero()
         }
     }
+
+    /// Compute the left contraction of `self` with `other`.
+    /// 
+    /// This is a synonym for the `<<` operator.
+    #[inline]
+    pub fn left_contract(&self, other: &Self) -> Self {
+        self << other
+    }
+
+    /// Compute the right contraction of `self` with `other`.
+    /// 
+    /// This is a synonym for the `>>` operator.
+    #[inline]
+    pub fn right_contract(&self, other: &Self) -> Self {
+        self >> other
+    }
+
+    /// Compute the scalar product of `self` and `other`.
+    /// 
+    /// This is a synonym for the `|` operator.
+    #[inline]
+    pub fn scalar_product(&self, other: &Self) -> Self {
+        self | other
+    }
+
+    /// Compute the outer product of `self` and `other`.
+    /// 
+    /// This is a synonym for the `^` operator.
+    #[inline]
+    pub fn outer_product(&self, other: &Self) -> Self {
+        self ^ other
+    }
 }
 
 impl<S> ops::Index<usize> for EuclideanMultivector3<S> 
