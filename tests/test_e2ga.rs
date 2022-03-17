@@ -4,12 +4,9 @@ extern crate num_traits;
 
 
 #[cfg(test)]
-mod e2ga_tests {
+mod e2ga_component_tests {
     use cggeomalg::e2ga::{
         EuclideanMultivector2,
-    };
-    use approx::{
-        assert_relative_eq,
     };
 
 
@@ -48,6 +45,21 @@ mod e2ga_tests {
 
         assert_eq!(v_ref, &mut [1, 2, 3, 4]);
     }
+
+    #[test]
+    #[should_panic]
+    fn test_out_of_bounds_array_access() {
+        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
+
+        assert_eq!(mv[4], mv[4]);
+    }
+}
+
+#[cfg(test)]
+mod e2ga_addition_subtraction_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
 
 
     #[test]
@@ -126,6 +138,14 @@ mod e2ga_tests {
         assert_eq!(-mv + mv, zero);
         assert_eq!(mv + (-mv), zero);
     }
+}
+
+#[cfg(test)]
+mod e2ga_multiplication_division_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_scalar_multiplication() {
@@ -150,14 +170,6 @@ mod e2ga_tests {
         let result = mv / scalar;
 
         assert_eq!(result, expected);
-    }
-
-    #[test]
-    #[should_panic]
-    fn test_out_of_bounds_array_access() {
-        let mv = EuclideanMultivector2::new(1, 2, 3, 4);
-
-        assert_eq!(mv[4], mv[4]);
     }
 
     #[test]
@@ -257,6 +269,15 @@ mod e2ga_tests {
 
         assert_eq!(e21 * e12, one);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_magnitude_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_magnitude1() {
@@ -335,6 +356,15 @@ mod e2ga_tests {
 
         assert_eq!(result, expected);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_reversion_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_multivector_reverse1() {
@@ -357,6 +387,32 @@ mod e2ga_tests {
         assert_eq!(e2.reverse(), e2);
         assert_eq!(e12.reverse(), -e12);
     }
+
+    /// In an Euclidean geometric algebra, the square of the volume 
+    /// element should be negative one. That is, let `I` denote the volume element. 
+    /// Then
+    /// ```text
+    /// I^2 := I * I == -1
+    /// ```
+    #[test]
+    fn test_volume_element_squared_equals_negative_one() {
+        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
+        let one = EuclideanMultivector2::unit_scalar();
+
+        assert_eq!(e12 * e12, -one);
+    }
+}
+
+
+#[cfg(test)]
+mod e2ga_inversion_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+    use approx::{
+        assert_relative_eq,
+    };
+
 
     #[test]
     fn test_multivector_inverse() {
@@ -444,20 +500,15 @@ mod e2ga_tests {
 
         assert!(!zero.is_invertible());
     }
+}
 
-    /// In an Euclidean geometric algebra, the square of the volume 
-    /// element should be negative one. That is, let `I` denote the volume element. 
-    /// Then
-    /// ```text
-    /// I^2 := I * I == -1
-    /// ```
-    #[test]
-    fn test_volume_element_squared_equals_negative_one() {
-        let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
-        let one = EuclideanMultivector2::unit_scalar();
 
-        assert_eq!(e12 * e12, -one);
-    }
+#[cfg(test)]
+mod e2ga_outer_product_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_outer_product_scalar_e1() {
@@ -558,6 +609,15 @@ mod e2ga_tests {
 
         assert_eq!(e2 ^ e12, zero);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_grade_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_multivector_grade0() {
@@ -601,6 +661,15 @@ mod e2ga_tests {
 
         assert_eq!(mv.grade(usize::MAX), zero);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_left_contraction_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_left_contraction_scalar_e1() {
@@ -825,6 +894,15 @@ mod e2ga_tests {
 
         assert_eq!((e2 ^ e1) << (e1 ^ e2), one);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_scalar_product_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_scalar_product_e1_e1() {
@@ -928,6 +1006,15 @@ mod e2ga_tests {
 
         assert_eq!(zero | mv, zero);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_right_contraction_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
     
     #[test]
     fn test_right_contraction_scalar_e1() {
@@ -1152,6 +1239,15 @@ mod e2ga_tests {
 
         assert_eq!((e2 ^ e1) >> (e1 ^ e2), one);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_commutator_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_commutator_scalar_scalar() {
@@ -1345,6 +1441,15 @@ mod e2ga_tests {
 
         assert_eq!(result, expected);
     }
+}
+
+
+#[cfg(test)]
+mod e2ga_duality_tests {
+    use cggeomalg::e2ga::{
+        EuclideanMultivector2,
+    };
+
 
     #[test]
     fn test_dual_e1() {
