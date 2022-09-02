@@ -8,7 +8,7 @@ in the language of real-valued Clifford algebras.
 ## Getting Started
 To use the library in your project, add **cggeomalg** as a dependency in your 
 `Cargo.toml` file:
-```
+```toml
 [dependencies]
 cggeomalg = "0.2.0"
 ```
