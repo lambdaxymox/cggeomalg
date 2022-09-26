@@ -35,12 +35,12 @@ version = "0.5.1"
 default-features = false
 
 [dependencies.num-traits]
-version = "0.2.14"
+version = "0.2.15"
 default-features = false
 features = ["libm"]
 
 [dev-dependencies]
-criterion = "0.3.5"
+criterion = "0.4.0"
 rand = "0.8.5"
 rand_isaac = "0.3.0"
 
