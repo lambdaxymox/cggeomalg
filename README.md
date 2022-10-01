@@ -9,8 +9,8 @@ in the language of real-valued Clifford algebras.
 To use the library in your project, add **cggeomalg** as a dependency in your 
 `Cargo.toml` file:
 ```toml
-[dependencies]
-cggeomalg = "0.2.0"
+[dependencies.cggeomalg]
+version = "0.2.0"
 ```
 After that, place the crate declaration in either your `lib.rs` file or 
 your `main.rs` file
