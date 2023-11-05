@@ -1,13 +1,11 @@
-extern crate cggeomalg;
 extern crate approx;
+extern crate cggeomalg;
 extern crate num_traits;
 
 
 #[cfg(test)]
 mod e2ga_component_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -57,9 +55,7 @@ mod e2ga_component_tests {
 
 #[cfg(test)]
 mod e2ga_addition_subtraction_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -126,7 +122,7 @@ mod e2ga_addition_subtraction_tests {
     fn test_multivector_minus_multivector_equals_zero() {
         let mv = EuclideanMultivector2::new(5, 75, 2, 92);
         let zero = EuclideanMultivector2::zero();
-        
+
         assert_eq!(mv - mv, zero);
     }
 
@@ -134,7 +130,7 @@ mod e2ga_addition_subtraction_tests {
     fn test_multivector_additive_inverse() {
         let mv = EuclideanMultivector2::new(5, 75, 2, 92);
         let zero = EuclideanMultivector2::zero();
-        
+
         assert_eq!(-mv + mv, zero);
         assert_eq!(mv + (-mv), zero);
     }
@@ -142,9 +138,7 @@ mod e2ga_addition_subtraction_tests {
 
 #[cfg(test)]
 mod e2ga_multiplication_division_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -161,12 +155,7 @@ mod e2ga_multiplication_division_tests {
     fn test_scalar_division() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let scalar = 9_f64;
-        let expected = EuclideanMultivector2::new(
-            1_f64 / 9_f64, 
-            2_f64 / 9_f64, 
-            3_f64 / 9_f64, 
-            4_f64 / 9_f64
-        );
+        let expected = EuclideanMultivector2::new(1_f64 / 9_f64, 2_f64 / 9_f64, 3_f64 / 9_f64, 4_f64 / 9_f64);
         let result = mv / scalar;
 
         assert_eq!(result, expected);
@@ -274,9 +263,7 @@ mod e2ga_multiplication_division_tests {
 
 #[cfg(test)]
 mod e2ga_magnitude_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -361,9 +348,7 @@ mod e2ga_magnitude_tests {
 
 #[cfg(test)]
 mod e2ga_reversion_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -388,8 +373,8 @@ mod e2ga_reversion_tests {
         assert_eq!(e12.reverse(), -e12);
     }
 
-    /// In an Euclidean geometric algebra, the square of the volume 
-    /// element should be negative one. That is, let `I` denote the volume element. 
+    /// In an Euclidean geometric algebra, the square of the volume
+    /// element should be negative one. That is, let `I` denote the volume element.
     /// Then
     /// ```text
     /// I^2 := I * I == -1
@@ -406,12 +391,8 @@ mod e2ga_reversion_tests {
 
 #[cfg(test)]
 mod e2ga_inversion_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
-    use approx::{
-        assert_relative_eq,
-    };
+    use approx::assert_relative_eq;
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -448,7 +429,7 @@ mod e2ga_inversion_tests {
         let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
         let expected = -e12;
         let result = e12.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -458,7 +439,7 @@ mod e2ga_inversion_tests {
         let mv = e1 * 2_f64;
         let expected = e1 * (1_f64 / 2_f64);
         let result = mv.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -468,7 +449,7 @@ mod e2ga_inversion_tests {
         let mv = e2 * 2_f64;
         let expected = e2 * (1_f64 / 2_f64);
         let result = mv.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -488,7 +469,7 @@ mod e2ga_inversion_tests {
     fn test_scalar_inverse() {
         let unit_scalar: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
         let scalar = unit_scalar * 2_f64;
-        let expected = unit_scalar *  (1_f64 / 2_f64);
+        let expected = unit_scalar * (1_f64 / 2_f64);
         let result = scalar.inverse().unwrap();
 
         assert_eq!(result, expected);
@@ -505,9 +486,7 @@ mod e2ga_inversion_tests {
 
 #[cfg(test)]
 mod e2ga_outer_product_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -614,9 +593,7 @@ mod e2ga_outer_product_tests {
 
 #[cfg(test)]
 mod e2ga_grade_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -624,7 +601,7 @@ mod e2ga_grade_tests {
         let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
         let expected = EuclideanMultivector2::new(1, 0, 0, 0);
         let result = mv.grade(0);
-    
+
         assert_eq!(result, expected);
     }
 
@@ -642,7 +619,7 @@ mod e2ga_grade_tests {
         let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
         let expected = EuclideanMultivector2::new(0, 0, 0, 1);
         let result = mv.grade(2);
-    
+
         assert_eq!(result, expected);
     }
 
@@ -666,9 +643,7 @@ mod e2ga_grade_tests {
 
 #[cfg(test)]
 mod e2ga_left_contraction_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -849,7 +824,7 @@ mod e2ga_left_contraction_tests {
     fn test_left_contraction_zero_multivector() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let zero = EuclideanMultivector2::zero();
-        
+
         assert_eq!(zero << mv, zero);
     }
 
@@ -865,7 +840,7 @@ mod e2ga_left_contraction_tests {
     fn test_left_contraction_one_multivector() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let one = EuclideanMultivector2::unit_scalar();
-        
+
         assert_eq!(mv << one, one);
     }
 
@@ -873,7 +848,7 @@ mod e2ga_left_contraction_tests {
     fn test_left_contraction_multivector_one() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let one = EuclideanMultivector2::unit_scalar();
-        
+
         assert_eq!(one << mv, mv);
     }
 
@@ -899,9 +874,7 @@ mod e2ga_left_contraction_tests {
 
 #[cfg(test)]
 mod e2ga_scalar_product_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -1011,11 +984,9 @@ mod e2ga_scalar_product_tests {
 
 #[cfg(test)]
 mod e2ga_right_contraction_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
-    
+
     #[test]
     fn test_right_contraction_scalar_e1() {
         let scalar_part = 3_f64;
@@ -1194,7 +1165,7 @@ mod e2ga_right_contraction_tests {
     fn test_right_contraction_zero_multivector() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let zero = EuclideanMultivector2::zero();
-    
+
         assert_eq!(zero >> mv, zero);
     }
 
@@ -1210,7 +1181,7 @@ mod e2ga_right_contraction_tests {
     fn test_right_contraction_one_multivector() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let one = EuclideanMultivector2::unit_scalar();
-    
+
         assert_eq!(mv >> one, mv);
     }
 
@@ -1218,7 +1189,7 @@ mod e2ga_right_contraction_tests {
     fn test_right_contraction_multivector_one() {
         let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
         let one = EuclideanMultivector2::unit_scalar();
-    
+
         assert_eq!(one >> mv, one);
     }
 
@@ -1244,9 +1215,7 @@ mod e2ga_right_contraction_tests {
 
 #[cfg(test)]
 mod e2ga_commutator_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -1446,9 +1415,7 @@ mod e2ga_commutator_tests {
 
 #[cfg(test)]
 mod e2ga_duality_tests {
-    use cggeomalg::e2ga::{
-        EuclideanMultivector2,
-    };
+    use cggeomalg::e2ga::EuclideanMultivector2;
 
 
     #[test]
@@ -1471,4 +1438,3 @@ mod e2ga_duality_tests {
         assert_eq!(e2 >> e2_dual, zero);
     }
 }
-

@@ -1,13 +1,11 @@
-extern crate cggeomalg;
 extern crate approx;
+extern crate cggeomalg;
 extern crate num_traits;
 
 
 #[cfg(test)]
 mod e3ga_component_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -66,9 +64,7 @@ mod e3ga_component_tests {
 
 #[cfg(test)]
 mod e3ga_addition_subtraction_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -135,7 +131,7 @@ mod e3ga_addition_subtraction_tests {
     fn test_multivector_minus_multivector_equals_zero() {
         let mv = EuclideanMultivector3::new(5, 75, 2, 92, 12, 213, 9, 83);
         let zero = EuclideanMultivector3::zero();
-        
+
         assert_eq!(mv - mv, zero);
     }
 
@@ -143,7 +139,7 @@ mod e3ga_addition_subtraction_tests {
     fn test_multivector_additive_inverse() {
         let mv = EuclideanMultivector3::new(5, 75, 2, 92, 12, 213, 9, 83);
         let zero = EuclideanMultivector3::zero();
-        
+
         assert_eq!(-mv + mv, zero);
         assert_eq!(mv + (-mv), zero);
     }
@@ -152,12 +148,8 @@ mod e3ga_addition_subtraction_tests {
 
 #[cfg(test)]
 mod e3ga_multiplication_division_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
-    use approx::{
-        assert_relative_eq,
-    };
+    use approx::assert_relative_eq;
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -175,10 +167,14 @@ mod e3ga_multiplication_division_tests {
         let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let scalar = 9_f64;
         let expected = EuclideanMultivector3::new(
-            1_f64 / 9_f64, 
-            2_f64 / 9_f64, 3_f64 / 9_f64, 4_f64 / 9_f64,
-            5_f64 / 9_f64,6_f64 / 9_f64, 7_f64 / 9_f64,
-            8_f64 / 9_f64
+            1_f64 / 9_f64,
+            2_f64 / 9_f64,
+            3_f64 / 9_f64,
+            4_f64 / 9_f64,
+            5_f64 / 9_f64,
+            6_f64 / 9_f64,
+            7_f64 / 9_f64,
+            8_f64 / 9_f64,
         );
         let result = mv / scalar;
 
@@ -571,7 +567,7 @@ mod e3ga_multiplication_division_tests {
         let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
         let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
         let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
-        
+
         assert_eq!(e31 * e123, -e2);
     }
 
@@ -639,15 +635,9 @@ mod e3ga_multiplication_division_tests {
 
     #[test]
     fn test_geometric_product_multivectors() {
-        let mv1 = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let mv2 = EuclideanMultivector3::new(
-            9_f64, 10_f64, 11_f64, 12_f64, 13_f64, 14_f64, 15_f64, 16_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            -272_f64, -188_f64, -202_f64, -120_f64, 218_f64, 156_f64, 238_f64, 410_f64
-        );
+        let mv1 = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let mv2 = EuclideanMultivector3::new(9_f64, 10_f64, 11_f64, 12_f64, 13_f64, 14_f64, 15_f64, 16_f64);
+        let expected = EuclideanMultivector3::new(-272_f64, -188_f64, -202_f64, -120_f64, 218_f64, 156_f64, 238_f64, 410_f64);
         let result = mv1 * mv2;
 
         assert_eq!(result, expected);
@@ -655,9 +645,7 @@ mod e3ga_multiplication_division_tests {
 
     #[test]
     fn test_geometric_product_zero_multivector() {
-        let mv = EuclideanMultivector3::new(
-            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
-        );
+        let mv = EuclideanMultivector3::new(34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64);
         let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
 
         assert_eq!(zero * mv, zero);
@@ -665,9 +653,7 @@ mod e3ga_multiplication_division_tests {
 
     #[test]
     fn test_geometric_product_multivector_zero() {
-        let mv = EuclideanMultivector3::new(
-            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
-        );
+        let mv = EuclideanMultivector3::new(34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64);
         let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
 
         assert_eq!(mv * zero, zero);
@@ -675,9 +661,7 @@ mod e3ga_multiplication_division_tests {
 
     #[test]
     fn test_geometric_product_one_multivector() {
-        let mv = EuclideanMultivector3::new(
-            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
-        );
+        let mv = EuclideanMultivector3::new(34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64);
         let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
 
         assert_eq!(one * mv, mv);
@@ -685,9 +669,7 @@ mod e3ga_multiplication_division_tests {
 
     #[test]
     fn test_geometric_product_multivector_one() {
-        let mv = EuclideanMultivector3::new(
-            34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64
-        );
+        let mv = EuclideanMultivector3::new(34_f64, 955_f64, 123_f64, 68_f64, -15_f64, -24_f64, 235_f64, 3_f64);
         let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
 
         assert_eq!(mv * one, mv);
@@ -696,11 +678,9 @@ mod e3ga_multiplication_division_tests {
 
 #[cfg(test)]
 mod e3ga_outer_product_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
- 
+
     #[test]
     fn test_outer_product_scalar_e1() {
         let scalar = EuclideanMultivector3::unit_scalar() * 3_f64;
@@ -1209,32 +1189,22 @@ mod e3ga_outer_product_tests {
 
 #[cfg(test)]
 mod e3ga_grade_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
     fn test_multivector_grade0() {
-        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            1, 1, 1, 1, 1, 1, 1, 1
-        );
-        let expected = EuclideanMultivector3::new(
-            1, 0, 0, 0, 0, 0, 0, 0
-        );
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 1, 1, 1, 1, 1, 1, 1);
+        let expected = EuclideanMultivector3::new(1, 0, 0, 0, 0, 0, 0, 0);
         let result = mv.grade(0);
-    
+
         assert_eq!(result, expected);
     }
 
     #[test]
     fn test_multivector_grade1() {
-        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            1, 1, 1, 1, 1, 1, 1, 1
-        );
-        let expected = EuclideanMultivector3::new(
-            0, 1, 1, 1, 0, 0, 0, 0
-        );
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 1, 1, 1, 1, 1, 1, 1);
+        let expected = EuclideanMultivector3::new(0, 1, 1, 1, 0, 0, 0, 0);
         let result = mv.grade(1);
 
         assert_eq!(result, expected);
@@ -1242,33 +1212,24 @@ mod e3ga_grade_tests {
 
     #[test]
     fn test_multivector_grade2() {
-        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            1, 1, 1, 1, 1, 1, 1, 1
-        );
-        let expected = EuclideanMultivector3::new(
-            0, 0, 0, 0, 1, 1, 1, 0);
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 1, 1, 1, 1, 1, 1, 1);
+        let expected = EuclideanMultivector3::new(0, 0, 0, 0, 1, 1, 1, 0);
         let result = mv.grade(2);
-    
+
         assert_eq!(result, expected);
     }
 
     #[test]
     fn test_multivector_grade3() {
-        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            1, 1, 1, 1, 1, 1, 1, 1
-        );
-        let expected: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            0, 0, 0, 0, 0, 0, 0, 1
-        );
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 1, 1, 1, 1, 1, 1, 1);
+        let expected: EuclideanMultivector3<isize> = EuclideanMultivector3::new(0, 0, 0, 0, 0, 0, 0, 1);
 
         assert_eq!(mv.grade(3), expected);
     }
 
     #[test]
     fn test_multivector_grade4() {
-        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            1, 1, 1, 1, 1, 1, 1, 1
-        );
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 1, 1, 1, 1, 1, 1, 1);
         let zero: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
 
         assert_eq!(mv.grade(4), zero);
@@ -1276,9 +1237,7 @@ mod e3ga_grade_tests {
 
     #[test]
     fn test_multivector_grade_large() {
-        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(
-            1, 1, 1, 1, 1, 1, 1, 1
-        );
+        let mv: EuclideanMultivector3<isize> = EuclideanMultivector3::new(1, 1, 1, 1, 1, 1, 1, 1);
         let zero: EuclideanMultivector3<isize> = EuclideanMultivector3::zero();
 
         assert_eq!(mv.grade(usize::MAX), zero);
@@ -1288,19 +1247,13 @@ mod e3ga_grade_tests {
 
 #[cfg(test)]
 mod e3ga_reversion_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
     fn test_multivector_reverse1() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, -5_f64, -6_f64, -7_f64, -8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let expected = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, -5_f64, -6_f64, -7_f64, -8_f64);
         let result = mv.reverse();
 
         assert_eq!(result, expected);
@@ -1331,24 +1284,22 @@ mod e3ga_reversion_tests {
 
 #[cfg(test)]
 mod e3ga_inversion_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
-    use approx::{
-        assert_relative_eq,
-    };
+    use approx::assert_relative_eq;
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
     fn test_multivector_inverse() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let expected = EuclideanMultivector3::new(
             -0.083333333333333,
-            0.05982905982906, 0.068376068376068, 0.044871794871795,
-            -0.053418803418803, -0.034188034188034, -0.047008547008547,
-            0.027777777777778
+            0.05982905982906,
+            0.068376068376068,
+            0.044871794871795,
+            -0.053418803418803,
+            -0.034188034188034,
+            -0.047008547008547,
+            0.027777777777778,
         );
         let result = mv.inverse().unwrap();
 
@@ -1357,9 +1308,7 @@ mod e3ga_inversion_tests {
 
     #[test]
     fn test_multivector_times_inverse1() {
-        let mv = EuclideanMultivector3::new(
-            3_f64, 35_f64, 13_f64, 94_f64, 2_f64, 2089_f64, 120_f64, 3_f64
-        );
+        let mv = EuclideanMultivector3::new(3_f64, 35_f64, 13_f64, 94_f64, 2_f64, 2089_f64, 120_f64, 3_f64);
         let mv_inv = mv.inverse().unwrap();
         let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
         let result = mv * mv_inv;
@@ -1369,9 +1318,7 @@ mod e3ga_inversion_tests {
 
     #[test]
     fn test_multivector_times_inverse2() {
-        let mv = EuclideanMultivector3::new(
-            3_f64, 35_f64, 13_f64, 94_f64, 2_f64, 2089_f64, 120_f64, 3_f64
-        );
+        let mv = EuclideanMultivector3::new(3_f64, 35_f64, 13_f64, 94_f64, 2_f64, 2089_f64, 120_f64, 3_f64);
         let mv_inv = mv.inverse().unwrap();
         let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
         let result = mv_inv * mv;
@@ -1384,7 +1331,7 @@ mod e3ga_inversion_tests {
         let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
         let expected = -e123;
         let result = e123.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -1394,7 +1341,7 @@ mod e3ga_inversion_tests {
         let mv = e1 * 2_f64;
         let expected = e1 * (1_f64 / 2_f64);
         let result = mv.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -1404,7 +1351,7 @@ mod e3ga_inversion_tests {
         let mv = e2 * 2_f64;
         let expected = e2 * (1_f64 / 2_f64);
         let result = mv.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -1414,7 +1361,7 @@ mod e3ga_inversion_tests {
         let mv = e3 * 2_f64;
         let expected = e3 * (1_f64 / 2_f64);
         let result = mv.inverse().unwrap();
-        
+
         assert_eq!(result, expected);
     }
 
@@ -1425,8 +1372,7 @@ mod e3ga_inversion_tests {
         let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
         let mv = e1 * 3_f64 + e2 * 5_f64 + e3 * 7_f64;
         let magnitude_squared = 83_f64;
-        let expected = 
-            e1 * (3_f64 / magnitude_squared) + e2 * (5_f64 / magnitude_squared) + e3 * (7_f64 / magnitude_squared);
+        let expected = e1 * (3_f64 / magnitude_squared) + e2 * (5_f64 / magnitude_squared) + e3 * (7_f64 / magnitude_squared);
         let result = mv.inverse().unwrap();
 
         assert_relative_eq!(result, expected, epsilon = 1e-10);
@@ -1436,7 +1382,7 @@ mod e3ga_inversion_tests {
     fn test_scalar_inverse() {
         let unit_scalar: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
         let scalar = unit_scalar * 2_f64;
-        let expected = unit_scalar *  (1_f64 / 2_f64);
+        let expected = unit_scalar * (1_f64 / 2_f64);
         let result = scalar.inverse().unwrap();
 
         assert_eq!(result, expected);
@@ -1453,9 +1399,7 @@ mod e3ga_inversion_tests {
 
 #[cfg(test)]
 mod e3ga_scalar_product_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -1826,7 +1770,7 @@ mod e3ga_scalar_product_tests {
         let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
         let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
         let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
-    
+
         assert_eq!(e31 | e123, zero);
     }
 
@@ -1894,12 +1838,8 @@ mod e3ga_scalar_product_tests {
 
     #[test]
     fn test_scalar_product() {
-        let mv1 = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let mv2 = EuclideanMultivector3::new(
-            9_f64, 10_f64, 11_f64, 12_f64, 13_f64, 14_f64, 15_f64, 16_f64
-        );
+        let mv1 = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let mv2 = EuclideanMultivector3::new(9_f64, 10_f64, 11_f64, 12_f64, 13_f64, 14_f64, 15_f64, 16_f64);
         let expected = EuclideanMultivector3::from_scalar(492_f64);
         let result = mv1 | mv2;
 
@@ -1908,9 +1848,7 @@ mod e3ga_scalar_product_tests {
 
     #[test]
     fn test_scalar_product_zero_multivector() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
 
         assert_eq!(zero | mv, zero);
@@ -1918,9 +1856,7 @@ mod e3ga_scalar_product_tests {
 
     #[test]
     fn test_scalar_product_multivector_zero() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let zero: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
 
         assert_eq!(mv | zero, zero);
@@ -1928,9 +1864,7 @@ mod e3ga_scalar_product_tests {
 
     #[test]
     fn test_scalar_product_one_multivector() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
 
         assert_eq!(one | mv, one);
@@ -1938,9 +1872,7 @@ mod e3ga_scalar_product_tests {
 
     #[test]
     fn test_scalar_product_multivector_one() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
 
         assert_eq!(mv | one, one);
@@ -1949,9 +1881,7 @@ mod e3ga_scalar_product_tests {
 
 #[cfg(test)]
 mod e3ga_left_contraction_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -1959,9 +1889,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
-        let expected = EuclideanMultivector3::new(
-            0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = scalar << e1;
 
         assert_eq!(result, expected);
@@ -1972,9 +1900,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = scalar << e2;
 
         assert_eq!(result, expected);
@@ -1985,9 +1911,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = scalar << e3;
 
         assert_eq!(result, expected);
@@ -1998,9 +1922,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64);
         let result = scalar << e12;
 
         assert_eq!(result, expected);
@@ -2011,9 +1933,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64);
         let result = scalar << e23;
 
         assert_eq!(result, expected);
@@ -2024,9 +1944,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64);
         let result = scalar << e31;
 
         assert_eq!(result, expected);
@@ -2037,9 +1955,7 @@ mod e3ga_left_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part);
         let result = scalar << e123;
 
         assert_eq!(result, expected);
@@ -2560,12 +2476,8 @@ mod e3ga_left_contraction_tests {
     fn test_left_contraction_scalar_multivector() {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            3_f64, 6_f64, 9_f64, 12_f64, 15_f64, 18_f64, 21_f64, 24_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let expected = EuclideanMultivector3::new(3_f64, 6_f64, 9_f64, 12_f64, 15_f64, 18_f64, 21_f64, 24_f64);
         let result = scalar << mv;
 
         assert_eq!(result, expected);
@@ -2573,15 +2485,9 @@ mod e3ga_left_contraction_tests {
 
     #[test]
     fn test_left_contraction_multivector_multivector() {
-        let mv1 = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let mv2 = EuclideanMultivector3::new(
-            3_f64, 5_f64, 7_f64, 9_f64, 11_f64, 13_f64, 15_f64, 17_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            -304_f64, -70_f64, -142_f64, -67_f64, 79_f64, 47_f64, 66_f64, 17_f64
-        );
+        let mv1 = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let mv2 = EuclideanMultivector3::new(3_f64, 5_f64, 7_f64, 9_f64, 11_f64, 13_f64, 15_f64, 17_f64);
+        let expected = EuclideanMultivector3::new(-304_f64, -70_f64, -142_f64, -67_f64, 79_f64, 47_f64, 66_f64, 17_f64);
         let result = mv1 << mv2;
 
         assert_eq!(result, expected);
@@ -2589,12 +2495,8 @@ mod e3ga_left_contraction_tests {
 
     #[test]
     fn test_left_contraction_multivector_with_self() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            -144_f64, -33_f64, -67_f64, -32_f64, 37_f64, 22_f64, 31_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let expected = EuclideanMultivector3::new(-144_f64, -33_f64, -67_f64, -32_f64, 37_f64, 22_f64, 31_f64, 8_f64);
         let result = mv << mv;
 
         assert_eq!(result, expected);
@@ -2602,19 +2504,15 @@ mod e3ga_left_contraction_tests {
 
     #[test]
     fn test_left_contraction_zero_multivector() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let zero = EuclideanMultivector3::zero();
-    
+
         assert_eq!(zero << mv, zero);
     }
 
     #[test]
     fn test_left_contraction_multivector_zero() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let zero = EuclideanMultivector3::zero();
 
         assert_eq!(mv << zero, zero);
@@ -2622,21 +2520,17 @@ mod e3ga_left_contraction_tests {
 
     #[test]
     fn test_left_contraction_one_multivector() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let one = EuclideanMultivector3::unit_scalar();
-    
+
         assert_eq!(mv << one, one);
     }
 
     #[test]
     fn test_left_contraction_multivector_one() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let one = EuclideanMultivector3::unit_scalar();
-    
+
         assert_eq!(one << mv, mv);
     }
 
@@ -2718,9 +2612,7 @@ mod e3ga_left_contraction_tests {
 
 #[cfg(test)]
 mod e3ga_right_contraction_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -2805,9 +2697,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e1: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e1();
-        let expected = EuclideanMultivector3::new(
-            0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = e1 >> scalar;
 
         assert_eq!(result, expected);
@@ -2818,9 +2708,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e2: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e2();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = e2 >> scalar;
 
         assert_eq!(result, expected);
@@ -2831,9 +2719,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e3: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e3();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = e3 >> scalar;
 
         assert_eq!(result, expected);
@@ -2844,9 +2730,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e12: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e12();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64, 0_f64);
         let result = e12 >> scalar;
 
         assert_eq!(result, expected);
@@ -2857,9 +2741,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e23: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e23();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64, 0_f64);
         let result = e23 >> scalar;
 
         assert_eq!(result, expected);
@@ -2870,9 +2752,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e31: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e31();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part, 0_f64);
         let result = e31 >> scalar;
 
         assert_eq!(result, expected);
@@ -2883,9 +2763,7 @@ mod e3ga_right_contraction_tests {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
         let e123: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_e123();
-        let expected = EuclideanMultivector3::new(
-            0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part
-        );
+        let expected = EuclideanMultivector3::new(0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, scalar_part);
         let result = e123 >> scalar;
 
         assert_eq!(result, expected);
@@ -3330,12 +3208,8 @@ mod e3ga_right_contraction_tests {
     fn test_right_contraction_scalar_multivector() {
         let scalar_part = 3_f64;
         let scalar = EuclideanMultivector3::from_scalar(scalar_part);
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            3_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let expected = EuclideanMultivector3::new(3_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64, 0_f64);
         let result = scalar >> mv;
 
         assert_eq!(result, expected);
@@ -3343,15 +3217,9 @@ mod e3ga_right_contraction_tests {
 
     #[test]
     fn test_right_contraction_multivector_multivector() {
-        let mv1 = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let mv2 = EuclideanMultivector3::new(
-            3_f64, 5_f64, 7_f64, 9_f64, 11_f64, 13_f64, 15_f64, 17_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            -304_f64, -126_f64, -82_f64, -83_f64, 87_f64, 58_f64, 77_f64, 24_f64
-        );
+        let mv1 = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let mv2 = EuclideanMultivector3::new(3_f64, 5_f64, 7_f64, 9_f64, 11_f64, 13_f64, 15_f64, 17_f64);
+        let expected = EuclideanMultivector3::new(-304_f64, -126_f64, -82_f64, -83_f64, 87_f64, 58_f64, 77_f64, 24_f64);
         let result = mv1 >> mv2;
 
         assert_eq!(result, expected);
@@ -3359,12 +3227,8 @@ mod e3ga_right_contraction_tests {
 
     #[test]
     fn test_right_contraction_multivector_with_self() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
-        let expected = EuclideanMultivector3::new(
-            -144_f64, -59_f64, -39_f64, -40_f64, 37_f64, 22_f64, 31_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
+        let expected = EuclideanMultivector3::new(-144_f64, -59_f64, -39_f64, -40_f64, 37_f64, 22_f64, 31_f64, 8_f64);
         let result = mv >> mv;
 
         assert_eq!(result, expected);
@@ -3372,19 +3236,15 @@ mod e3ga_right_contraction_tests {
 
     #[test]
     fn test_right_contraction_zero_multivector() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let zero = EuclideanMultivector3::zero();
-    
+
         assert_eq!(zero >> mv, zero);
     }
 
     #[test]
     fn test_right_contraction_multivector_zero() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let zero = EuclideanMultivector3::zero();
 
         assert_eq!(mv >> zero, zero);
@@ -3392,21 +3252,17 @@ mod e3ga_right_contraction_tests {
 
     #[test]
     fn test_right_contraction_one_multivector() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let one = EuclideanMultivector3::unit_scalar();
-    
+
         assert_eq!(mv >> one, mv);
     }
 
     #[test]
     fn test_right_contraction_multivector_one() {
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let one = EuclideanMultivector3::unit_scalar();
-    
+
         assert_eq!(one >> mv, one);
     }
 
@@ -3488,9 +3344,7 @@ mod e3ga_right_contraction_tests {
 
 #[cfg(test)]
 mod e3ga_commutator_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -3719,9 +3573,7 @@ mod e3ga_commutator_tests {
     #[test]
     fn test_commutator_scalar_multivector() {
         let scalar = EuclideanMultivector3::from_scalar(7_f64);
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
         let result = scalar.commutator(&mv);
 
@@ -3731,9 +3583,7 @@ mod e3ga_commutator_tests {
     #[test]
     fn test_commutator_multivector_scalar() {
         let scalar = EuclideanMultivector3::from_scalar(7_f64);
-        let mv = EuclideanMultivector3::new(
-            1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64
-        );
+        let mv = EuclideanMultivector3::new(1_f64, 2_f64, 3_f64, 4_f64, 5_f64, 6_f64, 7_f64, 8_f64);
         let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::zero();
         let result = mv.commutator(&scalar);
 
@@ -4179,9 +4029,7 @@ mod e3ga_commutator_tests {
 
 #[cfg(test)]
 mod e3ga_duality_tests {
-    use cggeomalg::e3ga::{
-        EuclideanMultivector3,
-    };
+    use cggeomalg::e3ga::EuclideanMultivector3;
 
 
     #[test]
@@ -4244,4 +4092,3 @@ mod e3ga_duality_tests {
         assert_eq!(e31 >> e31_dual, zero);
     }
 }
-

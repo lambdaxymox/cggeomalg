@@ -1,17 +1,17 @@
 use crate::scalar::{
     Scalar,
-    ScalarSigned,
     ScalarFloat,
+    ScalarSigned,
 };
 use crate::{
     impl_coords,
     impl_coords_deref,
 };
-use core::ops;
 use core::fmt;
+use core::ops;
 
 
-/// A stack-allocated, two-dimensional Euclidean multivector 
+/// A stack-allocated, two-dimensional Euclidean multivector
 /// in the basis the orthonormal basis `{1, e1, e2, e12}`.
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
@@ -24,21 +24,21 @@ impl<S> EuclideanMultivector2<S> {
     #[inline]
     pub const fn new(scalar: S, e1: S, e2: S, e12: S) -> Self {
         Self {
-            data: [scalar, e1, e2, e12]
+            data: [scalar, e1, e2, e12],
         }
     }
 
     /// Returns the number of components in a multivector.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let mv = EuclideanMultivector2::new(1, 1, 1, 1);
-    /// 
+    ///
     /// assert_eq!(mv.len(), 4);
     /// ```
     #[inline]
@@ -65,14 +65,14 @@ impl<S> EuclideanMultivector2<S> {
     }
 }
 
-impl<S> EuclideanMultivector2<S> 
+impl<S> EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     /// Construct the additive unit (zero) multivector.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -80,49 +80,44 @@ where
     /// #
     /// let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
     /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
-    /// 
+    ///
     /// assert_eq!(mv + zero, mv);
     /// assert_eq!(zero + mv, mv);
     /// ```
     #[inline]
     pub fn zero() -> Self {
-        Self {
-            data: [S::zero(); 4],
-        }
+        Self { data: [S::zero(); 4] }
     }
 
     /// Determine whether a multivector is the zero mutlivector.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
-    /// 
+    ///
     /// assert!(zero.is_zero());
-    /// 
+    ///
     /// let mv: EuclideanMultivector2<f64> = EuclideanMultivector2::new(3_f64, 84_f64, 83_f64, 61_f64);
-    /// 
+    ///
     /// assert!(!mv.is_zero());
     /// ```
     #[inline]
     pub fn is_zero(&self) -> bool {
-        self.data[0].is_zero() &&
-        self.data[1].is_zero() &&
-        self.data[2].is_zero() &&
-        self.data[3].is_zero()
+        self.data[0].is_zero() && self.data[1].is_zero() && self.data[2].is_zero() && self.data[3].is_zero()
     }
 
     /// Construct a new multivector from the scalar part only.
-    /// 
+    ///
     /// A scalar is a multivector whose vector, bivector, etc. components are
     /// all zero.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -130,7 +125,7 @@ where
     /// #
     /// let scalar_part = 2;
     /// let scalar = EuclideanMultivector2::from_scalar(scalar_part);
-    /// 
+    ///
     /// assert_eq!(scalar.scalar, scalar_part);
     /// assert_eq!(scalar.e1, 0);
     /// assert_eq!(scalar.e2, 0);
@@ -144,14 +139,14 @@ where
     /// Returns the unit scalar multivector.
     ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let unit_scalar: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
-    /// 
+    ///
     /// assert_eq!(unit_scalar.scalar, 1);
     /// assert_eq!(unit_scalar.e1, 0);
     /// assert_eq!(unit_scalar.e2, 0);
@@ -165,14 +160,14 @@ where
     /// Returns the unit `x`-axis vector.
     ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let unit_e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
-    /// 
+    ///
     /// assert_eq!(unit_e1.scalar, 0);
     /// assert_eq!(unit_e1.e1, 1);
     /// assert_eq!(unit_e1.e2, 0);
@@ -186,14 +181,14 @@ where
     /// Returns the unit `y`-axis vector.
     ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let unit_e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
-    /// 
+    ///
     /// assert_eq!(unit_e2.scalar, 0);
     /// assert_eq!(unit_e2.e1, 0);
     /// assert_eq!(unit_e2.e2, 1);
@@ -207,14 +202,14 @@ where
     /// Returns the unit volume element for two-dimensional Euclidean space.
     ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let unit_e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
-    /// 
+    ///
     /// assert_eq!(unit_e12.scalar, 0);
     /// assert_eq!(unit_e12.e1, 0);
     /// assert_eq!(unit_e12.e2, 0);
@@ -225,8 +220,8 @@ where
         Self::new(S::zero(), S::zero(), S::zero(), S::one())
     }
 
-    /// Returns the unit volume element for two-dimensional Euclidean space. 
-    /// 
+    /// Returns the unit volume element for two-dimensional Euclidean space.
+    ///
     /// This is a synonym for `unit_e12`.
     #[inline(always)]
     pub fn pseudoscalar() -> Self {
@@ -234,12 +229,12 @@ where
     }
 
     /// Project the multivector onto the grade `grade`.
-    /// 
-    /// Return a multivector where the components of each grade other than 
-    /// input grade are zero. For each grade larger than the dimension of the 
-    /// underlying vector space, the grade projection is always zero. In this 
+    ///
+    /// Return a multivector where the components of each grade other than
+    /// input grade are zero. For each grade larger than the dimension of the
+    /// underlying vector space, the grade projection is always zero. In this
     /// case, any grade projection onto a grade larger than two will be zero.
-    /// 
+    ///
     /// # Example
     /// ```
     /// # use cggeomalg::e2ga::{
@@ -253,11 +248,11 @@ where
     /// let mv_1 = mv.grade(1);
     /// let expected_2 = EuclideanMultivector2::new(0, 0, 0, 1);
     /// let mv_2 = mv.grade(2);
-    /// 
+    ///
     /// assert_eq!(mv_0, expected_0);
     /// assert_eq!(mv_1, expected_1);
     /// assert_eq!(mv_2, expected_2);
-    /// 
+    ///
     /// // Any grade larger than two should be zero.
     /// let zero: EuclideanMultivector2<isize> = EuclideanMultivector2::zero();
     /// assert_eq!(mv.grade(3), zero);
@@ -269,12 +264,12 @@ where
             0 => Self::new(self.data[0], S::zero(), S::zero(), S::zero()),
             1 => Self::new(S::zero(), self.data[1], self.data[2], S::zero()),
             2 => Self::new(S::zero(), S::zero(), S::zero(), self.data[3]),
-            _ => Self::zero()
+            _ => Self::zero(),
         }
     }
 
     /// Compute the left contraction of `self` with `other`.
-    /// 
+    ///
     /// This is a synonym for the `<<` operator.
     #[inline]
     pub fn left_contract(&self, other: &Self) -> Self {
@@ -282,7 +277,7 @@ where
     }
 
     /// Compute the right contraction of `self` with `other`.
-    /// 
+    ///
     /// This is a synonym for the `>>` operator.
     #[inline]
     pub fn right_contract(&self, other: &Self) -> Self {
@@ -290,7 +285,7 @@ where
     }
 
     /// Compute the scalar product of `self` and `other`.
-    /// 
+    ///
     /// This is a synonym for the `|` operator.
     #[inline]
     pub fn scalar_product(&self, other: &Self) -> Self {
@@ -298,7 +293,7 @@ where
     }
 
     /// Compute the outer product of `self` and `other`.
-    /// 
+    ///
     /// This is a synonym for the `^` operator.
     #[inline]
     pub fn outer_product(&self, other: &Self) -> Self {
@@ -306,9 +301,9 @@ where
     }
 }
 
-impl<S> ops::Index<usize> for EuclideanMultivector2<S> 
+impl<S> ops::Index<usize> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = S;
 
@@ -318,9 +313,9 @@ where
     }
 }
 
-impl<S> ops::IndexMut<usize> for EuclideanMultivector2<S> 
+impl<S> ops::IndexMut<usize> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     #[inline]
     fn index_mut(&mut self, index: usize) -> &mut Self::Output {
@@ -331,59 +326,51 @@ where
 impl<S> AsRef<[S; 4]> for EuclideanMultivector2<S> {
     #[inline]
     fn as_ref(&self) -> &[S; 4] {
-        unsafe {
-            &*(self as *const EuclideanMultivector2<S> as *const [S; 4])
-        }
+        unsafe { &*(self as *const EuclideanMultivector2<S> as *const [S; 4]) }
     }
 }
 
 impl<S> AsMut<[S; 4]> for EuclideanMultivector2<S> {
     #[inline]
     fn as_mut(&mut self) -> &mut [S; 4] {
-        unsafe {
-            &mut *(self as *mut EuclideanMultivector2<S> as *mut [S; 4])
-        }
+        unsafe { &mut *(self as *mut EuclideanMultivector2<S> as *mut [S; 4]) }
     }
 }
 
 impl<S> AsRef<(S, S, S, S)> for EuclideanMultivector2<S> {
     #[inline]
     fn as_ref(&self) -> &(S, S, S, S) {
-        unsafe {
-            &*(self as *const EuclideanMultivector2<S> as *const (S, S, S, S))
-        }
+        unsafe { &*(self as *const EuclideanMultivector2<S> as *const (S, S, S, S)) }
     }
 }
 
 impl<S> AsMut<(S, S, S, S)> for EuclideanMultivector2<S> {
     #[inline]
     fn as_mut(&mut self) -> &mut (S, S, S, S) {
-        unsafe {
-            &mut *(self as *mut EuclideanMultivector2<S> as *mut (S, S, S, S))
-        }
+        unsafe { &mut *(self as *mut EuclideanMultivector2<S> as *mut (S, S, S, S)) }
     }
 }
 
 impl<S> fmt::Display for EuclideanMultivector2<S>
 where
-    S: fmt::Display
+    S: fmt::Display,
 {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         write!(
-            formatter, 
+            formatter,
             "{} + {}^e1 + {}^e2 + {}^e12",
             self.data[0], self.data[1], self.data[2], self.data[3]
         )
     }
 }
 
-impl<S> EuclideanMultivector2<S> 
+impl<S> EuclideanMultivector2<S>
 where
-    S: ScalarSigned
+    S: ScalarSigned,
 {
     /// Compute the reverse of a multivector.
-    /// 
-    /// The reverse of a two-dimensional multivector `mv`, for each grade of 
+    ///
+    /// The reverse of a two-dimensional multivector `mv`, for each grade of
     /// multivector is given by
     /// ```text
     /// When mv is a scalar, rev(mv) := mv
@@ -401,18 +388,18 @@ where
     ///    = -B.
     /// ```
     /// Then for an arbitrary two-dimensional multivector `mv = a + v + B`,
-    /// where `a` is a scalar, `v` is a vector, and `B` is a bivector, we get the 
+    /// where `a` is a scalar, `v` is a vector, and `B` is a bivector, we get the
     /// reverse of a general multivector by linearity
     /// ```text
     /// rev(mv) = rev(a + v + B)
     ///     = rev(a) + rev(v) + rev(B)
     ///     =  a +  v - B
     /// ```
-    /// where the last line follows from the definition of reversion of k-vectors 
+    /// where the last line follows from the definition of reversion of k-vectors
     /// on each grade.
-    /// 
+    ///
     /// # Reversion In Euclidean Space
-    /// 
+    ///
     /// The reversion of each basis blade in the basis `{1, e1, e2, e12}` are given by
     /// ```text
     /// rev(1)   = 1
@@ -420,7 +407,7 @@ where
     /// rev(e2)  = e2
     /// rev(e12) = rev(e1 * e2) = (rev(e2)) * (rev(e1)) = e2 * e1 = -(e1 * e2) = -e12
     /// ```
-    /// The reversion of a general multivector in the basis `{1, e1, e2, e12}` is 
+    /// The reversion of a general multivector in the basis `{1, e1, e2, e12}` is
     /// the following
     /// ```text
     /// rev(mv) = rev(a0 + a1 * e1 + a2 * e2 + a12 * e12)
@@ -430,9 +417,9 @@ where
     ///         = a0      + a1 * e1      + a2 * e2      - a12 * e12
     /// ```
     /// We illustrate this with an example.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -441,7 +428,7 @@ where
     /// let mv = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
     /// let result = mv.reverse();
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn reverse(&self) -> Self {
@@ -449,9 +436,9 @@ where
     }
 
     /// Compute the reverse of a multivector mutably in place.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -460,25 +447,25 @@ where
     /// let mut result = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
     /// result.reverse_mut();
-    /// 
+    ///
     /// assert_eq!(result, expected);
-    /// ``` 
+    /// ```
     pub fn reverse_mut(&mut self) {
         self.data[3] = -self.data[3];
     }
 
     /// Compute the conjugate of a multivector.
-    /// 
-    /// The conjugate of a two-dimensional multivector `mv`, for each grade of 
+    ///
+    /// The conjugate of a two-dimensional multivector `mv`, for each grade of
     /// multivector is given by
     /// ```text
     /// When mv is a scalar, conj(mv) := mv
     /// When mv is a vector, conj(mv) := -mv
     /// When mv is a bivector, conj(mv) := -mv
     /// ```
-    /// The conjugate of a two-dimensional multivector extends to an arbitrary 
+    /// The conjugate of a two-dimensional multivector extends to an arbitrary
     /// multivector `mv` by linearity. Let `mv = a + v + B` be an arbitrary
-    /// two-dimensional Euclidean multivector where `a` is a scalar, `v` is a vector, 
+    /// two-dimensional Euclidean multivector where `a` is a scalar, `v` is a vector,
     /// `B` is a bivectors. Then the conjugate of `mv` is given by
     /// ```text
     /// conj(mv) = conj(a + v + B)
@@ -486,10 +473,10 @@ where
     ///          = a + (-v) + (-B)
     ///          = a - v - B
     /// ```
-    /// 
+    ///
     /// # Conjugate In Euclidean Space
-    /// 
-    /// The conjugate of each basis blade in the basis `{1, e1, e2, e12}` are 
+    ///
+    /// The conjugate of each basis blade in the basis `{1, e1, e2, e12}` are
     /// given by
     /// ```text
     /// conj(1)   = 1
@@ -506,9 +493,9 @@ where
     ///          = a0 - a1 * e1 - a2 * e2 - a12 * e12
     /// ```
     /// We illustrate this with an example.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -517,7 +504,7 @@ where
     /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
     /// let result = mv.conjugate();
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn conjugate(&self) -> Self {
@@ -525,9 +512,9 @@ where
     }
 
     /// Compute the conjugate of a multivector mutably in place.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -536,7 +523,7 @@ where
     /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
     /// result.conjugate_mut();
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn conjugate_mut(&mut self) {
@@ -546,7 +533,7 @@ where
     }
 
     /// Compute the grade involution of a multivector.
-    /// 
+    ///
     /// The grade involution of a multivector `mv` is defined by
     /// ```text
     /// When mv is a scalar, invol(mv) := mv
@@ -561,10 +548,10 @@ where
     ///           = invol(a) + invol(v) + invol(B)
     ///           = a - v + B
     /// ```
-    /// 
+    ///
     /// # Involution In Euclidean Space
-    /// 
-    /// The grade involution of each basis blade in the basis `{1, e1, e2, e12}` are 
+    ///
+    /// The grade involution of each basis blade in the basis `{1, e1, e2, e12}` are
     /// given by
     /// ```text
     /// invol(1)   = 1
@@ -582,9 +569,9 @@ where
     ///           = a0 - a1 * e1    - a2 * e2    + a12 * e12
     /// ```
     /// We illustrate this with an example.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -593,7 +580,7 @@ where
     /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
     /// let result = mv.involute();
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn involute(&self) -> Self {
@@ -601,9 +588,9 @@ where
     }
 
     /// Compute the grade involution of a multivector mutably in place.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -612,7 +599,7 @@ where
     /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
     /// result.involute_mut();
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn involute_mut(&mut self) {
@@ -621,18 +608,18 @@ where
     }
 
     /// Compute the dual of a multivector.
-    /// 
+    ///
     /// The dual is also known as the orthogonal complement.
-    /// 
+    ///
     /// The dual of a multivector `mv` is defined by
     /// ```text
     /// dual(mv) := mv << inv(e12) == mv * inv(e12)
     /// ```
     /// where `<<` denotes the left contraction, and `inv` denotes the inverse
     /// operator.
-    /// 
+    ///
     /// # Duality In Euclidean Space
-    /// 
+    ///
     /// In two-dimensional Euclidean geometric algebra, the dual of the elements
     /// of the bases `{1, e1, e2, e12}` is given by
     /// ```text
@@ -641,7 +628,7 @@ where
     /// dual(e2)  = e1
     /// dual(e12) = 1
     /// ```
-    /// The dual of a multivector `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` is 
+    /// The dual of a multivector `mv = a0 + a1 * e1 + a2 * e2 + a12 * e12` is
     /// given by
     /// ```text
     /// dual(mv) = dual(a0 + a1 * e1 + a2 * e2 + a12 * e12)
@@ -650,9 +637,9 @@ where
     ///          = a0 * (-e12) + a1 * (-e2) + a2 * e1 + a12
     ///          = a12 + a2 * e1 - a1 * e2 - a0 * e12
     /// ```
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -661,11 +648,11 @@ where
     /// let mv = EuclideanMultivector2::new(1, 2, 3, 4);
     /// let expected = EuclideanMultivector2::new(4, 3, -2, -1);
     /// let result = mv.dual();
-    /// 
+    ///
     /// assert_eq!(result, expected);
-    /// 
+    ///
     /// let e12: EuclideanMultivector2<i32> = EuclideanMultivector2::unit_e12();
-    /// 
+    ///
     /// assert_eq!(result * e12, mv);
     /// ```
     pub fn dual(&self) -> Self {
@@ -673,9 +660,9 @@ where
     }
 
     /// Compute the dual of a multivector mutably in place.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -684,25 +671,25 @@ where
     /// let mut result = EuclideanMultivector2::new(1, 2, 3, 4);
     /// let expected = EuclideanMultivector2::new(4, 3, -2, -1);
     /// result.dual_mut();
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn dual_mut(&mut self) {
         let mut result = Self::zero();
-        result.data[0] =  self.data[3];
-        result.data[1] =  self.data[2];
+        result.data[0] = self.data[3];
+        result.data[1] = self.data[2];
         result.data[2] = -self.data[1];
         result.data[3] = -self.data[0];
         *self = result;
     }
 
     /// Construct the inverse pseudoscalar of the geometric algebra.
-    /// 
+    ///
     /// In the case of the two-dimensional Euclidean geometric algebra, the
     /// inverse of the pseudoscalar is the two-blade `inv(e12) = -e12`.
     ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e3ga::{
     /// #     EuclideanMultivector3,
@@ -711,7 +698,7 @@ where
     /// let ps: EuclideanMultivector3<f64> = EuclideanMultivector3::pseudoscalar();
     /// let ps_inv: EuclideanMultivector3<f64> = EuclideanMultivector3::inv_pseudoscalar();
     /// let one: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
-    /// 
+    ///
     /// assert_eq!(ps * ps_inv, one);
     /// assert_eq!(ps_inv * ps, one);
     /// ```
@@ -721,12 +708,13 @@ where
     }
 }
 
-impl<S> ops::Not for EuclideanMultivector2<S> 
+impl<S> ops::Not for EuclideanMultivector2<S>
 where
-    S: ScalarSigned
+    S: ScalarSigned,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn not(self) -> Self::Output {
         let mut result = Self::Output::zero();
@@ -734,17 +722,18 @@ where
         result.data[1] =  self.data[2];
         result.data[2] = -self.data[1];
         result.data[3] = -self.data[0];
-        
+
         result
     }
 }
 
-impl<S> ops::Not for &EuclideanMultivector2<S> 
+impl<S> ops::Not for &EuclideanMultivector2<S>
 where
-    S: ScalarSigned
+    S: ScalarSigned,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn not(self) -> Self::Output {
         let mut result = Self::Output::zero();
@@ -752,17 +741,18 @@ where
         result.data[1] =  self.data[2];
         result.data[2] = -self.data[1];
         result.data[3] = -self.data[0];
-        
+
         result
     }
 }
 
 impl<S> ops::Neg for EuclideanMultivector2<S>
 where
-    S: ScalarSigned
+    S: ScalarSigned,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn neg(self) -> Self::Output {
         let result_1   = -self.data[0];
@@ -776,10 +766,11 @@ where
 
 impl<S> ops::Neg for &EuclideanMultivector2<S>
 where
-    S: ScalarSigned
+    S: ScalarSigned,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn neg(self) -> Self::Output {
         let result_1   = -self.data[0];
@@ -793,10 +784,11 @@ where
 
 impl<S> ops::Mul<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn mul(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -812,10 +804,11 @@ where
 
 impl<S> ops::Mul<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn mul(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -831,10 +824,11 @@ where
 
 impl<S> ops::Mul<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn mul(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -850,10 +844,11 @@ where
 
 impl<'a, 'b, S> ops::Mul<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn mul(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -867,12 +862,13 @@ where
     }
 }
 
-impl<S> ops::Mul<S> for EuclideanMultivector2<S> 
+impl<S> ops::Mul<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn mul(self, other: S) -> Self::Output {
         let a = self;
@@ -881,17 +877,18 @@ where
         let result_e1  = a[1] * b;
         let result_e2  = a[2] * b;
         let result_e12 = a[3] * b;
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
-impl<S> ops::Mul<S> for &EuclideanMultivector2<S> 
+impl<S> ops::Mul<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn mul(self, other: S) -> Self::Output {
         let a = self;
@@ -900,17 +897,18 @@ where
         let result_e1  = a[1] * b;
         let result_e2  = a[2] * b;
         let result_e12 = a[3] * b;
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
-impl<S> ops::BitXor<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitXor<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn bitxor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -919,17 +917,18 @@ where
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
         let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
-impl<S> ops::BitXor<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitXor<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn bitxor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -938,17 +937,18 @@ where
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
         let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
-impl<S> ops::BitXor<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
+impl<S> ops::BitXor<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn bitxor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -957,17 +957,18 @@ where
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
         let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
-impl<'a, 'b, S> ops::BitXor<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
+impl<'a, 'b, S> ops::BitXor<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn bitxor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -976,17 +977,18 @@ where
         let result_e1  = a[0] * b[1] + a[1] * b[0];
         let result_e2  = a[0] * b[2] + a[2] * b[0];
         let result_e12 = a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::BitXor<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn bitxor(self, other: S) -> Self::Output {
         let a = self;
@@ -1001,25 +1003,25 @@ where
 
 impl<S> ops::BitXor<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
     #[inline]
     fn bitxor(self, other: S) -> Self::Output {
         let a = self;
-        let result_1   = a[0] * other;
-        let result_e1  = a[1] * other;
-        let result_e2  = a[2] * other;
+        let result_1 = a[0] * other;
+        let result_e1 = a[1] * other;
+        let result_e2 = a[2] * other;
         let result_e12 = a[3] * other;
 
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
-impl<S> ops::BitOr<EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitOr<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1027,15 +1029,15 @@ where
     fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+
         EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
-impl<S> ops::BitOr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S> 
+impl<S> ops::BitOr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1043,15 +1045,15 @@ where
     fn bitor(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+
         EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
-impl<S> ops::BitOr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S> 
+impl<S> ops::BitOr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1059,15 +1061,15 @@ where
     fn bitor(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+
         EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
-impl<'a, 'b, S> ops::BitOr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S> 
+impl<'a, 'b, S> ops::BitOr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1075,15 +1077,15 @@ where
     fn bitor(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
         let b = other;
-        let result_1   = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-        
+        let result_1 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+
         EuclideanMultivector2::from_scalar(result_1)
     }
 }
 
 impl<S> ops::BitOr<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1098,7 +1100,7 @@ where
 
 impl<S> ops::BitOr<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1113,10 +1115,11 @@ where
 
 impl<S> ops::Add<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1125,17 +1128,18 @@ where
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
         let result_e12 = a[3] + b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Add<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn add(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1144,17 +1148,18 @@ where
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
         let result_e12 = a[3] + b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Add<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn add(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1163,17 +1168,18 @@ where
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
         let result_e12 = a[3] + b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<'a, 'b, S> ops::Add<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn add(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1182,17 +1188,18 @@ where
         let result_e1  = a[1] + b[1];
         let result_e2  = a[2] + b[2];
         let result_e12 = a[3] + b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Add<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn add(self, other: S) -> Self::Output {
         let a = self;
@@ -1201,17 +1208,18 @@ where
         let result_e1  = a[1];
         let result_e2  = a[2];
         let result_e12 = a[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Add<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn add(self, other: S) -> Self::Output {
         let a = self;
@@ -1220,17 +1228,18 @@ where
         let result_e1  = a[1];
         let result_e2  = a[2];
         let result_e12 = a[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Sub<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn sub(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1239,17 +1248,18 @@ where
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
         let result_e12 = a[3] - b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Sub<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn sub(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1258,17 +1268,18 @@ where
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
         let result_e12 = a[3] - b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Sub<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn sub(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1277,17 +1288,18 @@ where
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
         let result_e12 = a[3] - b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<'a, 'b, S> ops::Sub<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn sub(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1296,17 +1308,18 @@ where
         let result_e1  = a[1] - b[1];
         let result_e2  = a[2] - b[2];
         let result_e12 = a[3] - b[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Sub<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn sub(self, other: S) -> Self::Output {
         let a = self;
@@ -1315,17 +1328,18 @@ where
         let result_e1  = a[1];
         let result_e2  = a[2];
         let result_e12 = a[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> ops::Sub<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn sub(self, other: S) -> Self::Output {
         let a = self;
@@ -1334,14 +1348,14 @@ where
         let result_e1  = a[1];
         let result_e2  = a[2];
         let result_e12 = a[3];
-        
+
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
     }
 }
 
 impl<S> approx::AbsDiffEq for EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Epsilon = <S as approx::AbsDiffEq>::Epsilon;
 
@@ -1352,16 +1366,16 @@ where
 
     #[inline]
     fn abs_diff_eq(&self, other: &Self, epsilon: Self::Epsilon) -> bool {
-        S::abs_diff_eq(&self[0], &other[0], epsilon) &&
-        S::abs_diff_eq(&self[1], &other[1], epsilon) &&
-        S::abs_diff_eq(&self[2], &other[2], epsilon) &&
-        S::abs_diff_eq(&self[3], &other[3], epsilon)
+        S::abs_diff_eq(&self[0], &other[0], epsilon)
+            && S::abs_diff_eq(&self[1], &other[1], epsilon)
+            && S::abs_diff_eq(&self[2], &other[2], epsilon)
+            && S::abs_diff_eq(&self[3], &other[3], epsilon)
     }
 }
 
 impl<S> approx::RelativeEq for EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     #[inline]
     fn default_max_relative() -> S::Epsilon {
@@ -1370,16 +1384,16 @@ where
 
     #[inline]
     fn relative_eq(&self, other: &Self, epsilon: S::Epsilon, max_relative: S::Epsilon) -> bool {
-        S::relative_eq(&self[0], &other[0], epsilon, max_relative) &&
-        S::relative_eq(&self[1], &other[1], epsilon, max_relative) &&
-        S::relative_eq(&self[2], &other[2], epsilon, max_relative) &&
-        S::relative_eq(&self[3], &other[3], epsilon, max_relative)
+        S::relative_eq(&self[0], &other[0], epsilon, max_relative)
+            && S::relative_eq(&self[1], &other[1], epsilon, max_relative)
+            && S::relative_eq(&self[2], &other[2], epsilon, max_relative)
+            && S::relative_eq(&self[3], &other[3], epsilon, max_relative)
     }
 }
 
 impl<S> approx::UlpsEq for EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     #[inline]
     fn default_max_ulps() -> u32 {
@@ -1388,16 +1402,16 @@ where
 
     #[inline]
     fn ulps_eq(&self, other: &Self, epsilon: S::Epsilon, max_ulps: u32) -> bool {
-        S::ulps_eq(&self[0], &other[0], epsilon, max_ulps) &&
-        S::ulps_eq(&self[1], &other[1], epsilon, max_ulps) &&
-        S::ulps_eq(&self[2], &other[2], epsilon, max_ulps) &&
-        S::ulps_eq(&self[3], &other[3], epsilon, max_ulps)
+        S::ulps_eq(&self[0], &other[0], epsilon, max_ulps)
+            && S::ulps_eq(&self[1], &other[1], epsilon, max_ulps)
+            && S::ulps_eq(&self[2], &other[2], epsilon, max_ulps)
+            && S::ulps_eq(&self[3], &other[3], epsilon, max_ulps)
     }
 }
 
-impl<S> EuclideanMultivector2<S> 
+impl<S> EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     /// Calculate the squared magnitude of a multivector.
     pub fn magnitude_squared(&self) -> S {
@@ -1415,7 +1429,7 @@ where
     pub fn normalize(&self) -> Self {
         self * (S::one() / self.magnitude())
     }
-    
+
     /// Normalize a multivector to a specified magnitude.
     pub fn normalize_to(&self, magnitude: S) -> Self {
         self * (magnitude / self.magnitude())
@@ -1434,19 +1448,19 @@ where
 
 impl<S> EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     /// Determine whether a multivector is invertible.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
     /// # };
     /// #
     /// let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
-    /// 
+    ///
     /// assert!(e12.is_invertible());
     /// ```
     #[inline]
@@ -1455,18 +1469,18 @@ where
     }
 
     /// Compute the multiplicative inverse of a multivector.
-    /// 
+    ///
     /// The inverse of a multivector `mv` is a multivector `mv_inv`
     /// such that
     /// ```text
     /// mv * mv_inv = mv_inv * mv = 1
     /// ```
     /// Even though the geometric product is noncommutative, in
-    /// dimension two, the left and right inverses are both identical. For 
+    /// dimension two, the left and right inverses are both identical. For
     /// more information on the inversion of multivectors in general, see [1].
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -1478,15 +1492,15 @@ where
     /// let mv = EuclideanMultivector2::new(13_f64, -4_f64, 98_f64, 4_f64);
     /// let mv_inv = mv.inverse().unwrap();
     /// let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
-    /// 
+    ///
     /// assert_relative_eq!(mv * mv_inv, one, epsilon = 1e-10);
     /// assert_relative_eq!(mv_inv * mv, one, epsilon = 1e-10);
     /// ```
-    /// 
+    ///
     /// # References
-    /// 
-    /// [1] _Eckhard Hitzer, Stephen Sangwine. Multivector and multivector matrix 
-    ///     inverse in real Clifford algebras. Applied Mathematics and Computation 
+    ///
+    /// [1] _Eckhard Hitzer, Stephen Sangwine. Multivector and multivector matrix
+    ///     inverse in real Clifford algebras. Applied Mathematics and Computation
     ///     (311) (2017) 375-389. Elsevier. DOI:10.1016/j.amc.2017.05.027._
     pub fn inverse(&self) -> Option<Self> {
         let magnitude_squared = self.magnitude_squared();
@@ -1505,15 +1519,15 @@ where
     }
 
     /// Compute the commutator of two multivectors.
-    /// 
+    ///
     /// The commutator of multivectors `mv1` and `mv2` is given by
     /// ```text
     /// comm(mv1, mv2) := (mv1 * mv2 - mv2 * mv1) / 2
     /// ```
     /// where `*` denotes the geometric product.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -1523,7 +1537,7 @@ where
     /// let mv2 = EuclideanMultivector2::from_scalar(3_f64);
     /// let expected: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
     /// let result = mv1.commutator(&mv2);
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn commutator(&self, other: &Self) -> Self {
@@ -1535,7 +1549,7 @@ where
     }
 
     /// Compute the commutator of two multivectors.
-    /// 
+    ///
     /// This is a synonym for `commutator`.
     #[inline(always)]
     pub fn x(&self, other: &Self) -> Self {
@@ -1543,15 +1557,15 @@ where
     }
 
     /// Compute the anticommutator of two multivectors.
-    /// 
+    ///
     /// The anticommutator of multivectors `mv1` and `mv2` is given by
     /// ```text
     /// anticomm(mv1, mv2) := (mv1 * mv2 + mv2 * mv1) / 2
     /// ```
     /// where `*` denotes the geometric product.
-    /// 
+    ///
     /// # Example
-    /// 
+    ///
     /// ```
     /// # use cggeomalg::e2ga::{
     /// #     EuclideanMultivector2,
@@ -1561,7 +1575,7 @@ where
     /// let mv2 = EuclideanMultivector2::from_scalar(3_f64);
     /// let expected: EuclideanMultivector2<f64> = mv1 * mv2;
     /// let result = mv1.anticommutator(&mv2);
-    /// 
+    ///
     /// assert_eq!(result, expected);
     /// ```
     pub fn anticommutator(&self, other: &Self) -> Self {
@@ -1575,10 +1589,11 @@ where
 
 impl<S> ops::Div<S> for EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn div(self, other: S) -> Self::Output {
         let one_over_other = S::one() / other;
@@ -1593,10 +1608,11 @@ where
 
 impl<S> ops::Div<S> for &EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn div(self, other: S) -> Self::Output {
         let one_over_other = S::one() / other;
@@ -1611,7 +1627,7 @@ where
 
 impl<S> ops::Div<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1624,7 +1640,7 @@ where
 
 impl<S> ops::Div<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1637,7 +1653,7 @@ where
 
 impl<S> ops::Div<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1650,7 +1666,7 @@ where
 
 impl<'a, 'b, S> ops::Div<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: ScalarFloat
+    S: ScalarFloat,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1663,10 +1679,11 @@ where
 
 impl<S> ops::Shl<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shl(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1682,10 +1699,11 @@ where
 
 impl<S> ops::Shl<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shl(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1701,10 +1719,11 @@ where
 
 impl<S> ops::Shl<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shl(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1720,10 +1739,11 @@ where
 
 impl<'a, 'b, S> ops::Shl<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shl(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1739,7 +1759,7 @@ where
 
 impl<S> ops::Shl<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1754,7 +1774,7 @@ where
 
 impl<S> ops::Shl<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
@@ -1769,10 +1789,11 @@ where
 
 impl<S> ops::Shr<EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shr(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1783,15 +1804,16 @@ where
         let result_e12 = a[3] * b[0];
 
         EuclideanMultivector2::new(result_1, result_e1, result_e2, result_e12)
-    }   
+    }
 }
 
 impl<S> ops::Shr<&EuclideanMultivector2<S>> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shr(self, other: &EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1807,10 +1829,11 @@ where
 
 impl<S> ops::Shr<EuclideanMultivector2<S>> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shr(self, other: EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1826,10 +1849,11 @@ where
 
 impl<'a, 'b, S> ops::Shr<&'b EuclideanMultivector2<S>> for &'a EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shr(self, other: &'b EuclideanMultivector2<S>) -> Self::Output {
         let a = self;
@@ -1845,10 +1869,11 @@ where
 
 impl<S> ops::Shr<S> for EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shr(self, other: S) -> Self::Output {
         let a = self;
@@ -1863,10 +1888,11 @@ where
 
 impl<S> ops::Shr<S> for &EuclideanMultivector2<S>
 where
-    S: Scalar
+    S: Scalar,
 {
     type Output = EuclideanMultivector2<S>;
 
+    #[rustfmt::skip]
     #[inline]
     fn shr(self, other: S) -> Self::Output {
         let a = self;
@@ -2007,7 +2033,7 @@ macro_rules! impl_scalar_multivector_bitor_ops {
             fn bitor(self, other: EuclideanMultivector2<$Lhs>) -> Self::Output {
                 let mut result = Self::Output::zero();
                 result[0] = self * other[0];
-        
+
                 result
             }
         }
@@ -2019,11 +2045,11 @@ macro_rules! impl_scalar_multivector_bitor_ops {
             fn bitor(self, other: &EuclideanMultivector2<$Lhs>) -> Self::Output {
                 let mut result = Self::Output::zero();
                 result[0] = self * other[0];
-        
+
                 result
             }
         }
-    }
+    };
 }
 
 impl_scalar_multivector_bitor_ops!(u8);
@@ -2054,7 +2080,7 @@ macro_rules! impl_scalar_multivector_bitxor_ops {
                 result[1] = self * other[1];
                 result[2] = self * other[2];
                 result[3] = self * other[3];
-        
+
                 result
             }
         }
@@ -2069,11 +2095,11 @@ macro_rules! impl_scalar_multivector_bitxor_ops {
                 result[1] = self * other[1];
                 result[2] = self * other[2];
                 result[3] = self * other[3];
-        
+
                 result
             }
         }
-    }
+    };
 }
 
 impl_scalar_multivector_bitxor_ops!(u8);
@@ -2100,7 +2126,11 @@ macro_rules! impl_scalar_multivector_div_ops {
             #[inline]
             fn div(self, other: EuclideanMultivector2<$Lhs>) -> Self::Output {
                 let result = other.inverse();
-                assert!(result.is_some(), "Attempt to divide by a multivector with zero magnitude: {:?}", other);
+                assert!(
+                    result.is_some(),
+                    "Attempt to divide by a multivector with zero magnitude: {:?}",
+                    other
+                );
                 let mut result = result.unwrap();
                 result[0] = self * result[0];
                 result[1] = self * result[1];
@@ -2117,7 +2147,11 @@ macro_rules! impl_scalar_multivector_div_ops {
             #[inline]
             fn div(self, other: &EuclideanMultivector2<$Lhs>) -> Self::Output {
                 let result = other.inverse();
-                assert!(result.is_some(), "Attempt to divide by a multivector with zero magnitude: {:?}", other);
+                assert!(
+                    result.is_some(),
+                    "Attempt to divide by a multivector with zero magnitude: {:?}",
+                    other
+                );
                 let mut result = result.unwrap();
                 result[0] = self * result[0];
                 result[1] = self * result[1];
@@ -2127,9 +2161,8 @@ macro_rules! impl_scalar_multivector_div_ops {
                 result
             }
         }
-    }
+    };
 }
 
 impl_scalar_multivector_div_ops!(f32);
 impl_scalar_multivector_div_ops!(f64);
-

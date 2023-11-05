@@ -10,7 +10,7 @@ To use the library in your project, add **cggeomalg** as a dependency in your
 `Cargo.toml` file:
 ```toml
 [dependencies.cggeomalg]
-version = "0.2.1"
+version = "0.2.2"
 ```
 After that, place the crate declaration in either your `lib.rs` file or 
 your `main.rs` file

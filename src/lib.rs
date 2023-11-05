@@ -4,10 +4,10 @@
 #[cfg(feature = "core")]
 extern crate core;
 
-#[cfg(feature = "alloc")] 
+#[cfg(feature = "alloc")]
 extern crate alloc;
 
-#[cfg(feature = "std")] 
+#[cfg(feature = "std")]
 extern crate std;
 
 extern crate approx;
@@ -16,7 +16,6 @@ extern crate num_traits;
 
 mod coordinates;
 
-pub mod scalar;
 pub mod e2ga;
 pub mod e3ga;
-
+pub mod scalar;

@@ -4,28 +4,24 @@ extern crate rand;
 extern crate rand_isaac;
 
 
-use cggeomalg::e3ga::{
-    EuclideanMultivector3,
-};
+use cggeomalg::e3ga::EuclideanMultivector3;
 use core::ops::{
     Add,
-    Sub,
-    Mul,
-    BitXor,
     BitOr,
+    BitXor,
+    Mul,
     Shl,
     Shr,
+    Sub,
 };
 
 use rand::{
-    Rng, 
-    prelude::Distribution,
     distributions::Standard,
+    prelude::Distribution,
+    Rng,
 };
 
-use rand_isaac::{
-    IsaacRng,
-};
+use rand_isaac::IsaacRng;
 
 use criterion::{
     criterion_group,
@@ -33,18 +29,22 @@ use criterion::{
 };
 
 
-fn gen_multivector3<S>() -> EuclideanMultivector3<S> 
-where 
-    Standard: Distribution<S> 
+fn gen_multivector3<S>() -> EuclideanMultivector3<S>
+where
+    Standard: Distribution<S>,
 {
     use rand::SeedableRng;
     let mut rng = IsaacRng::seed_from_u64(0);
-    
+
     EuclideanMultivector3::new(
-        rng.gen(), 
-        rng.gen(), rng.gen(), rng.gen(),
-        rng.gen(), rng.gen(), rng.gen(),
-        rng.gen()
+        rng.gen(),
+        rng.gen(),
+        rng.gen(),
+        rng.gen(),
+        rng.gen(),
+        rng.gen(),
+        rng.gen(),
+        rng.gen(),
     )
 }
 
@@ -87,46 +87,109 @@ macro_rules! bench_unop(
 );
 
 bench_binop!(
-    multivector3_add_multivector3_f32, 
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, add
+    multivector3_add_multivector3_f32,
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    add
 );
 bench_binop!(
     multivector3_sub_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, sub
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    sub
 );
 bench_binop!(
     multivector3_mul_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, mul
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    mul
 );
 bench_binop!(
     multivector3_outer_product_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, bitxor
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    bitxor
 );
 bench_binop!(
     multivector3_scalar_product_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, bitor
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    bitor
 );
 bench_binop!(
     multivector3_left_contract_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, shl
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    shl
 );
 bench_binop!(
     multivector3_right_contract_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, shr
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    shr
 );
 
 bench_binop_ref!(
     multivector3_commutator_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, commutator
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    commutator
 );
 bench_binop_ref!(
     multivector3_anticommutator_multivector3_f32,
-    f32, EuclideanMultivector3<f32>, EuclideanMultivector3<f32>, gen_multivector3, gen_multivector3, anticommutator
+    f32,
+    EuclideanMultivector3<f32>,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    gen_multivector3,
+    anticommutator
 );
 
-bench_unop!(multivector3_magnitude_f32, f32, EuclideanMultivector3<f32>, gen_multivector3, magnitude);
-bench_unop!(multivector3_conjugate_f32, f32, EuclideanMultivector3<f32>, gen_multivector3, conjugate);
-bench_unop!(multivector3_involute_f32, f32, EuclideanMultivector3<f32>, gen_multivector3, involute);
+bench_unop!(
+    multivector3_magnitude_f32,
+    f32,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    magnitude
+);
+bench_unop!(
+    multivector3_conjugate_f32,
+    f32,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    conjugate
+);
+bench_unop!(
+    multivector3_involute_f32,
+    f32,
+    EuclideanMultivector3<f32>,
+    gen_multivector3,
+    involute
+);
 bench_unop!(multivector3_dual_f32, f32, EuclideanMultivector3<f32>, gen_multivector3, dual);
 bench_unop!(multivector3_reverse_f32, f32, EuclideanMultivector3<f32>, gen_multivector3, reverse);
 bench_unop!(multivector3_inverse_f32, f32, EuclideanMultivector3<f32>, gen_multivector3, inverse);
@@ -151,4 +214,3 @@ criterion_group!(
     multivector3_inverse_f32,
 );
 criterion_main!(e3ga_benchmarks);
-
