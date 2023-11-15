@@ -1,8 +1,3 @@
-extern crate approx;
-extern crate cggeomalg;
-extern crate num_traits;
-
-
 #[cfg(test)]
 mod e2ga_component_tests {
     use cggeomalg::e2ga::EuclideanMultivector2;

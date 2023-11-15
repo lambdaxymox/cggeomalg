@@ -1,9 +1,3 @@
-extern crate cggeomalg;
-extern crate criterion;
-extern crate rand;
-extern crate rand_isaac;
-
-
 use cggeomalg::e3ga::EuclideanMultivector3;
 use core::ops::{
     Add,
