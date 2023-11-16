@@ -1,3 +1,4 @@
+use approx_cmp::ulps_ne;
 use crate::scalar::{
     Scalar,
     ScalarFloat,
@@ -33,9 +34,7 @@ impl<S> EuclideanMultivector2<S> {
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(1, 1, 1, 1);
     ///
@@ -74,9 +73,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(1_f64, 2_f64, 3_f64, 4_f64);
     /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
@@ -94,9 +91,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let zero: EuclideanMultivector2<f64> = EuclideanMultivector2::zero();
     ///
@@ -119,9 +114,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let scalar_part = 2;
     /// let scalar = EuclideanMultivector2::from_scalar(scalar_part);
@@ -141,9 +134,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let unit_scalar: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_scalar();
     ///
@@ -162,9 +153,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let unit_e1: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e1();
     ///
@@ -183,9 +172,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let unit_e2: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e2();
     ///
@@ -204,9 +191,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let unit_e12: EuclideanMultivector2<isize> = EuclideanMultivector2::unit_e12();
     ///
@@ -237,9 +222,7 @@ where
     ///
     /// # Example
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv: EuclideanMultivector2<isize> = EuclideanMultivector2::new(1, 1, 1, 1);
     /// let expected_0 = EuclideanMultivector2::new(1, 0, 0, 0);
@@ -421,9 +404,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
@@ -440,9 +421,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mut result = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, 2_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, 1_i32, 1_i32, -2_i32);
@@ -497,9 +476,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
@@ -516,9 +493,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, -4_i32);
@@ -573,9 +548,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
@@ -592,9 +565,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mut result = EuclideanMultivector2::new(1_i32, 2_i32, 3_i32, 4_i32);
     /// let expected = EuclideanMultivector2::new(1_i32, -2_i32, -3_i32, 4_i32);
@@ -641,9 +612,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(1, 2, 3, 4);
     /// let expected = EuclideanMultivector2::new(4, 3, -2, -1);
@@ -664,9 +633,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mut result = EuclideanMultivector2::new(1, 2, 3, 4);
     /// let expected = EuclideanMultivector2::new(4, 3, -2, -1);
@@ -691,9 +658,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e3ga::{
-    /// #     EuclideanMultivector3,
-    /// # };
+    /// # use cggeomalg::e3ga::EuclideanMultivector3;
     /// #
     /// let ps: EuclideanMultivector3<f64> = EuclideanMultivector3::pseudoscalar();
     /// let ps_inv: EuclideanMultivector3<f64> = EuclideanMultivector3::inv_pseudoscalar();
@@ -1353,59 +1318,223 @@ where
     }
 }
 
-impl<S> approx::AbsDiffEq for EuclideanMultivector2<S>
+impl<S> approx_cmp::AbsDiffEq for EuclideanMultivector2<S>
 where
     S: ScalarFloat,
 {
-    type Epsilon = <S as approx::AbsDiffEq>::Epsilon;
+    type Tolerance = EuclideanMultivector2<<S as approx_cmp::AbsDiffEq>::Tolerance>;
 
     #[inline]
-    fn default_epsilon() -> Self::Epsilon {
-        S::default_epsilon()
-    }
-
-    #[inline]
-    fn abs_diff_eq(&self, other: &Self, epsilon: Self::Epsilon) -> bool {
-        S::abs_diff_eq(&self[0], &other[0], epsilon)
-            && S::abs_diff_eq(&self[1], &other[1], epsilon)
-            && S::abs_diff_eq(&self[2], &other[2], epsilon)
-            && S::abs_diff_eq(&self[3], &other[3], epsilon)
+    fn abs_diff_eq(&self, other: &Self, max_abs_diff: &Self::Tolerance) -> bool {
+        approx_cmp::AbsDiffEq::abs_diff_eq(&self.data, &other.data, &max_abs_diff.data)
     }
 }
 
-impl<S> approx::RelativeEq for EuclideanMultivector2<S>
+impl<S> approx_cmp::AbsDiffAllEq for EuclideanMultivector2<S>
 where
     S: ScalarFloat,
 {
-    #[inline]
-    fn default_max_relative() -> S::Epsilon {
-        S::default_max_relative()
-    }
+    type AllTolerance = <S as approx_cmp::AbsDiffAllEq>::AllTolerance;
 
     #[inline]
-    fn relative_eq(&self, other: &Self, epsilon: S::Epsilon, max_relative: S::Epsilon) -> bool {
-        S::relative_eq(&self[0], &other[0], epsilon, max_relative)
-            && S::relative_eq(&self[1], &other[1], epsilon, max_relative)
-            && S::relative_eq(&self[2], &other[2], epsilon, max_relative)
-            && S::relative_eq(&self[3], &other[3], epsilon, max_relative)
+    fn abs_diff_all_eq(&self, other: &Self, max_abs_diff: &Self::AllTolerance) -> bool {
+        approx_cmp::AbsDiffAllEq::abs_diff_all_eq(&self.data, &other.data, max_abs_diff)
     }
 }
 
-impl<S> approx::UlpsEq for EuclideanMultivector2<S>
+impl<S> approx_cmp::AssertAbsDiffEq for EuclideanMultivector2<S>
 where
     S: ScalarFloat,
 {
+    type DebugAbsDiff = EuclideanMultivector2<<S as approx_cmp::AssertAbsDiffEq>::DebugAbsDiff>;
+    type DebugTolerance = EuclideanMultivector2<<S as approx_cmp::AssertAbsDiffEq>::DebugTolerance>;
+
     #[inline]
-    fn default_max_ulps() -> u32 {
-        S::default_max_ulps()
+    fn debug_abs_diff(&self, other: &Self) -> Self::DebugAbsDiff {
+        let data = approx_cmp::AssertAbsDiffEq::debug_abs_diff(&self.data, &other.data);
+
+        EuclideanMultivector2 { data }
     }
 
     #[inline]
-    fn ulps_eq(&self, other: &Self, epsilon: S::Epsilon, max_ulps: u32) -> bool {
-        S::ulps_eq(&self[0], &other[0], epsilon, max_ulps)
-            && S::ulps_eq(&self[1], &other[1], epsilon, max_ulps)
-            && S::ulps_eq(&self[2], &other[2], epsilon, max_ulps)
-            && S::ulps_eq(&self[3], &other[3], epsilon, max_ulps)
+    fn debug_abs_diff_tolerance(&self, other: &Self, max_abs_diff: &Self::Tolerance) -> Self::DebugTolerance {
+        let data = approx_cmp::AssertAbsDiffEq::debug_abs_diff_tolerance(&self.data, &other.data, &max_abs_diff.data);
+
+        EuclideanMultivector2 { data }
+    }
+}
+
+impl<S> approx_cmp::AssertAbsDiffAllEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type AllDebugTolerance = EuclideanMultivector2<<S as approx_cmp::AssertAbsDiffAllEq>::AllDebugTolerance>;
+
+    #[inline]
+    fn debug_abs_diff_all_tolerance(&self, other: &Self, max_abs_diff: &Self::AllTolerance) -> Self::AllDebugTolerance {
+        let data = approx_cmp::AssertAbsDiffAllEq::debug_abs_diff_all_tolerance(&self.data, &other.data, max_abs_diff);
+
+        EuclideanMultivector2 { data }
+    }
+}
+
+impl<S> approx_cmp::RelativeEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type Tolerance = EuclideanMultivector2<<S as approx_cmp::RelativeEq>::Tolerance>;
+
+    #[inline]
+    fn relative_eq(&self, other: &Self, max_abs_diff: &Self::Tolerance, max_relative: &Self::Tolerance) -> bool {
+        approx_cmp::RelativeEq::relative_eq(&self.data, &other.data, &max_abs_diff.data, &max_relative.data)
+    }
+}
+
+impl<S> approx_cmp::RelativeAllEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type AllTolerance = <S as approx_cmp::RelativeAllEq>::AllTolerance;
+
+    #[inline]
+    fn relative_all_eq(&self, other: &Self, max_abs_diff: &Self::AllTolerance, max_relative: &Self::AllTolerance) -> bool {
+        approx_cmp::RelativeAllEq::relative_all_eq(&self.data, &other.data, max_abs_diff, max_relative)
+    }
+}
+
+impl<S> approx_cmp::AssertRelativeEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type DebugAbsDiff = EuclideanMultivector2<<S as approx_cmp::AssertRelativeEq>::DebugAbsDiff>;
+    type DebugTolerance = EuclideanMultivector2<<S as approx_cmp::AssertRelativeEq>::DebugTolerance>;
+
+    #[inline]
+    fn debug_abs_diff(&self, other: &Self) -> Self::DebugAbsDiff {
+        let data = approx_cmp::AssertRelativeEq::debug_abs_diff(&self.data, &other.data);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_abs_diff_tolerance(&self, other: &Self, max_abs_diff: &Self::Tolerance) -> Self::DebugTolerance {
+        let data = approx_cmp::AssertRelativeEq::debug_abs_diff_tolerance(&self.data, &other.data, &max_abs_diff.data);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_relative_tolerance(&self, other: &Self, max_relative: &Self::Tolerance) -> Self::DebugTolerance {
+        let data = approx_cmp::AssertRelativeEq::debug_relative_tolerance(&self.data, &other.data, &max_relative.data);
+
+        EuclideanMultivector2 { data }
+    }
+}
+
+impl<S> approx_cmp::AssertRelativeAllEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type AllDebugTolerance = EuclideanMultivector2<<S as approx_cmp::AssertRelativeAllEq>::AllDebugTolerance>;
+
+    #[inline]
+    fn debug_abs_diff_all_tolerance(&self, other: &Self, max_abs_diff: &Self::AllTolerance) -> Self::AllDebugTolerance {
+        let data = approx_cmp::AssertRelativeAllEq::debug_abs_diff_all_tolerance(&self.data, &other.data, max_abs_diff);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_relative_all_tolerance(&self, other: &Self, max_relative: &Self::AllTolerance) -> Self::AllDebugTolerance {
+        let data = approx_cmp::AssertRelativeAllEq::debug_relative_all_tolerance(&self.data, &other.data, max_relative);
+
+        EuclideanMultivector2 { data }
+    }
+}
+
+impl<S> approx_cmp::UlpsEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type Tolerance = EuclideanMultivector2<<S as approx_cmp::UlpsEq>::Tolerance>;
+    type UlpsTolerance = EuclideanMultivector2<<S as approx_cmp::UlpsEq>::UlpsTolerance>;
+
+    #[inline]
+    fn ulps_eq(&self, other: &Self, max_abs_diff: &Self::Tolerance, max_ulps: &Self::UlpsTolerance) -> bool {
+        approx_cmp::UlpsEq::ulps_eq(&self.data, &other.data, &max_abs_diff.data, &max_ulps.data)
+    }
+}
+
+impl<S> approx_cmp::UlpsAllEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type AllTolerance = <S as approx_cmp::UlpsAllEq>::AllTolerance;
+    type AllUlpsTolerance = <S as approx_cmp::UlpsAllEq>::AllUlpsTolerance;
+
+    #[inline]
+    fn ulps_all_eq(&self, other: &Self, max_abs_diff: &Self::AllTolerance, max_ulps: &Self::AllUlpsTolerance) -> bool {
+        approx_cmp::UlpsAllEq::ulps_all_eq(&self.data, &other.data, max_abs_diff, max_ulps)
+    }
+}
+
+impl<S> approx_cmp::AssertUlpsEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type DebugAbsDiff = EuclideanMultivector2<<S as approx_cmp::AssertUlpsEq>::DebugAbsDiff>;
+    type DebugUlpsDiff = EuclideanMultivector2<<S as approx_cmp::AssertUlpsEq>::DebugUlpsDiff>;
+    type DebugTolerance = EuclideanMultivector2<<S as approx_cmp::AssertUlpsEq>::DebugTolerance>;
+    type DebugUlpsTolerance = EuclideanMultivector2<<S as approx_cmp::AssertUlpsEq>::DebugUlpsTolerance>;
+
+    #[inline]
+    fn debug_abs_diff(&self, other: &Self) -> Self::DebugAbsDiff {
+        let data = approx_cmp::AssertUlpsEq::debug_abs_diff(&self.data, &other.data);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_ulps_diff(&self, other: &Self) -> Self::DebugUlpsDiff {
+        let data = approx_cmp::AssertUlpsEq::debug_ulps_diff(&self.data, &other.data);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_abs_diff_tolerance(&self, other: &Self, max_abs_diff: &Self::Tolerance) -> Self::DebugTolerance {
+        let data = approx_cmp::AssertUlpsEq::debug_abs_diff_tolerance(&self.data, &other.data, &max_abs_diff.data);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_ulps_tolerance(&self, other: &Self, max_ulps: &Self::UlpsTolerance) -> Self::DebugUlpsTolerance {
+        let data = approx_cmp::AssertUlpsEq::debug_ulps_tolerance(&self.data, &other.data, &max_ulps.data);
+
+        EuclideanMultivector2 { data }
+    }
+}
+
+impl<S> approx_cmp::AssertUlpsAllEq for EuclideanMultivector2<S>
+where
+    S: ScalarFloat,
+{
+    type AllDebugTolerance = EuclideanMultivector2<<S as approx_cmp::AssertUlpsAllEq>::AllDebugTolerance>;
+    type AllDebugUlpsTolerance = EuclideanMultivector2<<S as approx_cmp::AssertUlpsAllEq>::AllDebugUlpsTolerance>;
+
+    #[inline]
+    fn debug_abs_diff_all_tolerance(&self, other: &Self, max_abs_diff: &Self::AllTolerance) -> Self::AllDebugTolerance {
+        let data = approx_cmp::AssertUlpsAllEq::debug_abs_diff_all_tolerance(&self.data, &other.data, max_abs_diff);
+
+        EuclideanMultivector2 { data }
+    }
+
+    #[inline]
+    fn debug_ulps_all_tolerance(&self, other: &Self, max_ulps: &Self::AllUlpsTolerance) -> Self::AllDebugUlpsTolerance {
+        let data = approx_cmp::AssertUlpsAllEq::debug_ulps_all_tolerance(&self.data, &other.data, max_ulps);
+
+        EuclideanMultivector2 { data }
     }
 }
 
@@ -1455,9 +1584,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let e12: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_e12();
     ///
@@ -1465,7 +1592,7 @@ where
     /// ```
     #[inline]
     pub fn is_invertible(&self) -> bool {
-        approx::ulps_ne!(self.magnitude_squared(), S::zero())
+        ulps_ne!(self.magnitude_squared(), S::zero(), abs_diff_all <= S::default_epsilon(), ulps_all <= S::default_max_ulps())
     }
 
     /// Compute the multiplicative inverse of a multivector.
@@ -1482,19 +1609,15 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
-    /// # use approx::{
-    /// #     assert_relative_eq,
-    /// # };
+    /// # use approx_cmp::assert_relative_eq;
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv = EuclideanMultivector2::new(13_f64, -4_f64, 98_f64, 4_f64);
     /// let mv_inv = mv.inverse().unwrap();
     /// let one: EuclideanMultivector2<f64> = EuclideanMultivector2::unit_scalar();
     ///
-    /// assert_relative_eq!(mv * mv_inv, one, epsilon = 1e-10);
-    /// assert_relative_eq!(mv_inv * mv, one, epsilon = 1e-10);
+    /// assert_relative_eq!(mv * mv_inv, one, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
+    /// assert_relative_eq!(mv_inv * mv, one, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
     /// ```
     ///
     /// # References
@@ -1529,9 +1652,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv1 = EuclideanMultivector2::from_scalar(2_f64);
     /// let mv2 = EuclideanMultivector2::from_scalar(3_f64);
@@ -1567,9 +1688,7 @@ where
     /// # Example
     ///
     /// ```
-    /// # use cggeomalg::e2ga::{
-    /// #     EuclideanMultivector2,
-    /// # };
+    /// # use cggeomalg::e2ga::EuclideanMultivector2;
     /// #
     /// let mv1 = EuclideanMultivector2::from_scalar(2_f64);
     /// let mv2 = EuclideanMultivector2::from_scalar(3_f64);

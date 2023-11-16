@@ -143,7 +143,7 @@ mod e3ga_addition_subtraction_tests {
 
 #[cfg(test)]
 mod e3ga_multiplication_division_tests {
-    use approx::assert_relative_eq;
+    use approx_cmp::assert_relative_eq;
     use cggeomalg::e3ga::EuclideanMultivector3;
 
 
@@ -173,7 +173,7 @@ mod e3ga_multiplication_division_tests {
         );
         let result = mv / scalar;
 
-        assert_relative_eq!(result, expected, epsilon = 1e-10);
+        assert_relative_eq!(result, expected, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
     }
 
     #[test]
@@ -1279,7 +1279,7 @@ mod e3ga_reversion_tests {
 
 #[cfg(test)]
 mod e3ga_inversion_tests {
-    use approx::assert_relative_eq;
+    use approx_cmp::assert_relative_eq;
     use cggeomalg::e3ga::EuclideanMultivector3;
 
 
@@ -1298,7 +1298,7 @@ mod e3ga_inversion_tests {
         );
         let result = mv.inverse().unwrap();
 
-        assert_relative_eq!(result, expected, epsilon = 1e-10);
+        assert_relative_eq!(result, expected, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
     }
 
     #[test]
@@ -1308,7 +1308,7 @@ mod e3ga_inversion_tests {
         let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
         let result = mv * mv_inv;
 
-        assert_relative_eq!(result, expected, epsilon = 1e-10);
+        assert_relative_eq!(result, expected, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
     }
 
     #[test]
@@ -1318,7 +1318,7 @@ mod e3ga_inversion_tests {
         let expected: EuclideanMultivector3<f64> = EuclideanMultivector3::unit_scalar();
         let result = mv_inv * mv;
 
-        assert_relative_eq!(result, expected, epsilon = 1e-10);
+        assert_relative_eq!(result, expected, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
     }
 
     #[test]
@@ -1370,7 +1370,7 @@ mod e3ga_inversion_tests {
         let expected = e1 * (3_f64 / magnitude_squared) + e2 * (5_f64 / magnitude_squared) + e3 * (7_f64 / magnitude_squared);
         let result = mv.inverse().unwrap();
 
-        assert_relative_eq!(result, expected, epsilon = 1e-10);
+        assert_relative_eq!(result, expected, abs_diff_all <= 1e-10, relative_all <= f64::EPSILON);
     }
 
     #[test]
