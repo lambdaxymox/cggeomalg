@@ -33,7 +33,10 @@ where
 {
 }
 
-impl<T> Scalar for T where T: Copy + Clone + fmt::Debug + Num + NumCast + PartialOrd + AddAssign + SubAssign + MulAssign + DivAssign + RemAssign {}
+impl<T> Scalar for T where
+    T: Copy + Clone + fmt::Debug + Num + NumCast + PartialOrd + AddAssign + SubAssign + MulAssign + DivAssign + RemAssign
+{
+}
 
 /// Scalar numbers with a notion of subtraction and have additive
 /// inverses.
@@ -72,16 +75,9 @@ pub trait ScalarCmp:
 
 /// Scalar numbers that have the properties of finite precision
 /// floating point arithmetic.
-pub trait ScalarFloat: Scalar
-    + ScalarCmp
-    + Float
-{
-}
+pub trait ScalarFloat: Scalar + ScalarCmp + Float {}
 
-impl<T> ScalarFloat for T where
-    T: Scalar + ScalarCmp + Float
-{
-}
+impl<T> ScalarFloat for T where T: Scalar + ScalarCmp + Float {}
 
 impl ScalarCmp for f32 {
     type IntegerRepr = u32;

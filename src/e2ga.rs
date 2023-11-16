@@ -1,4 +1,3 @@
-use approx_cmp::ulps_ne;
 use crate::scalar::{
     Scalar,
     ScalarFloat,
@@ -8,6 +7,7 @@ use crate::{
     impl_coords,
     impl_coords_deref,
 };
+use approx_cmp::ulps_ne;
 use core::fmt;
 use core::ops;
 
@@ -1592,7 +1592,12 @@ where
     /// ```
     #[inline]
     pub fn is_invertible(&self) -> bool {
-        ulps_ne!(self.magnitude_squared(), S::zero(), abs_diff_all <= S::default_epsilon(), ulps_all <= S::default_max_ulps())
+        ulps_ne!(
+            self.magnitude_squared(),
+            S::zero(),
+            abs_diff_all <= S::default_epsilon(),
+            ulps_all <= S::default_max_ulps()
+        )
     }
 
     /// Compute the multiplicative inverse of a multivector.
