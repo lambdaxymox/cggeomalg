@@ -6,6 +6,12 @@ Change log dates follow the ISO 8601 standard (YEAR-MONTH-DAY).
 
 ## [Unreleased]
 
+## [0.3.0] - 2023-11-15
+
+### Changed
+- Migrate approximate comparisons of multivectors from the `approx` crate to 
+  the `approx_cmp` crate.
+
 ## [0.2.2] - 2023-11-04
 Some small project level improvements.
 
