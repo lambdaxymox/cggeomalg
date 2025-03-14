@@ -10,7 +10,7 @@ use core::ops::{
 };
 
 use rand::{
-    distributions::Standard,
+    distr::StandardUniform,
     prelude::Distribution,
     Rng,
 };
@@ -25,20 +25,20 @@ use criterion::{
 
 fn gen_multivector3<S>() -> EuclideanMultivector3<S>
 where
-    Standard: Distribution<S>,
+    StandardUniform: Distribution<S>,
 {
     use rand::SeedableRng;
     let mut rng = IsaacRng::seed_from_u64(0);
 
     EuclideanMultivector3::new(
-        rng.gen(),
-        rng.gen(),
-        rng.gen(),
-        rng.gen(),
-        rng.gen(),
-        rng.gen(),
-        rng.gen(),
-        rng.gen(),
+        rng.random(),
+        rng.random(),
+        rng.random(),
+        rng.random(),
+        rng.random(),
+        rng.random(),
+        rng.random(),
+        rng.random(),
     )
 }
 

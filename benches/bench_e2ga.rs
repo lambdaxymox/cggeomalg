@@ -10,7 +10,7 @@ use core::ops::{
 };
 
 use rand::{
-    distributions::Standard,
+    distr::StandardUniform,
     prelude::Distribution,
     Rng,
 };
@@ -25,12 +25,12 @@ use criterion::{
 
 fn gen_multivector2<S>() -> EuclideanMultivector2<S>
 where
-    Standard: Distribution<S>,
+    StandardUniform: Distribution<S>,
 {
     use rand::SeedableRng;
     let mut rng = IsaacRng::seed_from_u64(0);
 
-    EuclideanMultivector2::new(rng.gen(), rng.gen(), rng.gen(), rng.gen())
+    EuclideanMultivector2::new(rng.random(), rng.random(), rng.random(), rng.random())
 }
 
 macro_rules! bench_binop(
