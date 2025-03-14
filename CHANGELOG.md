@@ -6,6 +6,9 @@ Change log dates follow the ISO 8601 standard (YEAR-MONTH-DAY).
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-03-13
+Migrate to Rust Edition 2024.
+
 ## [0.3.0] - 2023-11-15
 
 ### Changed

@@ -1,6 +1,6 @@
 [package]
 name = "cggeomalg"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2024"
 authors = ["LambdaXymox <lambda.xymox@gmail.com>"]
 description = "A low-dimensional geometric algebra library for real-time computer graphics."
