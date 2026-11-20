@@ -9,28 +9,31 @@ use core::ops::{
     Sub,
 };
 
-use rand::{
-    distr::StandardUniform,
-    prelude::Distribution,
-    Rng,
-};
-
-use rand_isaac::IsaacRng;
-
 use criterion::{
     criterion_group,
     criterion_main,
 };
 
+use rand::{
+    distr::StandardUniform,
+    prelude::Distribution,
+};
+
+use chacha20::ChaCha20Rng;
 
 fn gen_multivector2<S>() -> EuclideanMultivector2<S>
 where
     StandardUniform: Distribution<S>,
 {
     use rand::SeedableRng;
-    let mut rng = IsaacRng::seed_from_u64(0);
+    let mut rng = ChaCha20Rng::seed_from_u64(0);
 
-    EuclideanMultivector2::new(rng.random(), rng.random(), rng.random(), rng.random())
+    EuclideanMultivector2::new(
+        StandardUniform.sample(&mut rng),
+        StandardUniform.sample(&mut rng),
+        StandardUniform.sample(&mut rng),
+        StandardUniform.sample(&mut rng),
+    )
 }
 
 macro_rules! bench_binop(

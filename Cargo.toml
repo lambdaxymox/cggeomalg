@@ -39,10 +39,9 @@ alloc = []
 # Option: "std" enables support for environments that use the full standard library.
 std = []
 
-
 [dependencies.approx_cmp]
 git = "https://github.com/lambdaxymox/approx_cmp/"
-version = "2.0.0"
+version = "3.0.0"
 features = ["core"]
 
 [dependencies.num-traits]
@@ -51,9 +50,9 @@ default-features = false
 features = ["libm"]
 
 [dev-dependencies]
-criterion = "0.5.1"
-rand = "0.9.0"
-rand_isaac = "0.4.0"
+criterion = "0.8.2"
+rand = "0.10.4"
+chacha20 = "0.10.2"
 
 [profile.release]
 opt-level = 2
@@ -67,4 +66,3 @@ harness = false
 [[bench]]
 name = "bench_e3ga"
 harness = false
-
